@@ -1,0 +1,24 @@
+.link {
+    text-decoration: none;
+    color: #949290;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .link:hover,
+  .link:active {
+    background: linear-gradient(90deg, #5c5a5a, #7a7a7a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 18px rgba(34, 34, 34, 0.8);
+  }  
+
+.active {
+    background: linear-gradient(90deg, #1b1b1b, #f9b331);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
