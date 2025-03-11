@@ -43,6 +43,7 @@ export default function MainHeader() {
             {authenticated && (
               <>
                 <ClientNavLink href="/my-courses">Moje kurzy</ClientNavLink>
+                <ClientNavLink href="/account">Můj účet</ClientNavLink>
                 <button onClick={handleLogout}>Odhlásit se</button>
               </>
             )}

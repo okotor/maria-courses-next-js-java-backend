@@ -1,6 +1,11 @@
 import { getCourses } from "@/lib/db-content";
 import CourseList from "@/components/Courses/CourseList";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
+import SearchIcon from '@mui/icons-material/Edit';
+import {
+    InputAdornment,
+    TextField,
+  } from "@mui/material";
 import classes from "./page.module.css";
 
 export const metadata = {
@@ -25,6 +30,19 @@ export default async function CoursesPage(){
                     Vyberte svůj kurz na míru a zažijte proměnu!
                 </p>
             </header>
+            <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            placeholder="Zadej klíčové slovo"
+            sx={{ width: "75%", padding: "2% auto" }}
+            fullWidth
+            // onChange={(e) => setQuery(e.target.value)}
+          />
             <CourseList loader={LoadingCourses}/>
             {/* <main className={classes.main}>
                 <Suspense fallback={<p className={classes.loading}>Loading...</p>}>

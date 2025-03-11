@@ -1,7 +1,7 @@
 package com.tehacko.backend_java.controller;
 
 import com.tehacko.backend_java.model.User;
-import com.tehacko.backend_java.services.UserService;
+import com.tehacko.backend_java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,18 +38,25 @@ public class UserController {
         return "viewallusers";
     }
 
+    //User Details View, Edit, Delete
+    //View
+    @GetMapping({"user/{uId}"})
+    public User viewUserDetails(@PathVariable("uId") Integer uId) {
+        return userService.getUser(uId);
+    }
+    //Edit
     @PutMapping("user")
     public User updateUser(@RequestBody User user){
         userService.updateUser(user);
         return userService.getUser(user.getuId());
     }
-
+    //Delete
     @DeleteMapping("user/{uId}")
     public String deleteUser(@PathVariable int uId) {
         userService.deleteUser(uId);
         return "Uživatelský účet by smazán.";
     }
-
+    //Search by Keyword
     @GetMapping("users/keyword/{keyword}")
     public List<User> searchByKeyword(@PathVariable("keyword") String keyword){
         return userService.search(keyword);
