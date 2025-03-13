@@ -1,5 +1,4 @@
 import Image from 'next/image';
-
 import { notFound } from 'next/navigation';
 import { getCourse } from '@/lib/db-content'
 import classes from './page.module.css'
@@ -15,7 +14,8 @@ export default async function CourseDetailsPage( { params } ) {
         return null; // Return null to stop further processing
     }
 
-    course.course_description = course.course_description.replace(/\n/g, '<br />');
+   // Replace newlines with <br /> tags in course description
+   const courseDescription = course.courseDescription ? course.courseDescription.replace(/\n/g, '<br />') : '';
 
     return (
         <>
@@ -32,9 +32,11 @@ export default async function CourseDetailsPage( { params } ) {
                 <p className={classes.summary}>{course.summary}</p>
             </header>
             <main>
-                <p className={classes.instructions} dangerouslySetInnerHTML={{
-                    __html: course.course_description,
-                }}></p>
+                <p 
+                className={classes.instructions}
+                dangerouslySetInnerHTML={{
+                    __html: courseDescription}}
+                ></p>
             </main>
         </>
     );

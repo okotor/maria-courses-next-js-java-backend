@@ -15,7 +15,13 @@ public class CourseService {
     public CourseService(CourseRepo courseRepo) {
         this.courseRepo = courseRepo;
     }
+
+    public Course findBySlug(String slug) {
+        return courseRepo.findBySlug(slug);
+    }
+
     public List<Course> search(String keyword) {
         return courseRepo.findByTitleContainingOrCourseDescriptionContainingOrSummaryContainingOrLecturerContaining(keyword, keyword, keyword, keyword);
     }
+
 }

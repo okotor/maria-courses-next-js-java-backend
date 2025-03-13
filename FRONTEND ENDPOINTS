@@ -1,4 +1,49 @@
-USER (NODE&EXPRESS BACKEND)
+COURSE (NEXT.JS BACKEND) => lib/...
+
+    COMPONENTS
+
+        YEAR HEADER CHOICE
+        components/YearHeader
+        //COURSE YEAR LINKS
+        // const courseYearLinks = await getAvailableCourseYears();
+
+    APP
+
+        // COURSES
+        // app/courses/page.js
+        // //LOAD ALL COURSES
+        // // async function LoadingCourses() {
+        // //     const courses = await getCourses();
+        // //     return <CoursesGrid courses={courses}/>
+        // // }
+
+        // app/courses/[Courseslug]/page.js
+        // //FETCH COURSE DETAILS
+        // // const course = await getCourse(Courseslug);
+
+        ARCHIVE
+        app/archive/@latest/default.js
+        //LOAD LATEST COURSES
+        // async function LoadingLatestCourses() {
+        //     const courses = await getLatestCourses();
+        //     return <CoursesGrid courses={courses}/>
+        // }
+
+        app/archive/[[...filter]]/page.js
+        //SELECT COURSES FOR GIVEN YEAR
+        // if (selectedYear && !selectedMonth) {
+        //     courses = await getCoursesForYear(selectedYear);
+        // }
+
+        (AUTH)
+        app/(auth)/create-a-course.js
+        //CREATE A COURSE
+        // const [state, formAction] = useActionState(createACourse, {message: null});
+
+
+
+
+USER (NODE&EXPRESS BACKEND) => backend/index.js
 
     CONTEXT
 
@@ -7,7 +52,7 @@ USER (NODE&EXPRESS BACKEND)
         //       const res = await fetch("http://localhost:5000/auth/status", {
         //         credentials: "include",
         //       });
-        //      
+        
         // LOGOUT
         // const logout = async () => {
         //     await fetch("http://localhost:5000/api/logout", {
@@ -47,44 +92,5 @@ USER (NODE&EXPRESS BACKEND)
         //     body: JSON.stringify({ email, password }),
         //   });
 
-COURSE (NEXT.JS BACKEND)
-
-        YEAR HEADER CHOICE
-        components/YearHeader
-        //COURSE YEAR LINKS
-        // const courseYearLinks = await getAvailableCourseYears();
-
-    APP
-
-        COURSES
-        app/courses/page.js
-        //LOAD ALL COURSES
-        // async function LoadingCourses() {
-        //     const courses = await getCourses();
-        //     return <CoursesGrid courses={courses}/>
-        // }
-
-        app/courses/[Courseslug]/page.js
-        //FETCH COURSE DETAILS
-        // const course = await getCourse(Courseslug);
-
-        ARCHIVE
-        app/archive/@latest/default.js
-        //LOAD LATEST COURSES
-        // async function LoadingLatestCourses() {
-        //     const courses = await getLatestCourses();
-        //     return <CoursesGrid courses={courses}/>
-        // }
-
-        app/archive/[[...filter]]/page.js
-        //SELECT COURSES FOR GIVEN YEAR
-        // if (selectedYear && !selectedMonth) {
-        //     courses = await getCoursesForYear(selectedYear);
-        // }
-
-        (AUTH)
-        app/(auth)/create-a-course.js
-        //CREATE A COURSE
-        // const [state, formAction] = useActionState(createACourse, {message: null});
 
 

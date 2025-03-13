@@ -148,6 +148,7 @@ function isAuthenticated(req, res, next) {
 }
 
 app.get("/auth/status", (req, res) => {
+  console.log("Auth Status Check:", req.user); // ✅ Debugging
   if (req.isAuthenticated()) {
     res.json({ 
       authenticated: true, 
@@ -241,8 +242,8 @@ passport.use(
         ]);
         if (result.rows.length === 0) {
           const newUser = await db.query(
-            "INSERT INTO users (email, password) VALUES ($1, $2)",
-            [profile.email, "google"]
+            "INSERT INTO users (email, password, is_admin) VALUES ($1, $2, $3) RETURNING email, is_admin",
+            [profile.email, "google", false]
           );
           return cb(null, newUser.rows[0]);
         } else {
@@ -255,20 +256,25 @@ passport.use(
   )
 );
 
-passport.serializeUser((user, cb) => {
-  cb(null, { id: user.id, is_admin: user.is_admin }); // Store both ID & is_admin
+passport.serializeUser((user, done) => {
+  console.log("Serializing User:", user);
+  done(null, user.u_id); // ✅ Only store user ID in session
 });
 
-passport.deserializeUser(async (obj, cb) => {
+passport.deserializeUser(async (id, done) => {
   try {
-    const result = await db.query("SELECT * FROM users WHERE id = $1", [obj.id]);
-    if (result.rows.length > 0) {
-      cb(null, result.rows[0]); // Fetch full user details
-    } else {
-      cb(null, false);
+    console.log("Deserializing User ID:", id); // ✅ Check if ID is correct
+    let result = await db.query("SELECT * FROM users WHERE u_id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return done(null, false);
     }
+
+    console.log("User Retrieved from DB:", result.rows[0]); // ✅ Debugging
+
+    done(null, result.rows[0]);
   } catch (err) {
-    cb(err);
+    done(err, null);
   }
 });
 
