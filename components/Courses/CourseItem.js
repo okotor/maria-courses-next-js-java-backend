@@ -1,9 +1,25 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
+    const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
+
+    // Define functions to handle delete and edit
+    const handleDelete = () => {
+            alert('Need to define.');
+        }   
+
+    const handleEdit = () => {
+          alert('Need to define.');
+      }   
+
+
     return (
       <article className={classes.course}>
         <header>
@@ -25,6 +41,13 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           <p className={classes.summary}>{summary}</p>
           <div className={classes.actions}>
             <Link href={`/courses/${slug}`}>Více informací</Link>
+            {/* Show these icons only if the user is an admin */}
+            {isAdmin && (
+                        <>
+                            <DeleteIcon onClick={handleDelete} />
+                            <EditIcon onClick={handleEdit} />
+                        </>
+                    )}
           </div>
         </div>
       </article>

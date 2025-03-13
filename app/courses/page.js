@@ -38,7 +38,7 @@ export default async function CoursesPage(){
                 </InputAdornment>
               ),
             }}
-            placeholder="Zadej klíčové slovo"
+            placeholder="Najd kurz podle klíčového slova..."
             sx={{ width: "75%", padding: "2% auto" }}
             fullWidth
             // onChange={(e) => setQuery(e.target.value)}
