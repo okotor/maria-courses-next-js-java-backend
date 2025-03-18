@@ -1,8 +1,12 @@
 package com.tehacko.backend_java.controller;
 
 import com.tehacko.backend_java.model.User;
+import com.tehacko.backend_java.service.JwtService;
 import com.tehacko.backend_java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,27 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @PostMapping("register")
+    public User register(@RequestBody User user){
+        return userService.saveUser(user);
+    }
+
+    @PostMapping("login")
+    public String login(@RequestBody User user){
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        if(authentication.isAuthenticated())
+            return jwtService.generateToken(user.getEmail());
+        else
+            return "Přihlášení uživatele selhalo";
+    }
 
     @GetMapping({"/", "home"})
     public String home() {
@@ -48,7 +73,7 @@ public class UserController {
     @PutMapping("user")
     public User updateUser(@RequestBody User user){
         userService.updateUser(user);
-        return userService.getUser(user.getuId());
+        return userService.getUser(user.getUId());
     }
     //Delete
     @DeleteMapping("user/{uId}")
