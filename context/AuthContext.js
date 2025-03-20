@@ -1,46 +1,66 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
+import api from '@/utils/api';
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const router = useRouter();
+  const lastActivityRef = useRef(new Date().getTime());
 
   useEffect(() => {
-    const checkSession = async () => {
-      const res = await fetch("http://localhost:5000/auth/status", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      console.log('Session check:', data); // Add this line for debugging
-      if (data.authenticated) {
-        setAuthenticated(true);
-        setIsAdmin(data.isAdmin);
-      } else {
-        setAuthenticated(false);
-        setIsAdmin(false);
+    const token = localStorage.getItem('token');
+    if (token) {
+      setAuthenticated(true);
+    }
+
+    const handleUserActivity = () => {
+      lastActivityRef.current = new Date().getTime();
+    };
+
+    document.addEventListener('mousemove', handleUserActivity);
+    document.addEventListener('keydown', handleUserActivity);
+
+    const refreshTokenIfNeeded = async () => {
+      const now = new Date().getTime();
+      const timeSinceLastActivity = now - lastActivityRef.current;
+
+      if (timeSinceLastActivity < 20 * 60 * 1000) {
+        const refreshToken = localStorage.getItem('refreshToken');
+        try {
+          const { data } = await api.post('/api/refresh-token', { refreshToken });
+          localStorage.setItem('token', data.token);
+          api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
+        } catch (err) {
+          setAuthenticated(false);
+          setIsAdmin(false);
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          router.replace("/login");
+        }
       }
     };
 
-     // Initial session check
-    checkSession();
+    const interval = setInterval(refreshTokenIfNeeded, 5 * 60 * 1000);
 
-    // Periodic session check every 6 seconds
-    const interval = setInterval(checkSession, 1000 * 60 * 0.1)
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      document.removeEventListener('mousemove', handleUserActivity);
+      document.removeEventListener('keydown', handleUserActivity);
+      clearInterval(interval);
+    };
+  }, [router]);
 
   const logout = async () => {
-    await fetch("http://localhost:5000/api/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    await api.post("/api/logout");
     setAuthenticated(false);
     setIsAdmin(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    router.replace("/login");
   };
 
   return (

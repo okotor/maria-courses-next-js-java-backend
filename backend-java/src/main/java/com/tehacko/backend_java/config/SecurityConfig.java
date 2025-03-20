@@ -40,7 +40,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login", "/courses/**")
+                        .requestMatchers("/register", "/login", "/courses/**", "/api/refresh-token")
                         .permitAll()
                         .anyRequest().authenticated()) // Allow all requests
                 .httpBasic(Customizer.withDefaults())

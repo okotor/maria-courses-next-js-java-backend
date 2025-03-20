@@ -73,10 +73,10 @@ USER (NODE&EXPRESS BACKEND) => backend/index.js
 
         LOGIN
         components/LoginForm
-        CHECK SESSION
-        // const res = await fetch("http://localhost:5000/auth/status", {
-        //     credentials: "include",
-        //   });
+        // CHECK SESSION
+        // // const res = await fetch("http://localhost:5000/auth/status", {
+        // //     credentials: "include",
+        // //   });
 
         HANDLE GOOGLE LOGIN
         // const handleGoogleLogin = () => {
@@ -84,7 +84,7 @@ USER (NODE&EXPRESS BACKEND) => backend/index.js
         //     window.location.href = "http://localhost:5000/auth/google";
         //   };
 
-        HANDLE LOGIN
+        HANDLE LOGIN - FIX!!! THE LOGIN POST METHOD RETURNS A JWT Code, THAT SHOULD PROBABLY CHANGE
         // const res = await fetch("http://localhost:5000/api/login", {
         //     method: "POST",
         //     credentials: "include",
