@@ -43,6 +43,10 @@ public class UserService {
         userRepo.deleteById(uId);
     }
 
+    public boolean emailExists(String email) {
+        return userRepo.findByEmail(email) != null;
+    }
+
     public List<User> search(String keyword) {
         return userRepo.findByEmailContainingOrPassword(keyword, keyword);
     }
