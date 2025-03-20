@@ -4,7 +4,7 @@ let isRefreshing = false;
 let subscribers = [];
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -53,7 +53,7 @@ api.interceptors.response.use(
 
       const refreshToken = localStorage.getItem('refreshToken');
       try {
-        const { data } = await axios.post('http://localhost:5000/api/refresh-token', { refreshToken });
+        const { data } = await axios.post('http://localhost:8080/api/refresh-token', { refreshToken });
         localStorage.setItem('token', data.token);
         api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
         isRefreshing = false;
