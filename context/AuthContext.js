@@ -16,6 +16,9 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       setAuthenticated(true);
+      // Assuming you store isAdmin information in localStorage or fetch it on mount
+      const isAdminStored = JSON.parse(localStorage.getItem('isAdmin'));
+      setIsAdmin(isAdminStored);
     }
 
     const handleUserActivity = () => {
