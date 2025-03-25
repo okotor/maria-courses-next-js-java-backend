@@ -54,8 +54,7 @@ export const AuthProvider = ({ children }) => {
     };
   }, [router]);
 
-  const logout = async () => {
-    await api.post("/api/logout");
+  const logout = () => {
     setAuthenticated(false);
     setIsAdmin(false);
     localStorage.removeItem('token');

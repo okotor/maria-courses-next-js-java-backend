@@ -1,49 +1,18 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // ✅ Added for redirection
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
+//Access the Google Client ID from environment variables
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({ errors: null, message: null });
-  // const [googleError, setGoogleError] = useState(null); // ✅ State for Google login error
   const { setAuthenticated, setIsAdmin } = useAuth();
-  const router = useRouter(); // ✅ Added for navigation
-
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   if (urlParams.get('error') === 'google') {
-  //     setGoogleError('Google login failed. Please try again.');
-  //   }
-
-  //   const checkSession = async () => {
-  //     const res = await fetch("http://localhost:5000/auth/status", {
-  //       credentials: "include",
-  //     });
-  //     const data = await res.json();
-  //     console.log('Initial check session:', data); // Add this line for debugging
-  //     if (data.authenticated) {
-  //       setAuthenticated(true);
-  //       setIsAdmin(data.isAdmin);
-  //       if (data.isAdmin) {
-  //         router.push("/admin-dashboard");
-  //       } else {
-  //         router.push("/my-courses");
-  //       }
-  //     } else if (urlParams.get('success') === 'true') {
-  //       router.push("/my-courses");
-  //     }
-  //   };
-
-  //   checkSession();
-  // }, [setAuthenticated, setIsAdmin, router]);
-
-  // const handleGoogleLogin = () => {
-  //   // Redirect to Google's OAuth login page
-  //   window.location.href = "http://localhost:5000/auth/google";
-  // };
+  const router = useRouter();
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -56,25 +25,64 @@ export default function LoginForm() {
         password,
       });
       const data = response.data;
-      console.log('Login response:', data); // Add this line for debugging
+      console.log('Login response:', data); // debugging
 
       if (data.success) {
         // Store the JWT token in localStorage or cookies
         localStorage.setItem("token", data.token);
+        localStorage.setItem("isAdmin", JSON.stringify(data.user.is_admin)); // Store isAdmin in localStorage
         setAuthenticated(true);
-        setIsAdmin(data.user.is_admin); // Ensure this line uses `data.user.is_admin`
-        router.push("/my-courses");
+        setIsAdmin(data.user.is_admin);
+        console.log("isAdmin state after setting:", data.user.is_admin); // Debugging
+        if (data.user.is_admin) {
+          router.push("/admin-dashboard");
+        } else {
+          router.push("/my-courses");
+        }
       } else {
         setFormState({ errors: "Invalid credentials", message: null });
       }
     } catch (error) {
-      console.error('Login error:', error); // Add this line for debugging
+      console.error('Login error:', error); // debugging
       setFormState({ errors: error.response?.data?.message || "An error occurred", message: null });
     }
   };
 
+  const handleGoogleLoginSuccess = async (tokenResponse) => {
+    const { credential } = tokenResponse;
+
+    try {
+      const res = await axios.post("http://localhost:8080/google-login", {
+        token: credential,
+      });
+      const data = res.data;
+      console.log('Google login response:', data); // Debugging
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isAdmin", JSON.stringify(data.user.is_admin)); // Store isAdmin in localStorage
+        setAuthenticated(true);
+        console.log("is_admin value from backend:", data.user.is_admin); // Debugging
+        setIsAdmin(data.user.is_admin);
+        console.log("isAdmin state after setting:", data.user.is_admin); // Debugging
+        if (data.user.is_admin) {
+          router.push("/admin-dashboard");
+        } else {
+          router.push("/my-courses");
+        }
+      } else {
+        setFormState({ errors: "Google login failed", message: null });
+      }
+    } catch (error) {
+      console.error('Google login error:', error); // Debugging
+      setFormState({ errors: error.response?.data?.message || "An error occurred", message: null });
+    }
+  };
+
+
   return (
-      <div id ="login-box">
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <div id="login-box">
         <form id="auth-form" onSubmit={handleLogin}>
           <div>
             {/* <img src="/images/auth-icon.jpg" alt="A lock icon" /> */}
@@ -101,21 +109,14 @@ export default function LoginForm() {
           <p>
             <button type="submit">Přihlásit se</button>
           </p>
-
-          {/* <p> */}
-            {/* Added Google login button, redirects to backend auth route */}
-            {/* <button 
-                type="button" 
-                onClick={handleGoogleLogin} // ✅ Trigger the Google login process
-              >
-                Registrovat / Přihlásit se přes Google
-              </button>
-          </p> */}
         </form>
-
-    {/* {googleError && (
-        <p style={{ color: 'red' }}>{googleError}</p>
-    )} */}
+        <GoogleLogin
+          onSuccess={handleGoogleLoginSuccess}
+          onError={() => {
+            setFormState({ errors: "Google login failed", message: null });
+          }}
+        />
       </div>
+    </GoogleOAuthProvider>
     );
   }

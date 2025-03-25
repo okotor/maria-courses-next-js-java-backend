@@ -29,49 +29,98 @@ public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    @PostMapping("register")
-    public User register(@RequestBody User user){
-        return userService.saveUser(user);
+    @GetMapping({"/", "home"})
+    public String home() {
+        return "home";
     }
 
-    @PostMapping("login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
+    @PostMapping("register")
+    public ResponseEntity<?> register(@RequestBody User user){
+        try {
+            if (userService.emailExists(user.getEmail())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Map.of("error", "Email již existuje. Zkuste se přihlásit."));
+            }
+            User newUser = userService.saveUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Během registrace nastala chyba. Zkuste to ještě jednou."));
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
         try {
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-            if (authentication.isAuthenticated()) {
-                String token = jwtService.generateToken(user.getEmail());
-                response.put("success", true);
-                response.put("token", token);
-                response.put("user", user); // Assuming user object includes is_admin field
-                return ResponseEntity.ok(response);
+
+            if (!authentication.isAuthenticated()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "Invalid credentials"));
+            }
+
+            User authenticatedUser = userService.findByEmail(user.getEmail());
+            String token = jwtService.generateToken(authenticatedUser.getEmail());
+
+            response.put("success", true);
+            response.put("token", token);
+            response.put("user", Map.of("email", authenticatedUser.getEmail(), "is_admin", authenticatedUser.isAdmin()));
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Login failed due to an internal error."));
+        }
+    }
+
+    @PostMapping("/google-login")
+    public ResponseEntity<Map<String, Object>> googleLogin(@RequestBody Map<String, String> request) {
+        String googleToken = request.get("token");
+        try {
+            User googleUser = userService.validateGoogleToken(googleToken);
+            if (googleUser != null) {
+                // Check if the user already exists in the database
+                User existingUser = userService.findByEmail(googleUser.getEmail());
+                if (existingUser != null) {
+                    // User exists, log them in
+                    String token = jwtService.generateToken(existingUser.getEmail());
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("success", true);
+                    response.put("token", token);
+                    Map<String, Object> userDetails = new HashMap<>();
+                    userDetails.put("email", existingUser.getEmail());
+                    userDetails.put("is_admin", existingUser.isAdmin());
+                    response.put("user", userDetails);
+                    return ResponseEntity.ok(response);
+                } else {
+                    // User does not exist, register them
+                    User newUser = userService.saveUser(googleUser);
+                    String token = jwtService.generateToken(newUser.getEmail());
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("success", true);
+                    response.put("token", token);
+                    Map<String, Object> userDetails = new HashMap<>();
+                    userDetails.put("email", newUser.getEmail());
+                    userDetails.put("is_admin", newUser.isAdmin());
+                    response.put("user", userDetails);
+                    return ResponseEntity.ok(response);
+                }
             } else {
+                Map<String, Object> response = new HashMap<>();
                 response.put("success", false);
-                response.put("message", "Invalid credentials");
+                response.put("message", "Google login failed");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             }
         } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "An error occurred");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
-//    @PostMapping("login")
-//    public String login(@RequestBody User user){
-//        Authentication authentication = authenticationManager
-//                .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-//        if(authentication.isAuthenticated())
-//            return jwtService.generateToken(user.getEmail());
-//        else
-//            return "Přihlášení uživatele selhalo";
-//    }
-
-    @GetMapping({"/", "home"})
-    public String home() {
-        return "home";
-    }
 
     @GetMapping("adduser")
     public String addUser(){
