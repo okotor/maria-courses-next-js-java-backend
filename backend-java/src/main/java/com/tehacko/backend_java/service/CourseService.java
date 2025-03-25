@@ -48,19 +48,14 @@ public class CourseService {
         String twoSlugWords = String.join(" ", words.length > 1 ? new String[]{words[0], words[1]} : words);
         String randomSlugAddition = String.valueOf(new Random().nextInt(100) + 1);
         String modifiedTitle = twoSlugWords + " " + randomSlugAddition;
-
         // Create a Slugify instance using the builder
         Slugify slugify = Slugify.builder().build();
-
         // Generate the slug
         String slug = slugify.slugify(modifiedTitle);
-
         course.setSlug(slug);
-
         // Sanitize course description
         String sanitizedDescription = Jsoup.clean(course.getCourseDescription(), Safelist.basic());
         course.setCourseDescription(sanitizedDescription);
-
         // Handle image processing
         String extension = imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().lastIndexOf("."));
         String fileName = slug + extension;
@@ -72,7 +67,6 @@ public class CourseService {
             // Handle the exception, possibly rethrow it or log it
             throw new IOException("Failed to save the image file", e);
         }
-
         // Set image name for DB storage
         course.setImage(fileName);
 

@@ -16,6 +16,7 @@ public class BackendJavaApplication {
     Dotenv dotenv = Dotenv.configure().load();
     System.setProperty("GOOGLE_CLIENT_ID", dotenv.get("GOOGLE_CLIENT_ID"));
     System.setProperty("GOOGLE_CLIENT_SECRET", dotenv.get("GOOGLE_CLIENT_SECRET"));
+    System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
 
 //    // Debug: Print loaded environment variables
 //        System.out.println("GOOGLE_CLIENT_ID: " + dotenv.get("GOOGLE_CLIENT_ID"));
