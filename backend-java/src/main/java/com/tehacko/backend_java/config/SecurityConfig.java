@@ -42,6 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register", "/login", "/google-login", "/courses/**", "/api/refresh-token")
                         .permitAll()
+                        .requestMatchers("/courses/**")
+                        .authenticated() // Require authentication for /courses/**
                         .anyRequest().authenticated()) // Allow all requests
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session ->

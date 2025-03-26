@@ -24,11 +24,11 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AuthProvider>
-        <MainHeader />
-        <main>
-          {children}
-        </main>
-        <MainFooter />
+          <MainHeader />
+            <main>
+              {children}
+            </main>
+          <MainFooter />
         </AuthProvider>
       </body>
     </html>

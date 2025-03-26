@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getCourse } from '@/lib/db-content'
+import { getCourse } from '@/lib/courses-actions'
 import classes from './page.module.css'
 
 export default async function CourseDetailsPage( { params } ) {

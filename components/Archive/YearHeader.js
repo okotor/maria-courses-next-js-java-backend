@@ -1,6 +1,6 @@
 import Link from "next/link";
 import classes from '@/app/page.module.css'
-import { getAvailableCourseYears } from "@/lib/db-content";
+import { getAvailableCourseYears } from "@/lib/courses-actions";
 
 export default async function YearHeader() {
     const courseYearLinks = await getAvailableCourseYears();

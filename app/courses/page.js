@@ -1,4 +1,4 @@
-import { getCourses } from "@/lib/db-content";
+import { getCourses } from "@/lib/courses-actions";
 import CourseList from "@/components/Courses/CourseList";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
 import SearchIcon from '@mui/icons-material/Edit';

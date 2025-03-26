@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/courses")
-@CrossOrigin(origins = "http://localhost:3000") // Allow requests from React
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // Allow requests from React
 public class CourseController {
 
     @Autowired
@@ -47,7 +47,6 @@ public class CourseController {
 
     @PostMapping("/save")
     public ResponseEntity<Course> saveCourse(
-            @RequestParam("date") String date,
             @RequestParam("title") String title,
             @RequestParam("summary") String summary,
             @RequestParam("courseDescription") String courseDescription,
@@ -57,11 +56,7 @@ public class CourseController {
 
         try {
             Course course = new Course();
-            try {
-                course.setDate(LocalDate.parse(date));
-            } catch (DateTimeParseException e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-            }
+            course.setDate(LocalDate.now()); // Set the current date
             course.setTitle(title);
             course.setSummary(summary);
             course.setCourseDescription(courseDescription);
