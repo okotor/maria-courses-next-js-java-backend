@@ -1,5 +1,4 @@
 package com.tehacko.backend_java.controller;
-
 import com.tehacko.backend_java.model.User;
 import com.tehacko.backend_java.service.JwtService;
 import com.tehacko.backend_java.service.UserService;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -146,6 +144,19 @@ public class UserController {
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        // Clear the JWT token cookie
+        Cookie cookie = new Cookie("jwtToken", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true); // Use secure cookies in production
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Expire the cookie immediately
+
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Logout successful");
+    }
 
     @GetMapping("adduser")
     public String addUser(){
