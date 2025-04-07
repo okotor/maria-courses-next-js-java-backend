@@ -1,5 +1,5 @@
 // /** @type {import('next').NextConfig} */
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
