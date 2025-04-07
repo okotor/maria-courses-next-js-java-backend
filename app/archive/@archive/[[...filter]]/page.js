@@ -1,11 +1,11 @@
-import CourseList from "@/components/Courses/CourseList";
+// import CourseList from "@/components/Courses/CourseList";
 import { getCoursesForYear } from "@/lib/courses-actions";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
 import YearHeader from "@/components/Archive/YearHeader";
 
-function LoadingFilteredCourses(courses) {
-    return <CoursesGrid courses={courses}/>
-}
+// function LoadingFilteredCourses(courses) {
+//     return <CoursesGrid courses={courses}/>
+// }
 
 export default async function FilteredCoursesPage({params}) {
     
@@ -20,7 +20,7 @@ export default async function FilteredCoursesPage({params}) {
     let courseContent = <p>Vyberte rok.</p>
 
     if (courses && courses.length > 0) {
-        courseContent = <CourseList loader={() => LoadingFilteredCourses(courses)} />
+        courseContent = <CoursesGrid courses={courses} />;
     }
 
     return (
