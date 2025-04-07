@@ -1,16 +1,16 @@
-import { Suspense } from "react";
-import classes from "./CourseList.module.css";
+// import { Suspense } from "react";
+// import classes from "./CourseList.module.css";
 
 
-export default function CourseList({ loader, course }) {
+// export default function CourseList({ loader, course }) {
 
-    return (
-        <>
-            <main className={classes.main}>
-                <Suspense fallback={<p className={classes.loading}>Loading...</p>}>
-                    {loader()}
-                </Suspense>
-            </main>
-        </>
-    )
-}
+//     return (
+//         <>
+//             <main className={classes.main}>
+//                 <Suspense fallback={<p className={classes.loading}>Loading...</p>}>
+//                     {loader()}
+//                 </Suspense>
+//             </main>
+//         </>
+//     )
+// }

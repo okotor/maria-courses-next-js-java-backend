@@ -1,7 +1,7 @@
 import { getCourses } from "@/lib/courses-actions";
-import CourseList from "@/components/Courses/CourseList";
+// import CourseList from "@/components/Courses/CourseList";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
-import SearchIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
 import {
     InputAdornment,
     TextField,
@@ -13,13 +13,13 @@ export const metadata = {
     description: 'Browse the magnificent courses offered'
 }
 
-async function LoadingCourses() {
-    const courses = await getCourses();
-    return <CoursesGrid courses={courses}/>
-}
+// async function LoadingCourses() {
+    // const courses = await getCourses();
+//     return <CoursesGrid courses={courses}/>
+// }
 
 export default async function CoursesPage(){
-
+  const courses = await getCourses();
     return (
         <>
             <header className={classes.header}>
@@ -43,7 +43,9 @@ export default async function CoursesPage(){
             fullWidth
             // onChange={(e) => setQuery(e.target.value)}
           />
-            <CourseList loader={LoadingCourses}/>
+            <main className={classes.main}>
+                <CoursesGrid courses={courses} />
+            </main>
             {/* <main className={classes.main}>
                 <Suspense fallback={<p className={classes.loading}>Loading...</p>}>
                     <LoadingCourses />
