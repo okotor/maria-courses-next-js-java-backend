@@ -53,7 +53,7 @@ export default function CoursesPage(){
         <p>Vyberte svůj kurz na míru a zažijte proměnu!</p>
       </header>
       <main className={classes.main}>
-        <CoursesOverview courses={courses} />
+        {/* <CoursesOverview courses={courses} /> */}
       </main>
     </>
   );
