@@ -4,12 +4,36 @@ import { getCourses } from "@/lib/courses-actions";
 // import CoursesGrid from "@/components/Courses/CoursesGrid";
 import classes from "./page.module.css";
 
-// const CourseSearchBar = dynamic(() => import('@/components/Courses/CourseSearchBar'), { ssr: false });
-// const CoursesGrid = dynamic(() => import('@/components/Courses/CoursesGrid'), { ssr: false });
+const CourseSearchBar = dynamic(() => import('@/components/Courses/CourseSearchBar'), { ssr: false });
+const CoursesGrid = dynamic(() => import('@/components/Courses/CoursesGrid'), { ssr: false });
 
 export const metadata = {
     title: 'All Courses',
     description: 'Browse the magnificent courses offered'
+}
+
+// Error boundary component to catch and display errors
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Error caught in ErrorBoundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
 }
 
 // async function LoadingCourses() {
@@ -52,9 +76,13 @@ export default async function CoursesPage(){
         </h1>
         <p>Vyberte svůj kurz na míru a zažijte proměnu!</p>
       </header>
-      {/* <CourseSearchBar /> */}
+      <ErrorBoundary>
+        <CourseSearchBar />
+      </ErrorBoundary>
       <main className={classes.main}>
-        {/* <CoursesGrid courses={courses} /> */}
+        <ErrorBoundary>
+          <CoursesGrid courses={courses} />
+        </ErrorBoundary>
       </main>
     </>
   );
