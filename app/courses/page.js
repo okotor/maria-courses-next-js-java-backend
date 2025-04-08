@@ -4,8 +4,8 @@ import { getCourses } from "@/lib/courses-actions";
 // import CoursesGrid from "@/components/Courses/CoursesGrid";
 import classes from "./page.module.css";
 
-const CourseSearchBar = dynamic(() => import('@/components/Courses/CourseSearchBar'));
-const CoursesGrid = dynamic(() => import('@/components/Courses/CoursesGrid'));
+// const CourseSearchBar = dynamic(() => import('@/components/Courses/CourseSearchBar'), { ssr: false });
+// const CoursesGrid = dynamic(() => import('@/components/Courses/CoursesGrid'), { ssr: false });
 
 export const metadata = {
     title: 'All Courses',
@@ -52,9 +52,9 @@ export default async function CoursesPage(){
         </h1>
         <p>Vyberte svůj kurz na míru a zažijte proměnu!</p>
       </header>
-      <CourseSearchBar />
+      {/* <CourseSearchBar /> */}
       <main className={classes.main}>
-        <CoursesGrid courses={courses} />
+        {/* <CoursesGrid courses={courses} /> */}
       </main>
     </>
   );
