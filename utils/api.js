@@ -53,7 +53,7 @@ api.interceptors.response.use(
 
       const refreshToken = localStorage.getItem('refreshToken');
       try {
-        const { data } = await axios.post('http://marian-courses-backend-java-production.up.railway.app/api/refresh-token', { refreshToken });
+        const { data } = await axios.post('https://marian-courses-backend-java-production.up.railway.app/api/refresh-token', { refreshToken });
         localStorage.setItem('token', data.token);
         api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
         isRefreshing = false;

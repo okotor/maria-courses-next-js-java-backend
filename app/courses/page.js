@@ -1,13 +1,11 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { getCourses } from "@/lib/courses-actions";
 // import CourseSearchBar from "@/components/Courses/CourseSearchBar";
 // import CoursesGrid from "@/components/Courses/CoursesGrid";
 import classes from "./page.module.css";
 import CoursesOverview from '@/components/Courses/CoursesOverview';
-
-export const metadata = {
-    title: 'All Courses',
-    description: 'Browse the magnificent courses offered'
-}
 
 // async function LoadingCourses() {
     // const courses = await getCourses();
@@ -39,8 +37,13 @@ export const metadata = {
 //     );
 // }
 
-export default async function CoursesPage(){
-  const courses = await getCourses();
+export default function CoursesPage(){
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getCourses().then(setCourses);
+  }, []);
+
   return (
     <>
       <header className={classes.header}>

@@ -1,12 +1,19 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getCourse } from '@/lib/courses-actions'
+import { getCourse, getCourses } from '@/lib/courses-actions'
 import classes from './page.module.css'
 
-export default async function CourseDetailsPage( { params } ) {
-    const { Courseslug } = await params;
-    const course = await getCourse(Courseslug);
+export async function generateStaticParams() {
+    const courses = await getCourses();
+    return courses.map((course) => ({
+      Courseslug: course.slug,
+    }));
+  }
 
+export default async function CourseDetailsPage( { params } ) {
+    // const { Courseslug } = await params;
+    // const course = await getCourse(Courseslug);
+    const course = await getCourse(params.Courseslug);
 
     // If the course is not found, show the not found page
     if (!course) {

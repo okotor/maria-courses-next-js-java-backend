@@ -16,7 +16,7 @@ export default function RegisterForm() {
       const email = formData.get('email');
       const password = formData.get('password');
 
-      const response = await fetch('http://marian-courses-backend-java-production.up.railway.app/register', {
+      const response = await fetch('https://marian-courses-backend-java-production.up.railway.app/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
