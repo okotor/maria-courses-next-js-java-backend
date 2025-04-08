@@ -1,10 +1,9 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import React from 'react';
+import CourseSearchBar from './CourseSearchBar';
+import CoursesGrid from './CoursesGrid';
 
-const CourseSearchBar = dynamic(() => import('./CourseSearchBar'), { ssr: false });
-const CoursesGrid = dynamic(() => import('./CoursesGrid'), { ssr: false });
 
 class ErrorBoundary extends React.Component {
     constructor(props) {

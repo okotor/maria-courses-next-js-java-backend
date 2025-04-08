@@ -1,3 +1,6 @@
+'use client';
+
+
 import CourseItem from './CourseItem';
 import classes from './CoursesGrid.module.css';
 

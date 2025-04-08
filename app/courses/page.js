@@ -1,10 +1,8 @@
-import dynamic from 'next/dynamic';
 import { getCourses } from "@/lib/courses-actions";
 // import CourseSearchBar from "@/components/Courses/CourseSearchBar";
 // import CoursesGrid from "@/components/Courses/CoursesGrid";
 import classes from "./page.module.css";
-
-const CoursesOverview = dynamic(() => import('@/components/Courses/CoursesOverview'), { ssr: false });
+import CoursesOverview from '@/components/Courses/CoursesOverview';
 
 export const metadata = {
     title: 'All Courses',
