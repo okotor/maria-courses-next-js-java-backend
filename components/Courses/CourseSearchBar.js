@@ -1,8 +1,9 @@
 'use client'
+
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from "@mui/material";
 
-export default function ClientSearchBar() {
+export default function CourseSearchBar() {
   return (
     <TextField
       InputProps={{
@@ -12,7 +13,7 @@ export default function ClientSearchBar() {
           </InputAdornment>
         ),
       }}
-      placeholder="Najd kurz podle klíčového slova..."
+      placeholder="Najdi kurz podle klíčového slova..."
       fullWidth
       sx={{ width: "75%", padding: "2% auto" }}
     />
