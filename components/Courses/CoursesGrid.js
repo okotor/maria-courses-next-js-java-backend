@@ -1,6 +1,7 @@
 'use client';
 
 import CourseItem from './CourseItem';
+console.log('>>> CourseItem type:', typeof CourseItem);
 import classes from './CoursesGrid.module.css';
 
 export default function CoursesGrid({ courses }) {

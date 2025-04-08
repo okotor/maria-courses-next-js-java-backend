@@ -8,7 +8,8 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
-    const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
+    // const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
+    const { isAdmin } = false; // For testing purposes, set isAdmin to false
 
     // Define functions to handle delete and edit
     const handleDelete = () => {
