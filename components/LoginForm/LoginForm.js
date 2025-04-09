@@ -20,7 +20,7 @@ export default function LoginForm() {
     const password = e.target.password.value;
 
     try {
-      const response = await axios.post("https://marian-courses-backend-java-production.up.railway.app/login", {
+      const response = await axios.post("https://marian-courses-backend-java.onrender.com/login", {
         email,
         password,
       });
@@ -51,7 +51,7 @@ export default function LoginForm() {
     const { credential } = tokenResponse;
 
     try {
-      const res = await axios.post("https://marian-courses-backend-java-production.up.railway.app/google-login", {
+      const res = await axios.post("https://marian-courses-backend-java.onrender.com/google-login", {
         token: credential,
       });
       const data = res.data;
