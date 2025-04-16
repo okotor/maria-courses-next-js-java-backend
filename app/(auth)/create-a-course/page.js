@@ -25,8 +25,9 @@ export default function CreateACoursePage() {
 
         try {
             const response = await saveCourse(formData);
-            setState({ success: true, message: response.message });
+            setState({ success: true, message: "Kurz byl úspěšně uložen!" });
         } catch (error) {
+            console.error('Error saving course:', error);
             setState({ success: false, message: 'Chyba při ukládání kurzu.' });
         }
     };

@@ -4,7 +4,7 @@ let isRefreshing = false;
 let subscribers = [];
 
 const api = axios.create({
-  baseURL: 'marian-courses-backend-java-production.up.railway.app',
+  baseURL: 'https://marian-courses-backend-java-production.up.railway.app',
   headers: {
     'Content-Type': 'application/json',
   },
