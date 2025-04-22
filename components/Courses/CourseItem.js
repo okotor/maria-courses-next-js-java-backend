@@ -26,7 +26,7 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
         <header>
           <div className={classes.image}>
             <Image
-              src={`/${image}`} 
+              src={`https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}`} 
               // https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/
               alt={title}
               fill

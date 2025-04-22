@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/components/MainHeader/ClientNavLink.module.css"],"sourcesContent":[".link {\r\n    text-decoration: none;\r\n    color: #949290;\r\n    font-weight: bold;\r\n    padding: 0.5rem 1rem;\r\n    border-radius: 0.5rem;\r\n  }\r\n  \r\n  .link:hover,\r\n  .link:active {\r\n    background: linear-gradient(90deg, #5c5a5a, #7a7a7a);\r\n    background-clip: text;\r\n    -webkit-background-clip: text;\r\n    -webkit-text-fill-color: transparent;\r\n    text-shadow: 0 0 18px rgba(34, 34, 34, 0.8);\r\n  }  \r\n\r\n.active {\r\n    background: linear-gradient(90deg, #1b1b1b, #f9b331);\r\n    background-clip: text;\r\n    -webkit-background-clip: text;\r\n    -webkit-text-fill-color: transparent;\r\n  }\r\n  "],"names":[],"mappings":"AAAA;;;;;;;;AAQE;;;;;;;;AASF"}},
-    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

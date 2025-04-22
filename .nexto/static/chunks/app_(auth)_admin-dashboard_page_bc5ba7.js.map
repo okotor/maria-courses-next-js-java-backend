@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/Tom/Desktop/maria-courses-next-js/app/%28auth%29/admin-dashboard/page.js"],"sourcesContent":["\"use client\";\r\n\r\nimport ProtectedRoute from \"@/components/AuthRequired\"\r\n\r\nexport default function AdminDashboard() {\r\n  return (\r\n    <ProtectedRoute requireAdmin={true}>\r\n      <div>\r\n        <h1>Admin Dashboard</h1>\r\n        <p>Welcome, Admin!</p>\r\n      </div>\r\n    </ProtectedRoute>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;AAAA;;;AAIe,SAAS;IACtB,qBACE,6LAAC;QAAe,cAAc;kBAC5B,cAAA,6LAAC;;8BACC,6LAAC;8BAAG;;;;;;8BACJ,6LAAC;8BAAE;;;;;;;;;;;;;;;;;AAIX;KATwB"}},
-    {"offset": {"line": 56, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

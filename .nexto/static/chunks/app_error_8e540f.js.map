@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/corne/Desktop/maria-courses-next-js-java-backend/app/error.js"],"sourcesContent":["'use client';\r\n\r\nimport React from 'react';\r\n\r\nconst Error = ({ statusCode }) => {\r\n    return (\r\n        <p>\r\n            {statusCode\r\n                ? `An error ${statusCode} occurred on server`\r\n                : 'An error occurred on client'}\r\n        </p>\r\n    );\r\n};\r\n\r\nError.getInitialProps = ({ res, err }) => {\r\n    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;\r\n    return { statusCode };\r\n};\r\n\r\nexport default Error;"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIA,MAAM,QAAQ,CAAC,EAAE,UAAU,EAAE;IACzB,qBACI,6LAAC;kBACI,aACK,CAAC,SAAS,EAAE,WAAW,mBAAmB,CAAC,GAC3C;;;;;;AAGlB;KARM;AAUN,MAAM,eAAe,GAAG,CAAC,EAAE,GAAG,EAAE,GAAG,EAAE;IACjC,MAAM,aAAa,MAAM,IAAI,UAAU,GAAG,MAAM,IAAI,UAAU,GAAG;IACjE,OAAO;QAAE;IAAW;AACxB;uCAEe"}},
-    {"offset": {"line": 37, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

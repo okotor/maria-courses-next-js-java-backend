@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/Tom/Desktop/maria-courses-next-js/app/archive/layout.js"],"sourcesContent":["export default function ArchiveLayout({ archive, latest }) {\r\n    return (\r\n        <div>\r\n            <h1>Všechny kurzy</h1>\r\n            <section id=\"archive-latest\"> {latest}</section>\r\n            <section id=\"archive-filter\">{archive}</section>\r\n            {/* <section id=\"archive-latest\"> {children}</section> */}\r\n        </div>\r\n    );\r\n}"],"names":[],"mappings":";;;;;AAAe,SAAS,cAAc,EAAE,OAAO,EAAE,MAAM,EAAE;IACrD,qBACI,8OAAC;;0BACG,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;gBAAQ,IAAG;;oBAAiB;oBAAE;;;;;;;0BAC/B,8OAAC;gBAAQ,IAAG;0BAAkB;;;;;;;;;;;;AAI1C"}},
-    {"offset": {"line": 48, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/corne/Desktop/maria-courses-next-js-java-backend/components/Images/ImageSlides.module.css"],"sourcesContent":[".slideshow {\n  position: relative;\n  width: 70%;\n  height: 100%;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);\n}\n\n.slideshow img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  position: absolute;\n  top: 0;\n  left: 0;\n  opacity: 0;\n  transform: scale(1.2) translateX(-2rem) rotate(-5deg);\n  transition: all 0.5s ease-in-out;\n}\n\n.slideshow .active {\n  z-index: 1;\n  opacity: 1;\n  transform: scale(1) translateX(0) rotate(0);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;;;;;;;;AAYA"}},
-    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

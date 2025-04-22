@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/Tom/Desktop/maria-courses-next-js/app/archive/page.js"],"sourcesContent":["export default function Archive() {\r\n    return (\r\n        <div>\r\n            <h1>Archiveo</h1>\r\n        </div>\r\n    );\r\n}"],"names":[],"mappings":";;;;;AAAe,SAAS;IACpB,qBACI,8OAAC;kBACG,cAAA,8OAAC;sBAAG;;;;;;;;;;;AAGhB"}},
-    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
