@@ -49,6 +49,9 @@ export default function CoursesPage(){
       setCourses(sortedCourses);
       setFilteredCourses(sortedCourses); // Initialize filtered courses
     })
+    .catch(error => {
+      console.error("Error fetching courses:", error);
+    })
     .finally(() => setLoading(false)); // Set loading to false after fetching;
   }, []);
 
