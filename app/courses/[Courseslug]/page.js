@@ -14,6 +14,7 @@ export default async function CourseDetailsPage( { params } ) {
     // const { Courseslug } = await params;
     // const course = await getCourse(Courseslug);
     const course = await getCourse(params.Courseslug);
+    console.log(course); // Debugging: Check the course object
 
     // If the course is not found, show the not found page
     if (!course) {
@@ -28,7 +29,11 @@ export default async function CourseDetailsPage( { params } ) {
         <>
             <header className={classes.header}>
                 <div className={classes.image}>
-                    <Image src={'/' + `${course.image}`} alt={course.title} fill/>
+                    <Image 
+                       src={course.image ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${course.image}` : '/default-image.jpg'}
+                       alt={course.title} 
+                        fill
+                    />
                 {/* https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/ */}
                 </div>
                 <div className={classes.headerText}>
