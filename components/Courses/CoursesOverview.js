@@ -31,7 +31,7 @@ class ErrorBoundary extends React.Component {
 const CoursesOverview = ({ courses }) => {
   return (
     <ErrorBoundary>
-      <CourseSearchBar />
+      <CourseSearchBar onSearch={onSearch}/>
       <CoursesGrid courses={courses} />
     </ErrorBoundary>
   );

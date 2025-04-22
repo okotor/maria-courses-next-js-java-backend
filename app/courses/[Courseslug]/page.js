@@ -14,7 +14,6 @@ export default async function CourseDetailsPage( { params } ) {
     // const { Courseslug } = await params;
     // const course = await getCourse(Courseslug);
     const course = await getCourse(params.Courseslug);
-    console.log(course); // Debugging: Check the course object
 
     // If the course is not found, show the not found page
     if (!course) {

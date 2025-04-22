@@ -39,10 +39,25 @@ import CoursesOverview from '@/components/Courses/CoursesOverview';
 
 export default function CoursesPage(){
   const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
 
   useEffect(() => {
-    getCourses().then(setCourses);
+    getCourses().then(data => {
+      setCourses(data);
+      setFilteredCourses(data); // Initialize filtered courses
+    });
   }, []);
+
+  const handleSearch = (searchTerm) => {
+    const lowercasedTerm = searchTerm.toLowerCase();
+    const filtered = courses.filter(course =>
+      course.title.toLowerCase().includes(lowercasedTerm) ||
+      course.summary.toLowerCase().includes(lowercasedTerm) ||
+      course.courseDescription.toLowerCase().includes(lowercasedTerm) ||
+      course.lecturer.toLowerCase().includes(lowercasedTerm)
+    );
+    setFilteredCourses(filtered);
+  };
 
   return (
     <>
@@ -53,7 +68,7 @@ export default function CoursesPage(){
         <p>Vyberte svůj kurz na míru a zažijte proměnu!</p>
       </header>
       <main className={classes.main}>
-        {/* <CoursesOverview courses={courses} /> */}
+        <CoursesOverview courses={filteredCourses} onSearch={handleSearch}/>
       </main>
     </>
   );

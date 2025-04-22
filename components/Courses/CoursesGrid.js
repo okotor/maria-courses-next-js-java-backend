@@ -5,6 +5,10 @@ console.log('>>> CourseItem type:', typeof CourseItem);
 import classes from './CoursesGrid.module.css';
 
 export default function CoursesGrid({ courses }) {
+    if (courses.length === 0) {
+        return <p>No courses available.</p>;
+    }
+    
     return (
         <ul className={classes.courses}>
             {courses.map(course => (

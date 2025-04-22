@@ -3,7 +3,11 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from "@mui/material";
 
-export default function CourseSearchBar() {
+export default function CourseSearchBar({ onSearch }) {
+  const handleInputChange = (e) => {
+    onSearch(e.target.value);
+  };
+
   return (
     <TextField
       InputProps={{
@@ -16,6 +20,7 @@ export default function CourseSearchBar() {
       placeholder="Najdi kurz podle klíčového slova..."
       fullWidth
       sx={{ width: "75%", padding: "2% auto" }}
+      onChange={handleInputChange}
     />
   );
 }
