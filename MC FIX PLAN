@@ -1,4 +1,6 @@
-a. Make the old one work online so it is presentable and working
+a. Wedding Webpage - Next.js (Reusable Components)
+
+b. Make the old one work online so it is presentable and working
 
     PORTFOLIO FIX
 
@@ -6,9 +8,9 @@ a. Make the old one work online so it is presentable and working
 
         2. CLOUD STORAGE CONNECTION - access to images for latest courses ✔
 
-        3. ADDING A COURSE 
-        
-        4. ALL COURSES SHOW
+        3. ADDING A COURSE ✔
+
+        4. ALL COURSES SHOW 
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 
@@ -17,8 +19,6 @@ a. Make the old one work online so it is presentable and working
         6.5 (GIT HUB ACTIONS & RENDER)
 
         7. CV Fix & Agree with M'u about Negotiation Prep
-
-b. Wedding Webpage - Next.js (Reusable Components)
 
 c. add React to Marian Courses/Marian Novelty - go along with the Course, also make some of your own stuff later (keep improving it or switch to another Marian project)
 

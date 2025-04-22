@@ -44,6 +44,7 @@ export default function CoursesPage(){
 
   useEffect(() => {
     getCourses().then(data => {
+      console.log("Fetched courses:", data); // Log the fetched data
       // Sort courses by date in descending order
       const sortedCourses = data.sort((a, b) => new Date(b.date) - new Date(a.date));
       setCourses(sortedCourses);
