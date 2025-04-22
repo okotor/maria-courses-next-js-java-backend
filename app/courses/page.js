@@ -40,12 +40,16 @@ import CoursesOverview from '@/components/Courses/CoursesOverview';
 export default function CoursesPage(){
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     getCourses().then(data => {
-      setCourses(data);
-      setFilteredCourses(data); // Initialize filtered courses
-    });
+      // Sort courses by date in descending order
+      const sortedCourses = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setCourses(sortedCourses);
+      setFilteredCourses(sortedCourses); // Initialize filtered courses
+    })
+    .finally(() => setLoading(false)); // Set loading to false after fetching;
   }, []);
 
   const handleSearch = (searchTerm) => {
@@ -58,6 +62,14 @@ export default function CoursesPage(){
     );
     setFilteredCourses(filtered);
   };
+
+  if (loading) {
+    return (
+      <main className={classes.main}>
+        <p>Načítám...</p> {/* Show loading message */}
+      </main>
+    );
+  }
 
   return (
     <>

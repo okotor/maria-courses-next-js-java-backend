@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component {
     }
   }
 
-const CoursesOverview = ({ courses }) => {
+const CoursesOverview = ({ courses, onSearch }) => {
   return (
     <ErrorBoundary>
       <CourseSearchBar onSearch={onSearch}/>
