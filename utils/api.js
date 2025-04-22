@@ -4,7 +4,7 @@ let isRefreshing = false;
 let subscribers = [];
 
 const api = axios.create({
-  baseURL: 'https://marian-courses-backend-java-production.up.railway.app',
+  baseURL: 'https://marian-courses-backend-java.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -53,7 +53,7 @@ api.interceptors.response.use(
 
       const refreshToken = localStorage.getItem('refreshToken');
       try {
-        const { data } = await axios.post('https://marian-courses-backend-java-production.up.railway.app/api/refresh-token', { refreshToken });
+        const { data } = await axios.post('https://marian-courses-backend-java.onrender.com/api/refresh-token', { refreshToken });
         localStorage.setItem('token', data.token);
         api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
         isRefreshing = false;
