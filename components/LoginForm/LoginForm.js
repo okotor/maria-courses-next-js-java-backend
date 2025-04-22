@@ -8,6 +8,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 //Access the Google Client ID from environment variables
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+console.log(GOOGLE_CLIENT_ID); // Temporarily log it to verify
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({ errors: null, message: null });
