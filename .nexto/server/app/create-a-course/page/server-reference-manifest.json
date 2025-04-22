@@ -1,0 +1,27 @@
+{
+  "node": {
+    "60fd4f39d9055912202010f7ebb399b11cee4b6ad0": {
+      "workers": {
+        "app/create-a-course/page": {
+          "moduleId": "[project]/.next-internal/server/app/create-a-course/page/actions.js { ACTIONS_MODULE0 => \"[project]/lib/server-actions.js [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/create-a-course/page": "action-browser"
+      }
+    },
+    "6086970a18d14e81d1d243a0f8a0671d1461df6efa": {
+      "workers": {
+        "app/create-a-course/page": {
+          "moduleId": "[project]/.next-internal/server/app/create-a-course/page/actions.js { ACTIONS_MODULE0 => \"[project]/lib/server-actions.js [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/create-a-course/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

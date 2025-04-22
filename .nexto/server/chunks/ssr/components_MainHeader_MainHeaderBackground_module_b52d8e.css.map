@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/components/MainHeader/MainHeaderBackground.module.css"],"sourcesContent":["\r\n.header-background {\r\n    position: absolute;\r\n    width: 100%;\r\n    height: 320px;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n}\r\n  \r\n.header-background svg {\r\n    display: block;\r\n    width: 100%;\r\n    height: auto;\r\n}"],"names":[],"mappings":"AACA;;;;;;;;;AASA"}},
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

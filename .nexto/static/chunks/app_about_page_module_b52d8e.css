@@ -1,0 +1,62 @@
+/* [project]/app/about/page.module.css [app-client] (css) */
+.page-module__xgPmsG__header {
+  gap: 3rem;
+  margin: 0 auto 3rem;
+  width: 90%;
+  max-width: 75rem;
+  color: #312e28;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.page-module__xgPmsG__header h1 {
+  font-family: Montserrat, sans-serif;
+}
+
+.page-module__xgPmsG__highlight {
+  background: linear-gradient(90deg, #302826, #777573);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-module__xgPmsG__main {
+  width: 90%;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-module__xgPmsG__main h2 {
+  font-family: Montserrat, sans-serif;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: #000;
+}
+
+.page-module__xgPmsG__perks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.page-module__xgPmsG__perks li {
+  list-style: none;
+  text-align: center;
+}
+
+.page-module__xgPmsG__perks img {
+  width: 8rem;
+  height: 8rem;
+  object-fit: contain;
+}
+
+.page-module__xgPmsG__perks p {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+
+/*# sourceMappingURL=app_about_page_module_b52d8e.css.map*/

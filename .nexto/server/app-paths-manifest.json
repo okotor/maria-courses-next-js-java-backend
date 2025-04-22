@@ -1,0 +1,14 @@
+{
+  "/page": "app/page.js",
+  "/about/page": "app/about/page.js",
+  "/archive/@archive/[[...filter]]/page": "app/archive/@archive/[[...filter]]/page.js",
+  "/register/page": "app/register/page.js",
+  "/courses/page": "app/courses/page.js",
+  "/courses/[Courseslug]/page": "app/courses/[Courseslug]/page.js",
+  "/login/page": "app/login/page.js",
+  "/(auth)/my-courses/page": "app/(auth)/my-courses/page.js",
+  "/(auth)/account/page": "app/(auth)/account/page.js",
+  "/(auth)/admin-dashboard/page": "app/(auth)/admin-dashboard/page.js",
+  "/(auth)/create-a-course/page": "app/(auth)/create-a-course/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
+}

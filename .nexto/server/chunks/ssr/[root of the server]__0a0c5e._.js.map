@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 38, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/components/MainHeader/ClientNavLink.module.css [app-client] (css module)"],"sourcesContent":["__turbopack_export_value__({\n  \"active\": \"ClientNavLink-module__Vl_r-q__active\",\n  \"link\": \"ClientNavLink-module__Vl_r-q__link\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA;AACA"}},
+    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 48, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/Tom/Desktop/maria-courses-next-js/components/MainHeader/ClientNavLink.js"],"sourcesContent":["'use client';\r\n\r\nimport Link from 'next/link';\r\nimport { usePathname } from 'next/navigation';\r\nimport classes from './ClientNavLink.module.css';\r\n\r\nexport default function ClientLink({href, children}){\r\n    const path = usePathname();\r\n\r\n    return (\r\n        <Link href={href}\r\n            className={\r\n            path.startsWith(href) ? `${classes.link} ${classes.active}` : classes.link}\r\n        >\r\n            {children}\r\n        </Link>\r\n    );\r\n}"],"names":[],"mappings":";;;;AAEA;AACA;AACA;AAJA;;;;;AAMe,SAAS,WAAW,EAAC,IAAI,EAAE,QAAQ,EAAC;IAC/C,MAAM,OAAO,CAAA,GAAA,kIAAA,CAAA,cAAW,AAAD;IAEvB,qBACI,8OAAC,4JAAA,CAAA,UAAI;QAAC,MAAM;QACR,WACA,KAAK,UAAU,CAAC,QAAQ,GAAG,wJAAA,CAAA,UAAO,CAAC,IAAI,CAAC,CAAC,EAAE,wJAAA,CAAA,UAAO,CAAC,MAAM,EAAE,GAAG,wJAAA,CAAA,UAAO,CAAC,IAAI;kBAEzE;;;;;;AAGb"}},
+    {"offset": {"line": 72, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/app/courses/page.module.css [app-client] (css module)"],"sourcesContent":["__turbopack_export_value__({\n  \"cta\": \"page-module__JZcRDa__cta\",\n  \"header\": \"page-module__JZcRDa__header\",\n  \"highlight\": \"page-module__JZcRDa__highlight\",\n  \"loading\": \"page-module__JZcRDa__loading\",\n  \"subheader\": \"page-module__JZcRDa__subheader\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA"}},
+    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/corne/Desktop/maria-courses-next-js-java-backend/app/archive/layout.js"],"sourcesContent":["import classes from '@/app/courses/page.module.css'\r\n\r\nexport default function ArchiveLayout({ archive, latest }) {\r\n    return (\r\n        <>\r\n            <header className={classes.header}>\r\n                <h1>Všechny kurzy</h1>\r\n            </header>\r\n            <section id=\"archive-latest\"> {latest}</section>\r\n            <section id=\"archive-filter\">{archive}</section>\r\n            {/* <section id=\"archive-latest\"> {children}</section> */}\r\n        </>\r\n    );\r\n}"],"names":[],"mappings":";;;;AAAA;;;AAEe,SAAS,cAAc,EAAE,OAAO,EAAE,MAAM,EAAE;IACrD,qBACI;;0BACI,8OAAC;gBAAO,WAAW,qIAAA,CAAA,UAAO,CAAC,MAAM;0BAC7B,cAAA,8OAAC;8BAAG;;;;;;;;;;;0BAER,8OAAC;gBAAQ,IAAG;;oBAAiB;oBAAE;;;;;;;0BAC/B,8OAAC;gBAAQ,IAAG;0BAAkB;;;;;;;;AAI1C"}},
+    {"offset": {"line": 65, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

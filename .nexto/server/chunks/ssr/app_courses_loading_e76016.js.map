@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/corne/Desktop/maria-courses-next-js-java-backend/app/courses/loading.js"],"sourcesContent":["import classes from './loading.module.css'\r\n\r\nconst CoursesLoadingPage = () => {\r\n    return (\r\n        <div>\r\n            <p className={classes.loading}>Načítám...</p>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default CoursesLoadingPage;"],"names":[],"mappings":";;;;;;;;;;;AAEA,MAAM,qBAAqB;IACvB,qBACI,8OAAC;kBACG,cAAA,8OAAC;YAAE,WAAW,QAAQ,OAAO;sBAAE;;;;;;;;;;;AAG3C;uCAEe"}},
+    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

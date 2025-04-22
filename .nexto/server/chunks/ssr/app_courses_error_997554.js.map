@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/corne/Desktop/maria-courses-next-js-java-backend/app/courses/error.js"],"sourcesContent":["'use client';\r\n\r\nexport default function Error () {\r\n    return (\r\n        <main className='error'>\r\n            <h1>Na stránce došlo k chybě.</h1>\r\n            <p>Nepovedlo se načíst údaje ke kurzům. Zkuste to znovu.</p>\r\n        </main>\r\n    );\r\n}"],"names":[],"mappings":";;;;AAAA;;AAEe,SAAS;IACpB,qBACI,8OAAC;QAAK,WAAU;;0BACZ,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;;;;;;;AAGf"}},
+    {"offset": {"line": 38, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

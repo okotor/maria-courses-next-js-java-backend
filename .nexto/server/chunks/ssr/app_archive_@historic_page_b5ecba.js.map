@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/Tom/Desktop/maria-courses-next-js/app/archive/%40historic/page.js"],"sourcesContent":["import React from 'react';\r\n\r\n\r\nexport default function CoursesArchivePage() {\r\n    return <h1>Archiv kurzů</h1>;\r\n}"],"names":[],"mappings":";;;;AAAA;;;AAGe,SAAS;IACpB,qBAAO,8OAAC;kBAAG;;;;;;AACf"}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

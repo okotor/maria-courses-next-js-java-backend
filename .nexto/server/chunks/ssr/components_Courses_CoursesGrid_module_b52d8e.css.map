@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/components/Courses/CoursesGrid.module.css"],"sourcesContent":[".courses {\n  width: 90%;\n  max-width: 90rem;\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));\n  grid-gap: 5rem;\n  margin: 2rem auto;\n  list-style: none;\n  padding: 0;\n}\n"],"names":[],"mappings":"AAAA"}},
+    {"offset": {"line": 11, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
