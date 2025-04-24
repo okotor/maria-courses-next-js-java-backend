@@ -2,7 +2,17 @@ a. Wedding Webpage - Next.js (Reusable Components)
 
 b. Make the old one work online so it is presentable and working
 
-    PORTFOLIO FIX
+    I. CODE UNDERSTAND
+
+        1. CorsConfig -> SecurityConfig -> MyUserDetailsService (working? connected?) -> UserPrincipal
+                                        -> JwtFilter -> JwtService
+
+        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC -> RefreshTokenController -> JwtService
+
+        3. User -> UserController (incorporate UseContrNew) -> JwtService
+                                                            -> UserService + UserRepository -> GoogleTokenValidatorService
+
+    II. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
 
@@ -10,7 +20,7 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE ✔
 
-        4. ALL COURSES SHOW 
+        4. JWT SECURITY FIX & ALL COURSES SHOW 
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 
@@ -18,9 +28,10 @@ b. Make the old one work online so it is presentable and working
 
         6.5 (GIT HUB ACTIONS & RENDER)
 
-        7. CV Fix & Agree with M'u about Negotiation Prep
+        7. CV Fix & Agree with M'u about Negotiation Prep 
 
-c. add React to Marian Courses/Marian Novelty - go along with the Course, also make some of your own stuff later (keep improving it or switch to another Marian project)
+c. Need a New React & Java Project (Marian Novelty/Štěpán/...? - Template / from Scratch, go along with the Course, also make some of your own stuff later)
+
 
 
 
