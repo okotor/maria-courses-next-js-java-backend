@@ -20,10 +20,11 @@ export default function LoginForm() {
     const password = e.target.password.value;
 
     try {
-      const response = await axios.post("https://marian-courses-backend-java.onrender.com/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://marian-courses-backend-java.onrender.com/login",
+        { email, password },
+        { withCredentials: true } // Include cookies in the request
+      );
       const data = response.data;
       console.log('Login response:', data); // debugging
 
@@ -48,12 +49,20 @@ export default function LoginForm() {
   };
 
   const handleGoogleLoginSuccess = async (tokenResponse) => {
+    console.log("Google token response:", tokenResponse); // Debugging
     const { credential } = tokenResponse;
 
+    if (!credential) {
+      setFormState({ errors: "Google login failed: Missing credential", message: null });
+      return;
+    }
+
     try {
-      const res = await axios.post("https://marian-courses-backend-java.onrender.com/google-login", {
-        token: credential,
-      });
+      const res = await axios.post(
+        "https://marian-courses-backend-java.onrender.com/google-login",
+        { token: credential },
+        { withCredentials: true } // Include cookies in the request
+      );
       const data = res.data;
       console.log('Google login response:', data); // Debugging
 
@@ -73,7 +82,7 @@ export default function LoginForm() {
         setFormState({ errors: "Google login failed", message: null });
       }
     } catch (error) {
-      console.error('Google login error:', error); // Debugging
+      console.error("Google login error:", error.response?.data || error.message); // Debugging
       setFormState({ errors: error.response?.data?.message || "An error occurred", message: null });
     }
   };
