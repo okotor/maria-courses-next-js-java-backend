@@ -4,7 +4,7 @@ let isRefreshing = false;
 let subscribers = [];
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://marian-courses-backend-java.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -54,7 +54,7 @@ api.interceptors.response.use(
       const refreshToken = localStorage.getItem('refreshToken');
       try {
         const { data } = await axios.post(
-          'http://localhost:8080/api/refresh-token',
+          'https://marian-courses-backend-java.onrender.com/api/refresh-token',
           { refreshToken },
           { withCredentials: true } // Include cookies in the request
         );

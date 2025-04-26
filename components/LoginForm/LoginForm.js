@@ -59,7 +59,7 @@ export default function LoginForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/google-login",
+        "https://marian-courses-backend-java.onrender.com/google-login",
         { token: credential },
         { withCredentials: true } // Include cookies in the request
       );
