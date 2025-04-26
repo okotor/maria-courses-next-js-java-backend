@@ -49,7 +49,6 @@ export default function LoginForm() {
   };
 
   const handleGoogleLoginSuccess = async (tokenResponse) => {
-    console.log("Google token response:", tokenResponse); // Debugging
     const { credential } = tokenResponse;
 
     if (!credential) {

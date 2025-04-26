@@ -6,10 +6,11 @@ b. Make the old one work online so it is presentable and working
 
     I. JWT & BE CODE UNDERSTAND
 
-        1. CorsConfig -> SecurityConfig -> MyUserDetailsService (working? connected?) -> UserPrincipal
-                                        -> JwtFilter -> JwtService
-
-        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC (context/AuthContext.js, utils/api.js - later Zustand/Redux, saveCourse in lib/courses-actions.js) -> RefreshTokenController -> JwtService
+        1. FRONTEND LOGIN/REGISTER -> UserController (register, login, google login) -> ...
+                    
+        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC (context/AuthContext.js, utils/api.js - later Zustand/Redux, saveCourse in lib/courses-actions.js)
+        -> SecurityConfig -> JwtFilter -> JwtService -> MyUserDetailsService -> UserPrincipal
+        -> RefreshTokenController -> JwtService
 
         3. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
@@ -29,7 +30,7 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE ✔
 
-        4. JWT SECURITY FIX & LOGIN/REGISTER ERROR FIX & ALL COURSES SHOW 
+        4. JWT SECURITY FIX & ALL COURSES SHOW 
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 
