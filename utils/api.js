@@ -53,7 +53,11 @@ api.interceptors.response.use(
 
       const refreshToken = localStorage.getItem('refreshToken');
       try {
-        const { data } = await axios.post('https://marian-courses-backend-java.onrender.com/api/refresh-token', { refreshToken });
+        const { data } = await axios.post(
+          'https://marian-courses-backend-java.onrender.com/api/refresh-token',
+          { refreshToken },
+          { withCredentials: true } // Include cookies in the request
+        );
         localStorage.setItem('token', data.token);
         api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
         isRefreshing = false;

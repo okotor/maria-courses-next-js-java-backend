@@ -2,17 +2,26 @@ a. Wedding Webpage - Next.js (Reusable Components)
 
 b. Make the old one work online so it is presentable and working
 
-    I. CODE UNDERSTAND
+    0. Job Offers & ChatGPT 20 Key Skills Research:
+
+    I. JWT & BE CODE UNDERSTAND
 
         1. CorsConfig -> SecurityConfig -> MyUserDetailsService (working? connected?) -> UserPrincipal
                                         -> JwtFilter -> JwtService
 
-        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC -> RefreshTokenController -> JwtService
+        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC (context/AuthContext.js, utils/api.js - later Zustand/Redux, saveCourse in lib/courses-actions.js) -> RefreshTokenController -> JwtService
 
         3. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
+    II. FE CODE UNDERSTAND
 
-    II. PORTFOLIO FIX
+        1. next.config.js -> jsconfig.json -> eslint.config.mjs
+
+        2. .github -> .idea -> .next 
+
+        3. app & components
+        
+    III. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
 
@@ -20,7 +29,7 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE ✔
 
-        4. JWT SECURITY FIX & ALL COURSES SHOW 
+        4. JWT SECURITY FIX & LOGIN/REGISTER ERROR FIX & ALL COURSES SHOW 
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 
@@ -30,7 +39,7 @@ b. Make the old one work online so it is presentable and working
 
         7. CV Fix & Agree with M'u about Negotiation Prep 
 
-c. Need a New React & Java Project (Marian Novelty/Štěpán/...? - Template / from Scratch, go along with the Course, also make some of your own stuff later)
+c. EXAMINE JOB OFFERS + Need a New React & Django/Flask/FastAPI Project (Marian Novelty/Štěpán/...? - Template / from Scratch, go along with the Course, also make some of your own stuff later)
 
 
 
