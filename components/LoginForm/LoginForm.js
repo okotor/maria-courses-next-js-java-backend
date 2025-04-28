@@ -29,8 +29,6 @@ export default function LoginForm() {
       console.log('Login response:', data); // debugging
 
       if (data.success) {
-        // No need to store the JWT token in localStorage; it's already stored in an HTTP-only cookie
-        localStorage.setItem("isAdmin", JSON.stringify(data.user.is_admin)); // Store isAdmin in localStorage
         setAuthenticated(true);
         setIsAdmin(data.user.is_admin);
         console.log("isAdmin state after setting:", data.user.is_admin); // Debugging
@@ -63,11 +61,8 @@ export default function LoginForm() {
         { withCredentials: true } // Include cookies in the request
       );
       const data = res.data;
-      console.log('Google login response:', data); // Debugging
 
       if (data.success) {
-        // No need to store the JWT token in localStorage; it's already stored in an HTTP-only cookie
-        localStorage.setItem("isAdmin", JSON.stringify(data.user.is_admin)); // Store isAdmin in localStorage
         setAuthenticated(true);
         console.log("is_admin value from backend:", data.user.is_admin); // Debugging
         setIsAdmin(data.user.is_admin);

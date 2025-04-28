@@ -2,16 +2,26 @@ a. Wedding Webpage - Next.js (Reusable Components)
 
 b. Make the old one work online so it is presentable and working
 
-    0. Job Offers & ChatGPT 20 Key Skills Research:
+    0. Job Offers & ChatGPT 20 Key Skills Research: 
+
+        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), CI/CD Pipelines (GitHub Actions).
 
     I. JWT & BE CODE UNDERSTAND
 
         1. FRONTEND LOGIN/REGISTER -> UserController (register, login, google login) -> ...
-                    
-        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC (context/AuthContext.js, utils/api.js - later Zustand/Redux, saveCourse in lib/courses-actions.js)
-        -> SecurityConfig -> JwtFilter -> JwtService -> MyUserDetailsService -> UserPrincipal
-        -> RefreshTokenController -> JwtService
 
+        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC
+            a. Transform => AuthContext + api.js + LoginForm + course-action.js saveCourse -> no localStorage interaction but HttpOnly
+                -> SecurityConfig -> JwtFilter -> JwtService -> MyUserDetailsService -> UserPrincipal
+                -> RefreshTokenController -> JwtService
+            b. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
+                    Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
+            c. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
+                    Recommendation: Store refresh tokens in the database and validate them during the refresh process.
+            d. Issue: The UserController does not handle errors properly during registration and login.
+                    Recommendation: Implement error handling middleware to manage exceptions and provide user feedback.
+                    This can be done by creating a custom error handler that catches exceptions and sends appropriate responses to the client.
+                    
         3. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
     II. FE CODE UNDERSTAND
