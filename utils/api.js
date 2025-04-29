@@ -1,14 +1,16 @@
 import axios from 'axios';
 
-let isRefreshing = false;
-let subscribers = [];
-
 const api = axios.create({
   baseURL: 'https://marian-courses-backend-java.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+let isRefreshing = false;
+let subscribers = [];
+
+
 
 const onTokenRefreshed = (token) => {
   subscribers.forEach((callback) => callback(token));

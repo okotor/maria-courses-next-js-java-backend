@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios from "@/utils/api";
 import { useAuth } from "../../context/AuthContext";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-//Access the Google Client ID from environment variables
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({ errors: null, message: null });
@@ -21,7 +21,7 @@ export default function LoginForm() {
 
     try {
       const response = await axios.post(
-        "https://marian-courses-backend-java.onrender.com/login",
+        `${BACKEND_URL}/login`,
         { email, password },
         { withCredentials: true } // Include cookies in the request
       );
@@ -48,15 +48,13 @@ export default function LoginForm() {
 
   const handleGoogleLoginSuccess = async (tokenResponse) => {
     const { credential } = tokenResponse;
-
     if (!credential) {
       setFormState({ errors: "Google login failed: Missing credential", message: null });
       return;
     }
-
     try {
       const res = await axios.post(
-        "https://marian-courses-backend-java.onrender.com/google-login",
+        `${BACKEND_URL}/google-login`,
         { token: credential },
         { withCredentials: true } // Include cookies in the request
       );
