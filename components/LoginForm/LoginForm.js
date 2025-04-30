@@ -11,8 +11,8 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({ errors: null, message: null });
-  const { setAuthenticated, setIsAdmin } = useAuth();
   const router = useRouter();
+  const { login } = useAuth();
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,9 +29,8 @@ export default function LoginForm() {
       console.log('Login response:', data); // debugging
 
       if (data.success) {
-        setAuthenticated(true);
-        setIsAdmin(data.user.is_admin);
-        console.log("isAdmin state after setting:", data.user.is_admin); // Debugging
+        login(data.user); // Use the `login` function from `AuthContext`
+        setFormState({ errors: null, message: "Login successful!" });
         if (data.user.is_admin) {
           router.push("/admin-dashboard");
         } else {
@@ -61,10 +60,8 @@ export default function LoginForm() {
       const data = res.data;
 
       if (data.success) {
-        setAuthenticated(true);
-        console.log("is_admin value from backend:", data.user.is_admin); // Debugging
-        setIsAdmin(data.user.is_admin);
-        console.log("isAdmin state after setting:", data.user.is_admin); // Debugging
+        login(data.user); // Use the `login` function from `AuthContext`
+        setFormState({ errors: null, message: "Google login successful!" });
         if (data.user.is_admin) {
           router.push("/admin-dashboard");
         } else {

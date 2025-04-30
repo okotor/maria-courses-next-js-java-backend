@@ -6,21 +6,19 @@ b. Make the old one work online so it is presentable and working
 
         - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), CI/CD Pipelines (GitHub Actions).
 
-    I. JWT & BE CODE UNDERSTAND
+    I. JWT FE & BE CODE UNDERSTAND
 
-        1. FRONTEND LOGIN/REGISTER -> UserController (register, login, google login) -> ...
+        1. Check token expiration logic in api.js (with exp?) & courses-actions.js use api.js axios, not fetch for those needing authentication
 
-        2. FRONTEND REFRESH TOKEN / JWT TOKEN LOGIC
-            a. Transform => AuthContext + api.js + LoginForm + course-action.js saveCourse -> no localStorage interaction but HttpOnly
-                -> SecurityConfig -> JwtFilter -> JwtService -> MyUserDetailsService -> UserPrincipal
-                -> RefreshTokenController -> JwtService
-            b. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
-                    Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
-            c. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
+        2. JWT TOKEN LOGIC
+            a. Understand all access routes fully (FE+BE)? Fully tested? (START USING A LIBRARY FOR TESTING)
+            b. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
                     Recommendation: Store refresh tokens in the database and validate them during the refresh process.
-            d. Issue: The UserController does not handle errors properly during registration and login.
+            c. Issue: The UserController does not handle errors properly during registration and login.
                     Recommendation: Implement error handling middleware to manage exceptions and provide user feedback.
                     This can be done by creating a custom error handler that catches exceptions and sends appropriate responses to the client.
+            d. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
+                    Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
                     
         3. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
@@ -38,9 +36,9 @@ b. Make the old one work online so it is presentable and working
 
         2. CLOUD STORAGE CONNECTION - access to images for latest courses ✔
 
-        3. ADDING A COURSE ✔
+        3. ADDING A COURSE - saving the image to S3 Bucket ✔
 
-        4. JWT SECURITY FIX & ALL COURSES SHOW 
+        4. JWT SECURITY FIX & REGISTER & ALL COURSES SHOW & ADD A COURSE - test
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 

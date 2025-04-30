@@ -1,9 +1,13 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useRef } from "react";
-import api from '@/utils/api';
 import { useRouter } from "next/navigation";
+import axios from "@/utils/api";
+import { refreshAccessToken } from '@/utils/tokenUtil';
+import { useAuthCheck } from "@/hooks/useAuthCheck";
 
+const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const INACTIVITY_TIMEOUT = 20 * 60 * 1000; // 20 minutes
 
 const AuthContext = createContext();
 
@@ -11,63 +15,68 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const router = useRouter();
-  const lastActivityRef = useRef(new Date().getTime());
+  const lastActivityRef = useRef(Date.now());
+  const hasCheckedAuth = useRef(false);
+
+  useAuthCheck(setAuthenticated, setIsAdmin, hasCheckedAuth);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setAuthenticated(true);
-      // Assuming you store isAdmin information in localStorage or fetch it on mount
-      const isAdminStored = JSON.parse(localStorage.getItem('isAdmin'));
-      setIsAdmin(isAdminStored);
-    }
-
+    // Track activity
     const handleUserActivity = () => {
-      lastActivityRef.current = new Date().getTime();
+      lastActivityRef.current = Date.now();
+      console.log("User activity detected, updating last activity time.");
     };
 
-    document.addEventListener('mousemove', handleUserActivity);
-    document.addEventListener('keydown', handleUserActivity);
+    const refreshSession = async () => {
+      const now = Date.now();
+      const inactiveFor = now - lastActivityRef.current;
+      console.log("Inactive for:", inactiveFor, "ms");
 
-    const refreshTokenIfNeeded = async () => {
-      const now = new Date().getTime();
-      const timeSinceLastActivity = now - lastActivityRef.current;
-
-      if (timeSinceLastActivity < 20 * 60 * 1000) {
-        const refreshToken = localStorage.getItem('refreshToken');
+      if (inactiveFor < INACTIVITY_TIMEOUT) { 
+        console.log("User is active, skipping session refresh.");
+        console.log("Inactive for:", inactiveFor, "ms");  
         try {
-          const { data } = await api.post('/api/refresh-token', { refreshToken });
-          localStorage.setItem('token', data.token);
-          api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
-        } catch (err) {
-          setAuthenticated(false);
-          setIsAdmin(false);
-          localStorage.removeItem('token');
-          localStorage.removeItem('refreshToken');
-          router.replace("/login");
+          const newToken = await refreshAccessToken();
+          if (!newToken) logout();
+        } catch {
+          logout();
         }
       }
     };
 
-    const interval = setInterval(refreshTokenIfNeeded, 5 * 60 * 1000);
+    document.addEventListener("mousemove", handleUserActivity);
+    document.addEventListener("keydown", handleUserActivity);
+    const interval = setInterval(refreshSession, SESSION_REFRESH_INTERVAL);
 
     return () => {
-      document.removeEventListener('mousemove', handleUserActivity);
-      document.removeEventListener('keydown', handleUserActivity);
+      document.removeEventListener("mousemove", handleUserActivity);
+      document.removeEventListener("keydown", handleUserActivity);
       clearInterval(interval);
+      console.log("AuthProvider cleanup: Event listeners and interval cleared.");
     };
-  }, [router]);
+  }, []);
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await axios.post("/auth/logout", {}, { withCredentials: true });
+      console.log("Logout successful.");
+    } catch {
+      console.error("Logout failed.");
+    }
     setAuthenticated(false);
     setIsAdmin(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
     router.replace("/login");
   };
 
+  const login = (user) => {
+    setAuthenticated(true);
+    setIsAdmin(user.is_admin);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAdmin, authenticated, setIsAdmin, setAuthenticated, logout }}>
+    <AuthContext.Provider
+      value={{ isAdmin, authenticated, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

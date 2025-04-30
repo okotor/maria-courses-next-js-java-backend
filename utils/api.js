@@ -1,77 +1,51 @@
 import axios from 'axios';
+import { getJwtToken, refreshAccessToken } from './tokenUtil';
 
 const api = axios.create({
-  baseURL: 'https://marian-courses-backend-java.onrender.com',
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL, // now uses env variable
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-let isRefreshing = false;
-let subscribers = [];
-
-
-
-const onTokenRefreshed = (token) => {
-  subscribers.forEach((callback) => callback(token));
-  subscribers = [];
-};
-
-const addSubscriber = (callback) => {
-  subscribers.push(callback);
-};
-
 api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+  async (config) => {
+    let jwtToken = getJwtToken();
+    if (!jwtToken) {
+      return config; // No token available, proceed with the request
     }
+
+    // Optional: Check if JWT is expired (could be a utility function)
+    const isTokenExpired = false; // Add your expiration check here (optional)
+
+    if (isTokenExpired) {
+      // Try to refresh the token before making the request
+      jwtToken = await refreshAccessToken();
+      if (jwtToken) {
+        config.headers['Authorization'] = `Bearer ${jwtToken}`;
+      }
+    } else {
+      config.headers['Authorization'] = `Bearer ${jwtToken}`;
+    }
+
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
+
+let alreadyRedirecting = false;
 
 api.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const { config, response: { status } } = error;
-    const originalRequest = config;
+  (error) => {
+    const status = error.response?.status;
 
-    if (status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        return new Promise((resolve) => {
-          addSubscriber((token) => {
-            originalRequest.headers['Authorization'] = `Bearer ${token}`;
-            resolve(axios(originalRequest));
-          });
-        });
-      }
-
-      originalRequest._retry = true;
-      isRefreshing = true;
-
-      const refreshToken = localStorage.getItem('refreshToken');
-      try {
-        const { data } = await axios.post(
-          'https://marian-courses-backend-java.onrender.com/api/refresh-token',
-          { refreshToken },
-          { withCredentials: true } // Include cookies in the request
-        );
-        localStorage.setItem('token', data.token);
-        api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
-        isRefreshing = false;
-        onTokenRefreshed(data.token);
-        originalRequest.headers['Authorization'] = `Bearer ${data.token}`;
-        return axios(originalRequest);
-      } catch (err) {
-        isRefreshing = false;
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login'; // Redirect to login
-        return Promise.reject(err);
+    if (status === 401 && !alreadyRedirecting) {
+      alreadyRedirecting = true;
+      // Handle unauthorized access (possibly redirect to login)
+      if (typeof window !== "undefined") {
+        window.location.href = '/login';
       }
     }
 
