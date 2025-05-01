@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }) => {
   // Sync login/logout across tabs
   useEffect(() => {
     const syncAuthAcrossTabs = (event) => {
+      console.log("Storage event detected:", event); // Debug log for storage event
       if (event.key === 'logout') {
         console.log('Detected logout from another tab');
         logout(false);

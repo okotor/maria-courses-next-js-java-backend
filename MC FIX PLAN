@@ -33,6 +33,8 @@ b. Make the old one work online so it is presentable and working
 
         3. app & components
         
+        4. React Auth Kit (use it for the login/logout logic) - check the documentation and understand how to use it properly
+        
     III. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
