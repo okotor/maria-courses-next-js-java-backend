@@ -77,16 +77,12 @@ export const AuthProvider = ({ children }) => {
 
       if (type === "login" && user) {
         console.log("Detected login from another tab");
-        
-        // Delay to ensure cookies are written before checking
-        setTimeout(async () => {
           try {
             await checkAuth(); // re-validate on this tab
           } catch (err) {
             console.error("Post-login checkAuth failed", err);
             logout(); // force logout if cookies not usable
           }
-        }, 1000); // 2 sec delay
       }
     };
 
