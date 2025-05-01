@@ -11,6 +11,9 @@ const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 const AuthContext = createContext();
 
+// Create the BroadcastChannel
+const authChannel = typeof window !== "undefined" ? new BroadcastChannel("auth") : null;
+
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
@@ -59,34 +62,60 @@ export const AuthProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  let isSyncing = false;
+  // Sync auth state across tabs using BroadcastChannel
+  useEffect(() => {
+    if (!authChannel) return;
+
+    const handler = async (event) => {
+      console.log("BroadcastChannel message:", event.data);
+      const { type } = event.data;
+
+      if (type === "logout") {
+        console.log("Detected logout from another tab");
+        await logout(false); // Do not rebroadcast
+      }
+
+      if (type === "login") {
+        console.log("Detected login from another tab");
+        await checkAuth(); // Refresh local auth state
+      }
+    };
+
+    authChannel.addEventListener("message", handler);
+    return () => {
+      authChannel.removeEventListener("message", handler);
+    };
+  }, []);
+
+
+  // let isSyncing = false;
 
   // Sync login/logout across tabs
-  useEffect(() => {
-    const syncAuthAcrossTabs = async (event) => {
-      if (isSyncing) return; // Prevent simultaneous updates
-      isSyncing = true;
-      console.log("Storage event detected:", event); // Debug log for storage event
-      if (event.key === 'logout') {
-        setTimeout(async () => {
-          await checkAuth();
-        }, 500); // Delay to ensure backend state is updated
-        console.log('Detected logout from another tab');
-        await logout(false); // Ensure logout is handled properly
-      }
-      if (event.key === 'login') {
-        console.log('Detected login from another tab');
-        setTimeout(async () => {
-          await checkAuth();
-        }, 500); // Delay to ensure backend state is updated
-        await checkAuth();
-      }
+  // useEffect(() => {
+  //   const syncAuthAcrossTabs = async (event) => {
+  //     if (isSyncing) return; // Prevent simultaneous updates
+  //     isSyncing = true;
+  //     console.log("Storage event detected:", event); // Debug log for storage event
+  //     if (event.key === 'logout') {
+  //       setTimeout(async () => {
+  //         await checkAuth();
+  //       }, 500); // Delay to ensure backend state is updated
+  //       console.log('Detected logout from another tab');
+  //       await logout(false); // Ensure logout is handled properly
+  //     }
+  //     if (event.key === 'login') {
+  //       console.log('Detected login from another tab');
+  //       setTimeout(async () => {
+  //         await checkAuth();
+  //       }, 500); // Delay to ensure backend state is updated
+  //       await checkAuth();
+  //     }
 
-      isSyncing = false; // Reset syncing state
-    };
-    window.addEventListener('storage', syncAuthAcrossTabs);
-    return () => window.removeEventListener('storage', syncAuthAcrossTabs);
-  }, []);
+  //     isSyncing = false; // Reset syncing state
+  //   };
+  //   window.addEventListener('storage', syncAuthAcrossTabs);
+  //   return () => window.removeEventListener('storage', syncAuthAcrossTabs);
+  // }, []);
 
   //Checking authentication status with the backend function
   const checkAuth = async (retryCount = 0) => {
@@ -111,8 +140,8 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async (broadcast = true) => {
     console.log("Logging out...");
-    if (broadcast) {
-      localStorage.setItem('logout', Date.now());
+    if (broadcast && authChannel) {
+      authChannel.postMessage({ type: "logout" });
     }
     if (authenticated) {
       try {
@@ -131,7 +160,9 @@ export const AuthProvider = ({ children }) => {
     console.log("Login successful:", user);
     setAuthenticated(true);
     setIsAdmin(user.is_admin);
-    localStorage.setItem('login', Date.now()); // Sync login across tabs
+    if (authChannel) {
+      authChannel.postMessage({ type: "login", user });
+    }
   };
 
   const contextValue = useMemo(

@@ -8,9 +8,8 @@ b. Make the old one work online so it is presentable and working
 
     I. JWT FE & BE CODE UNDERSTAND
 
-        1. Make the login-check synchronous & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check even with public resource GET requests) & if manually entered a protected resource, the webpage logs the user out & when window closed in DEPLOYMENT
+        1. Use BroadcastAPI & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests) & if manually entered a protected resource, the webpage logs the user out & when window closed in DEPLOYMENT
             
-
         2. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
 
