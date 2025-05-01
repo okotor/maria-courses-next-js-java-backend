@@ -16,9 +16,10 @@ export default function RegisterForm() {
       const email = formData.get('email');
       const password = formData.get('password');
 
-      const response = await fetch('https://marian-courses-backend-java.onrender.com/register', {
+      const response = await fetch(`${BACKEND_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 

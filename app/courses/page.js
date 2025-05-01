@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getCourses } from "@/lib/courses-actions";
+import { getCourses } from "@/lib/courseService";
 // import CourseSearchBar from "@/components/Courses/CourseSearchBar";
 // import CoursesGrid from "@/components/Courses/CoursesGrid";
 import classes from "./page.module.css";

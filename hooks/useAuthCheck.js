@@ -1,28 +1,25 @@
 import { useEffect } from "react";
-import axios from "@/utils/api";
-import { getJwtToken } from "@/utils/tokenUtil";
+import api from "@/utils/api";
 
 export const useAuthCheck = (setAuthenticated, setIsAdmin, hasCheckedAuth) => {
     useEffect(() => {
       const checkAuth = async () => {
+        console.log("Checking authentication status...");
+        // Check if the auth check has already been performed
         if (hasCheckedAuth.current) {
             console.log("Auth check already performed, skipping.");
             return; // Prevent multiple checks
           }
   
-        const jwt = getJwtToken();
-        if (!jwt) {
-            console.log("No JWT found, skipping auth check.");
-            return;
-          }
-  
         try {
-          const response = await axios.get("/auth/check", { withCredentials: true });
+          const response = await api.get("/auth/check", { withCredentials: true });
           setAuthenticated(response.data?.authenticated || false);
           setIsAdmin(response.data?.user?.is_admin || false);
+          console.log("Auth check response:", response.data);
         } catch {
           setAuthenticated(false);
           setIsAdmin(false);
+          console.error("Error checking authentication status.");
         }
         hasCheckedAuth.current = true;
       };

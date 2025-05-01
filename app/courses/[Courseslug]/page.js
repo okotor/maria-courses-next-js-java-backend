@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getCourse, getCourses } from '@/lib/courses-actions'
+import { getCourse, getCourses } from '@/lib/courseService'
 import classes from './page.module.css'
 
 export async function generateStaticParams() {

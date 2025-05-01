@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getJwtToken, refreshAccessToken } from './tokenUtil';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL, // now uses env variable
@@ -9,43 +8,64 @@ const api = axios.create({
   },
 });
 
-api.interceptors.request.use(
-  async (config) => {
-    let jwtToken = getJwtToken();
-    if (!jwtToken) {
-      return config; // No token available, proceed with the request
-    }
+let isRefreshing = false;
+let failedQueue = [];
+let logoutFn = null;
+let isLoggingOut = false;
 
-    // Optional: Check if JWT is expired (could be a utility function)
-    const isTokenExpired = false; // Add your expiration check here (optional)
+export const setLogoutFunction = (fn) => {
+  logoutFn = fn;
+};
 
-    if (isTokenExpired) {
-      // Try to refresh the token before making the request
-      jwtToken = await refreshAccessToken();
-      if (jwtToken) {
-        config.headers['Authorization'] = `Bearer ${jwtToken}`;
-      }
+const processQueue = (error) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
     } else {
-      config.headers['Authorization'] = `Bearer ${jwtToken}`;
+      prom.resolve();
     }
-
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-let alreadyRedirecting = false;
+  });
+  failedQueue = [];
+};
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    const status = error.response?.status;
+  async (error) => {
+    const originalRequest = error.config;
 
-    if (status === 401 && !alreadyRedirecting) {
-      alreadyRedirecting = true;
-      // Handle unauthorized access (possibly redirect to login)
-      if (typeof window !== "undefined") {
-        window.location.href = '/login';
+    // Skip if already tried refresh or hitting refresh endpoint
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes('/auth/refresh')
+    ) {
+      if (isRefreshing) {
+        // Wait in queue if a refresh is already in progress
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: () => resolve(api(originalRequest)),
+            reject,
+          });
+        });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        await api.post('/auth/refresh'); // refresh cookies/token silently
+        processQueue(null);
+        return api(originalRequest); // retry failed request
+      } catch (refreshError) {
+        processQueue(refreshError);
+        if (logoutFn && !isLoggingOut) {
+          isLoggingOut = true;
+          await logoutFn(); // call passed-in logout only once
+        }
+
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
       }
     }
 
@@ -54,3 +74,22 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+// let alreadyRedirecting = false;
+
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response?.status === 401 && !alreadyRedirecting) {
+//       alreadyRedirecting = true;
+//       // Handle unauthorized access (possibly redirect to login)
+//       if (typeof window !== "undefined") {
+//         window.location.href = '/login';
+//       }
+//     }
+
+//     return Promise.reject(error);
+//   }
+// );
+
+// export default api;

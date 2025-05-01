@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProtectedRoute from "@/components/Authentication/AuthRequired"
-import { saveCourse } from '@/lib/courses-actions';
+import { saveCourse } from '@/lib/courseService';
 import ImagePicker from '@/components/Courses/ImagePicker';
 import CourseCreateButton from '@/components/Courses/CourseCreateButton';
 import classes from './page.module.css';

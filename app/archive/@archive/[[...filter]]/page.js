@@ -1,5 +1,5 @@
 // import CourseList from "@/components/Courses/CourseList";
-import { getCoursesForYear } from "@/lib/courses-actions";
+import { getCoursesForYear } from "@/lib/courseService";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
 import YearHeader from "@/components/Archive/YearHeader";
 

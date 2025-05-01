@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import axios from "@/utils/api";
-import { refreshAccessToken } from '@/utils/tokenUtil';
+import api, { setLogoutFunction }  from "@/utils/api";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
 
-const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
-const INACTIVITY_TIMEOUT = 20 * 60 * 1000; // 20 minutes
+//INACTIVITY LOGOUT
+// const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+// const INACTIVITY_TIMEOUT = 20 * 60 * 1000; // 20 minutes
 
 const AuthContext = createContext();
 
@@ -15,60 +15,82 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const router = useRouter();
-  const lastActivityRef = useRef(Date.now());
-  const hasCheckedAuth = useRef(false);
+  //INACTIVITY LOGOUT
+  // const lastActivityRef = useRef(Date.now());
 
-  useAuthCheck(setAuthenticated, setIsAdmin, hasCheckedAuth);
+  //INACTIVITY LOGOUT
+  // useEffect(() => {
+  //   // Track activity
+  //   const handleUserActivity = () => {
+  //     lastActivityRef.current = Date.now();
+  //     console.log("User activity detected, updating last activity time.");
+  //   };
 
-  useEffect(() => {
-    // Track activity
-    const handleUserActivity = () => {
-      lastActivityRef.current = Date.now();
-      console.log("User activity detected, updating last activity time.");
-    };
+  //   const logoutIfInactive = () => {
+  //     const now = Date.now();
+  //     const inactiveFor = now - lastActivityRef.current;
+  
+  //     if (inactiveFor >= INACTIVITY_TIMEOUT) {
+  //       console.log("Logging out due to inactivity");
+  //       logout();
+  //     }
+  //   };
 
-    const refreshSession = async () => {
-      const now = Date.now();
-      const inactiveFor = now - lastActivityRef.current;
-      console.log("Inactive for:", inactiveFor, "ms");
+  //   document.addEventListener("mousemove", handleUserActivity);
+  //   document.addEventListener("keydown", handleUserActivity);
+  //   const interval = setInterval(logoutIfInactive, SESSION_REFRESH_INTERVAL);
 
-      if (inactiveFor < INACTIVITY_TIMEOUT) { 
-        console.log("User is active, skipping session refresh.");
-        console.log("Inactive for:", inactiveFor, "ms");  
-        try {
-          const newToken = await refreshAccessToken();
-          if (!newToken) logout();
-        } catch {
-          logout();
-        }
-      }
-    };
+  //   return () => {
+  //     document.removeEventListener("mousemove", handleUserActivity);
+  //     document.removeEventListener("keydown", handleUserActivity);
+  //     clearInterval(interval);
+  //     console.log("AuthProvider cleanup: Event listeners and interval cleared.");
+  //   };
+  // }, []);
 
-    document.addEventListener("mousemove", handleUserActivity);
-    document.addEventListener("keydown", handleUserActivity);
-    const interval = setInterval(refreshSession, SESSION_REFRESH_INTERVAL);
-
-    return () => {
-      document.removeEventListener("mousemove", handleUserActivity);
-      document.removeEventListener("keydown", handleUserActivity);
-      clearInterval(interval);
-      console.log("AuthProvider cleanup: Event listeners and interval cleared.");
-    };
-  }, []);
-
-  const logout = async () => {
+  const checkAuth = async () => {
     try {
-      await axios.post("/auth/logout", {}, { withCredentials: true });
-      console.log("Logout successful.");
-    } catch {
-      console.error("Logout failed.");
+      const response = await api.get("/auth/check");
+      const isAuth = response.data?.authenticated || false;
+      setAuthenticated(isAuth);
+      setIsAdmin(response.data?.user?.is_admin || false);
+      console.log("Auth re-check success", response.data);
+    } catch (err) {
+      console.error("Auth re-check failed", err);
+      logout(); // logout on failed check (refresh token expired, etc.)
     }
-    setAuthenticated(false);
-    setIsAdmin(false);
-    router.replace("/login");
   };
 
+  const logout = async () => {
+    console.log("Logging out...");
+    try {
+      // Avoid logout API call if already logged out
+    if (authenticated) {
+      await api.post("/auth/logout", {}, { withCredentials: true });
+    }
+  } catch {
+    console.error("Logout failed.");
+  }
+
+  setAuthenticated(false);
+  setIsAdmin(false);
+  router.replace("/login");
+};
+
+  useEffect(() => {
+    console.log("AuthProvider mounted, setting up auth check.");
+    setLogoutFunction(logout); // let interceptor access logout
+    checkAuth(); // run immediately
+
+    const interval = setInterval(() => {
+      checkAuth();
+    }, 5 * 60 * 1000); // every 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   const login = (user) => {
+    console.log("Login successful:", user);
     setAuthenticated(true);
     setIsAdmin(user.is_admin);
   };

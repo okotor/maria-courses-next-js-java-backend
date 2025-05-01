@@ -4,13 +4,17 @@ b. Make the old one work online so it is presentable and working
 
     0. Job Offers & ChatGPT 20 Key Skills Research: 
 
-        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), CI/CD Pipelines (GitHub Actions).
+        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions).
 
     I. JWT FE & BE CODE UNDERSTAND
 
-        1. Check token expiration logic in api.js (with exp?) & courses-actions.js use api.js axios, not fetch for those needing authentication
+        1. Make the login-check synchronous & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check even with public resource GET requests)
+            
 
-        2. JWT TOKEN LOGIC
+        2. User -> UserController (incorporate UseContrNew) -> JwtService
+                                                            -> UserService + UserRepository -> GoogleTokenValidatorService
+
+        3. JWT TOKEN LOGIC
             a. Understand all access routes fully (FE+BE)? Fully tested? (START USING A LIBRARY FOR TESTING)
             b. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
                     Recommendation: Store refresh tokens in the database and validate them during the refresh process.
@@ -20,8 +24,7 @@ b. Make the old one work online so it is presentable and working
             d. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
                     Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
                     
-        3. User -> UserController (incorporate UseContrNew) -> JwtService
-                                                            -> UserService + UserRepository -> GoogleTokenValidatorService
+        
     II. FE CODE UNDERSTAND
 
         1. next.config.js -> jsconfig.json -> eslint.config.mjs
