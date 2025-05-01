@@ -1,12 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import api, { setLogoutFunction }  from "@/utils/api";
 // import { useAuthCheck } from "@/hooks/useAuthCheck";
 
 //INACTIVITY LOGOUT
-// const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 // const INACTIVITY_TIMEOUT = 20 * 60 * 1000; // 20 minutes
 
 const AuthContext = createContext();
@@ -53,14 +53,29 @@ export const AuthProvider = ({ children }) => {
     console.log("AuthProvider mounted, setting up auth check.");
     setLogoutFunction(logout); // let interceptor access logout
     checkAuth(); // run immediately
-
     const interval = setInterval(() => {
       checkAuth();
-    }, 5 * 60 * 1000); // every 5 minutes
-
+    }, SESSION_REFRESH_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
+  // Sync login/logout across tabs
+  useEffect(() => {
+    const syncAuthAcrossTabs = (event) => {
+      if (event.key === 'logout') {
+        console.log('Detected logout from another tab');
+        logout(false);
+      }
+      if (event.key === 'login') {
+        console.log('Detected login from another tab');
+        checkAuth();
+      }
+    };
+    window.addEventListener('storage', syncAuthAcrossTabs);
+    return () => window.removeEventListener('storage', syncAuthAcrossTabs);
+  }, []);
+
+  //Checking authentication status with the backend function
   const checkAuth = async (retryCount = 0) => {
     try {
       const response = await api.get("/auth/check");
@@ -81,19 +96,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
+  const logout = async (broadcast = true) => {
     console.log("Logging out...");
-    try {
-      // Avoid logout API call if already logged out
-    if (authenticated) {
-      await api.post("/auth/logout", {}, { withCredentials: true });
-      console.log("Logout successful.");
-    } else {
-      console.log("Already logged out, no action taken.");
+    if (broadcast) {
+      localStorage.setItem('logout', Date.now());
     }
-  } catch {
-    console.error("Logout failed.");
-  }
+    if (authenticated) {
+      try {
+        await api.post('/auth/logout', {}, { withCredentials: true });
+        console.log('Logout successful');
+      } catch (err) {
+        console.error('Logout request failed', err);
+      }
+    }
   setAuthenticated(false);
   setIsAdmin(false);
   router.replace("/login");
@@ -103,12 +118,16 @@ export const AuthProvider = ({ children }) => {
     console.log("Login successful:", user);
     setAuthenticated(true);
     setIsAdmin(user.is_admin);
+    localStorage.setItem('login', Date.now()); // Sync login across tabs
   };
 
+  const contextValue = useMemo(
+    () => ({ isAdmin, authenticated, login, logout }),
+    [isAdmin, authenticated]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{ isAdmin, authenticated, login, logout }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
