@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import api, { setLogoutFunction }  from "@/utils/api";
-import { useAuthCheck } from "@/hooks/useAuthCheck";
+// import { useAuthCheck } from "@/hooks/useAuthCheck";
 
 //INACTIVITY LOGOUT
 // const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
@@ -48,35 +48,7 @@ export const AuthProvider = ({ children }) => {
   //   };
   // }, []);
 
-  const checkAuth = async () => {
-    try {
-      const response = await api.get("/auth/check");
-      const isAuth = response.data?.authenticated || false;
-      setAuthenticated(isAuth);
-      setIsAdmin(response.data?.user?.is_admin || false);
-      console.log("Auth re-check success", response.data);
-    } catch (err) {
-      console.error("Auth re-check failed", err);
-      logout(); // logout on failed check (refresh token expired, etc.)
-    }
-  };
-
-  const logout = async () => {
-    console.log("Logging out...");
-    try {
-      // Avoid logout API call if already logged out
-    if (authenticated) {
-      await api.post("/auth/logout", {}, { withCredentials: true });
-    }
-  } catch {
-    console.error("Logout failed.");
-  }
-
-  setAuthenticated(false);
-  setIsAdmin(false);
-  router.replace("/login");
-};
-
+  //Recheck auth status every 5 minutes
   useEffect(() => {
     console.log("AuthProvider mounted, setting up auth check.");
     setLogoutFunction(logout); // let interceptor access logout
@@ -88,6 +60,44 @@ export const AuthProvider = ({ children }) => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const checkAuth = async (retryCount = 0) => {
+    try {
+      const response = await api.get("/auth/check");
+      const isAuth = response.data?.authenticated || false;
+      setAuthenticated(isAuth);
+      setIsAdmin(response.data?.user?.is_admin || false);
+      console.log("Auth re-check success", response.data);
+    } catch (err) {
+      console.error("Auth re-check failed", err);
+      // Retry auth check if under retry limit
+      if (retryCount < 1) {
+        console.log("Retrying auth check...");
+        setTimeout(() => checkAuth(retryCount + 1), 2000); // Retry after 2 seconds
+      } else {
+        console.log("Auth re-check failed after retries. Logging out...");
+        logout(); // Logout if retries are exhausted
+      }
+    }
+  };
+
+  const logout = async () => {
+    console.log("Logging out...");
+    try {
+      // Avoid logout API call if already logged out
+    if (authenticated) {
+      await api.post("/auth/logout", {}, { withCredentials: true });
+      console.log("Logout successful.");
+    } else {
+      console.log("Already logged out, no action taken.");
+    }
+  } catch {
+    console.error("Logout failed.");
+  }
+  setAuthenticated(false);
+  setIsAdmin(false);
+  router.replace("/login");
+};
 
   const login = (user) => {
     console.log("Login successful:", user);
