@@ -67,24 +67,31 @@ export const AuthProvider = ({ children }) => {
     if (!authChannel) return;
 
     const handler = async (event) => {
+      const { type, user } = event.data;
       console.log("BroadcastChannel message:", event.data);
-      const { type } = event.data;
 
       if (type === "logout") {
         console.log("Detected logout from another tab");
         await logout(false); // Do not rebroadcast
       }
 
-      if (type === "login") {
+      if (type === "login" && user) {
         console.log("Detected login from another tab");
-        await checkAuth(); // Refresh local auth state
+        
+        // Delay to ensure cookies are written before checking
+        setTimeout(async () => {
+          try {
+            await checkAuth(); // re-validate on this tab
+          } catch (err) {
+            console.error("Post-login checkAuth failed", err);
+            logout(); // force logout if cookies not usable
+          }
+        }, 1000); // 1 sec delay
       }
     };
 
     authChannel.addEventListener("message", handler);
-    return () => {
-      authChannel.removeEventListener("message", handler);
-    };
+    return () => authChannel.removeEventListener("message", handler);
   }, []);
 
 
@@ -124,16 +131,15 @@ export const AuthProvider = ({ children }) => {
       const isAuth = response.data?.authenticated || false;
       setAuthenticated(isAuth);
       setIsAdmin(response.data?.user?.is_admin || false);
-      console.log("Auth re-check success", response.data);
+      console.log("Auth check succeeded:", response.data);
     } catch (err) {
-      console.error("Auth re-check failed", err);
-      // Retry auth check if under retry limit
+      console.error("Auth check failed", err);
       if (retryCount < 1) {
-        console.log("Retrying auth check...");
-        setTimeout(() => checkAuth(retryCount + 1), 2000); // Retry after 2 seconds
+        console.log("Retrying checkAuth in 2 seconds...");
+        setTimeout(() => checkAuth(retryCount + 1), 2000);
       } else {
-        console.log("Auth re-check failed after retries. Logging out...");
-        logout(); // Logout if retries are exhausted
+        console.warn("Max retries reached. Logging out.");
+        logout(); // fallback
       }
     }
   };
@@ -149,9 +155,9 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.warn("[Logout] API call failed, continuing", err);
     }
-  setAuthenticated(false);
-  setIsAdmin(false);
-  router.replace("/login");
+    setAuthenticated(false);
+    setIsAdmin(false);
+    router.replace("/login");
 };
 
   const login = (user) => {
@@ -163,10 +169,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const contextValue = useMemo(
-    () => ({ isAdmin, authenticated, login, logout }),
-    [isAdmin, authenticated]
-  );
+  const contextValue = useMemo(() => ({
+    isAdmin,
+    authenticated,
+    login,
+    logout,
+  }), [isAdmin, authenticated]);
 
   return (
     <AuthContext.Provider value={contextValue}>
