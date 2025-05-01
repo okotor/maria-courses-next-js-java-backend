@@ -90,36 +90,6 @@ export const AuthProvider = ({ children }) => {
     return () => authChannel.removeEventListener("message", handler);
   }, []);
 
-
-  // let isSyncing = false;
-
-  // Sync login/logout across tabs
-  // useEffect(() => {
-  //   const syncAuthAcrossTabs = async (event) => {
-  //     if (isSyncing) return; // Prevent simultaneous updates
-  //     isSyncing = true;
-  //     console.log("Storage event detected:", event); // Debug log for storage event
-  //     if (event.key === 'logout') {
-  //       setTimeout(async () => {
-  //         await checkAuth();
-  //       }, 500); // Delay to ensure backend state is updated
-  //       console.log('Detected logout from another tab');
-  //       await logout(false); // Ensure logout is handled properly
-  //     }
-  //     if (event.key === 'login') {
-  //       console.log('Detected login from another tab');
-  //       setTimeout(async () => {
-  //         await checkAuth();
-  //       }, 500); // Delay to ensure backend state is updated
-  //       await checkAuth();
-  //     }
-
-  //     isSyncing = false; // Reset syncing state
-  //   };
-  //   window.addEventListener('storage', syncAuthAcrossTabs);
-  //   return () => window.removeEventListener('storage', syncAuthAcrossTabs);
-  // }, []);
-
   //Checking authentication status with the backend function
   const checkAuth = async (retryCount = 0) => {
     try {
@@ -140,6 +110,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const login = (user) => {
+    console.log("Login successful:", user);
+    setAuthenticated(true);
+    setIsAdmin(user.is_admin);
+    if (authChannel) {
+      authChannel.postMessage({ type: "login", user });
+    }
+  };
+
   const logout = async (broadcast = true) => {
     if (broadcast && authChannel) {
       console.log("[Logout] Broadcasting logout");
@@ -155,15 +134,6 @@ export const AuthProvider = ({ children }) => {
     setIsAdmin(false);
     router.replace("/login");
 };
-
-  const login = (user) => {
-    console.log("Login successful:", user);
-    setAuthenticated(true);
-    setIsAdmin(user.is_admin);
-    if (authChannel) {
-      authChannel.postMessage({ type: "login", user });
-    }
-  };
 
   const contextValue = useMemo(() => ({
     isAdmin,
