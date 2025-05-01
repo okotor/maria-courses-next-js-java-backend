@@ -8,7 +8,7 @@ b. Make the old one work online so it is presentable and working
 
     I. JWT FE & BE CODE UNDERSTAND
 
-        1. Use BroadcastAPI & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests) & if manually entered a protected resource, the webpage logs the user out & when window closed in DEPLOYMENT
+        1. Use BroadcastAPI & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests) & if manually entered a protected resource, the webpage logs the user out & when window closed in DEPLOYMENT, the user does not stay logged in.
             
         2. User -> UserController (incorporate UseContrNew) -> JwtService
                                                             -> UserService + UserRepository -> GoogleTokenValidatorService
@@ -23,7 +23,6 @@ b. Make the old one work online so it is presentable and working
             d. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
                     Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
                     
-        
     II. FE CODE UNDERSTAND
 
         1. next.config.js -> jsconfig.json -> eslint.config.mjs
