@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
             console.error("Post-login checkAuth failed", err);
             logout(); // force logout if cookies not usable
           }
-        }, 10000); // 1 sec delay
+        }, 1000); // 2 sec delay
       }
     };
 
@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Auth check failed", err);
       if (retryCount < 1) {
         console.log("Retrying checkAuth in 2 seconds...");
-        setTimeout(() => checkAuth(retryCount + 1), 2000);
+        setTimeout(() => checkAuth(retryCount + 1), 4000);
       } else {
         console.warn("Max retries reached. Logging out.");
         logout(); // fallback
