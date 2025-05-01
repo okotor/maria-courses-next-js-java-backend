@@ -139,17 +139,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async (broadcast = true) => {
-    console.log("Logging out...");
     if (broadcast && authChannel) {
+      console.log("[Logout] Broadcasting logout");
       authChannel.postMessage({ type: "logout" });
     }
-    if (authenticated) {
-      try {
-        await api.post('/auth/logout', {}, { withCredentials: true });
-        console.log('Logout successful');
-      } catch (err) {
-        console.error('Logout request failed', err);
-      }
+    try {
+      await api.post("/auth/logout", {}, { withCredentials: true });
+      console.log("[Logout] API logout successful");
+    } catch (err) {
+      console.warn("[Logout] API call failed, continuing", err);
     }
   setAuthenticated(false);
   setIsAdmin(false);

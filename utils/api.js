@@ -18,12 +18,9 @@ export const setLogoutFunction = (fn) => {
 };
 
 const processQueue = (error) => {
-  failedQueue.forEach(prom => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve();
-    }
+  failedQueue.forEach(({ resolve, reject }) => {
+    if (error) reject(error);
+    else resolve();
   });
   failedQueue = [];
 };
@@ -33,14 +30,11 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Skip if already tried refresh or hitting refresh endpoint
-    if (
-      error.response?.status === 401 &&
-      !originalRequest._retry &&
-      !originalRequest.url.includes('/auth/refresh')
-    ) {
+    const isAuthError = error.response?.status === 401;
+    const isRefreshAttempt = originalRequest.url.includes("/auth/refresh");
+
+    if (isAuthError && !originalRequest._retry && !isRefreshAttempt) {
       if (isRefreshing) {
-        // Wait in queue if a refresh is already in progress
         return new Promise((resolve, reject) => {
           failedQueue.push({
             resolve: () => resolve(api(originalRequest)),
@@ -53,16 +47,15 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        await api.post('/auth/refresh'); // refresh cookies/token silently
+        await api.post("/auth/refresh");
         processQueue(null);
-        return api(originalRequest); // retry failed request
+        return api(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
         if (logoutFn && !isLoggingOut) {
           isLoggingOut = true;
-          await logoutFn(); // call passed-in logout only once
+          await logoutFn(); // Prevent double logout
         }
-
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
