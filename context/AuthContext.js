@@ -59,18 +59,30 @@ export const AuthProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
+  let isSyncing = false;
+
   // Sync login/logout across tabs
   useEffect(() => {
     const syncAuthAcrossTabs = async (event) => {
+      if (isSyncing) return; // Prevent simultaneous updates
+      isSyncing = true;
       console.log("Storage event detected:", event); // Debug log for storage event
       if (event.key === 'logout') {
+        setTimeout(async () => {
+          await checkAuth();
+        }, 500); // Delay to ensure backend state is updated
         console.log('Detected logout from another tab');
         await logout(false); // Ensure logout is handled properly
       }
       if (event.key === 'login') {
         console.log('Detected login from another tab');
+        setTimeout(async () => {
+          await checkAuth();
+        }, 500); // Delay to ensure backend state is updated
         await checkAuth();
       }
+
+      isSyncing = false; // Reset syncing state
     };
     window.addEventListener('storage', syncAuthAcrossTabs);
     return () => window.removeEventListener('storage', syncAuthAcrossTabs);
