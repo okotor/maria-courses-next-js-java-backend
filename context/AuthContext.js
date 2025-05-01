@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
             console.error("Post-login checkAuth failed", err);
             logout(); // force logout if cookies not usable
           }
-        }, 1000); // 1 sec delay
+        }, 10000); // 1 sec delay
       }
     };
 
