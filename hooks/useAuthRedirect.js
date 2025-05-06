@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-export const useAuthRedirect = (redirectTo = "/my-courses") => {
-  const { authenticated } = useAuth();
+const useAuthPageRedirect = (redirectTo = "/my-courses") => {
+  const { authenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (authenticated) {
-      router.push(redirectTo);
+      router.replace(redirectTo);
     }
   }, [authenticated, router, redirectTo]);
+
+  return { loading, authenticated };
 };
+
+export default useAuthPageRedirect;

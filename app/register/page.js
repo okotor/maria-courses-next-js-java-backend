@@ -1,18 +1,17 @@
 'use client';
 
-import { useState } from 'react';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 
 export default function Register() {
-  useAuthRedirect("/my-courses"); // Redirect if authenticated
+  const { loading, authenticated } = useAuthRedirect("/my-courses");
 
-  const [loading, setLoading] = useState(false);
-
-  // Render loading state while the page is still processing authentication
-  if (loading) {
+  if (loading || authenticated === null) {
     return <div className="loading">Načítání...</div>;
   }
+
+  // If the user is authenticated, return null (no need to show register form)
+  if (authenticated) return null;
 
   return <RegisterForm />;
 }
