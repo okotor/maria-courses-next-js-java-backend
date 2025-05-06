@@ -1,18 +1,26 @@
+// pages/login/page.js
 'use client';
 
-import { useState } from 'react';
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import LoginForm from '@/components/LoginForm/LoginForm';
 
 export default function Login() {
-  useAuthRedirect("/my-courses"); // Redirect if authenticated
+  const { authenticated, loading } = useAuth();
+  const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (authenticated) {
+      router.replace("/my-courses");
+    }
+  }, [authenticated, router]);
 
-  // Render loading state while the page is still processing authentication
-  if (loading) {
+  if (loading || authenticated === null) {
     return <div className="loading">Načítání...</div>;
   }
+
+  if (authenticated) return null; // don't render anything
 
   return <LoginForm />;
 }
