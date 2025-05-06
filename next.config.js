@@ -5,7 +5,7 @@ dotenv.config();
 
 const nextConfig = {
   images: {
-    domains: ['marian-courses-bucket.s3.us-east-1.amazonaws.com'], // Add this line to allow images from this domain
+    domains: ['marian-courses-bucket.s3.us-east-1.amazonaws.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,9 +16,6 @@ const nextConfig = {
     ],
   },
   experimental: { serverActions: true },
-  middleware: {
-    matcher: ['/login', '/register'],
-  },
 };
 
 export default nextConfig;
