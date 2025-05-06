@@ -1,18 +1,29 @@
 'use client';
 
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 
 export default function Register() {
-  const { loading, authenticated } = useAuthRedirect("/my-courses");
+  const { authenticated, loading } = useAuth();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (authenticated) {
+      router.replace("/my-courses");
+    }
+  }, [authenticated, router]);
+
+  // Show a loading state while auth status is being checked
   if (loading || authenticated === null) {
     return <div className="loading">Načítání...</div>;
   }
 
-  // If the user is authenticated, return null (no need to show register form)
+  // If the user is already authenticated, do not render anything
   if (authenticated) return null;
 
+  // Render the registration form
   return <RegisterForm />;
 }
 
