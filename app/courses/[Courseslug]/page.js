@@ -4,11 +4,16 @@ import { getCourse, getCourses } from '@/lib/courseService'
 import classes from './page.module.css'
 
 export async function generateStaticParams() {
-    const courses = await getCourses();
-    return courses.map((course) => ({
-      Courseslug: course.slug,
-    }));
-  }
+    try {
+        const courses = await getCourses();
+        return courses.map((course) => ({
+          Courseslug: course.slug,
+        }));
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        return []; // Return an empty array to avoid build failure
+      }
+    }
 
 export default async function CourseDetailsPage( { params } ) {
     // const { Courseslug } = await params;
