@@ -1,5 +1,3 @@
-// utils/constants.js
-
 // Backend API URL
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"; // Fallback to localhost in dev
 
