@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-const useAuthRedirect = (redirectTo = "/my-courses") => {
+const useAuthPageRedirect = (redirectTo = "/my-courses") => {
   const { authenticated, loading } = useAuth();
   const router = useRouter();
 
@@ -15,4 +15,4 @@ const useAuthRedirect = (redirectTo = "/my-courses") => {
   return { loading, authenticated };
 };
 
-export default useAuthRedirect;
+export default useAuthPageRedirect;

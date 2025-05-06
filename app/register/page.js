@@ -1,10 +1,10 @@
 'use client';
 
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
+import { useAuthPageRedirect } from '@/hooks/useAuthPageRedirect';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 
 export default function Register() {
-  const { loading, authenticated } = useAuthRedirect("/my-courses");
+  const { loading, authenticated } = useAuthPageRedirect("/my-courses");
 
   if (loading || authenticated === null) {
     return <div className="loading">Načítání...</div>;
