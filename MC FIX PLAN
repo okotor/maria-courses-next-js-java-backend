@@ -6,23 +6,20 @@ b. Make the old one work online so it is presentable and working
 
         - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions).
 
-    I. JWT FE & BE CODE UNDERSTAND
+    I. Login & Logout Logic
 
-        1. Use BroadcastAPI & Check FE JWT login/logout logic line by line & prevent access to /login when logged in & differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests) & if manually entered a protected resource, the webpage logs the user out & when window closed in DEPLOYMENT, the user does not stay logged in.
-            
-        2. User -> UserController (incorporate UseContrNew) -> JwtService
-                                                            -> UserService + UserRepository -> GoogleTokenValidatorService
-
-        3. JWT TOKEN LOGIC
-            a. Understand all access routes fully (FE+BE)? Fully tested? (START USING A LIBRARY FOR TESTING)
-            b. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
+            a. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
                     Recommendation: Store refresh tokens in the database and validate them during the refresh process.
-            c. Issue: The UserController does not handle errors properly during registration and login.
+            b. Issue: The UserController does not handle errors properly during registration and login.
                     Recommendation: Implement error handling middleware to manage exceptions and provide user feedback.
                     This can be done by creating a custom error handler that catches exceptions and sends appropriate responses to the client.
-            d. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
+            c. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
                     Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
-                    
+            d. prevent access to /login when logged in
+            e. if manually entered a protected resource, the webpage redirects to login
+            f. differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests)
+            g. call regularly into Render to keep it refreshed
+    
     II. FE CODE UNDERSTAND
 
         1. next.config.js -> jsconfig.json -> eslint.config.mjs
@@ -31,7 +28,7 @@ b. Make the old one work online so it is presentable and working
 
         3. app & components
         
-        4. React Auth Kit (use it for the login/logout logic) - check the documentation and understand how to use it properly
+        4. (React Auth Kit)
         
     III. PORTFOLIO FIX
 
@@ -41,7 +38,7 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE - saving the image to S3 Bucket ✔
 
-        4. JWT SECURITY FIX & REGISTER & ALL COURSES SHOW & ADD A COURSE - test
+        4. REGISTER & ALL COURSES SHOW & ADD A COURSE - test
 
         5. CSS & Layout fix / Other Obvious Code Fixes
 
