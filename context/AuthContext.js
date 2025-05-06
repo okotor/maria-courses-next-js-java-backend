@@ -16,7 +16,8 @@ const authChannel = typeof window !== "undefined" ? new BroadcastChannel("auth")
 
 export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(null); // null until checked
+  const [loading, setLoading] = useState(true); // NEW
   const router = useRouter();
   //INACTIVITY LOGOUT
   // const lastActivityRef = useRef(Date.now());
@@ -55,12 +56,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     console.log("AuthProvider mounted, setting up auth check.");
     setLogoutFunction(logout); // let interceptor access logout
-    checkAuth(); // run immediately
-    const interval = setInterval(() => {
-      checkAuth();
-    }, SESSION_REFRESH_INTERVAL);
-    return () => clearInterval(interval);
-  }, []);
+    const doCheck = async () => {
+      await checkAuth();
+      setLoading(false); // ✅ now we’re ready to render
+    };
+  
+    doCheck(); // run on mount
+    const interval = setInterval(checkAuth, SESSION_REFRESH_INTERVAL);
+  return () => clearInterval(interval);
+}, []);
 
   // Sync auth state across tabs using BroadcastChannel
   useEffect(() => {
@@ -140,6 +144,7 @@ export const AuthProvider = ({ children }) => {
     authenticated,
     login,
     logout,
+    loading,
   }), [isAdmin, authenticated]);
 
   return (

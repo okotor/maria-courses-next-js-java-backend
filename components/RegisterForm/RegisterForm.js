@@ -1,11 +1,13 @@
 'use client';
 
-import "@/styles/globals.css";
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from 'next/link';
+import { BACKEND_URL } from "@/utils/constants"; 
 
 export default function RegisterForm() {
   const [formState, setFormState] = useState({ errors: null, message: null, loading: false });
+  const router = useRouter(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,32 +40,48 @@ export default function RegisterForm() {
   };
 
   return (
-    <form id="auth-form" onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
       <div>
         {/* <img src="/images/auth-icon.jpg" alt="A lock icon" /> */}
       </div>
-
+      <h2>Registrace</h2>
       <p>
         <label htmlFor="email">Email: </label>
-        <input type="email" name="email" id="email" required disabled={formState.loading} />
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          required 
+          disabled={formState.loading} 
+          placeholder="Zadejte svůj email"
+        />
       </p>
 
       <p>
         <label htmlFor="password">Heslo: </label>
-        <input type="password" name="password" id="password" required disabled={formState.loading} />
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          required
+          disabled={formState.loading} 
+          placeholder="Zadejte své heslo"
+        />
       </p>
 
       {formState.errors && <p style={{ color: 'red' }}>{formState.errors}</p>}
       {formState.message && <p style={{ color: 'green' }}>{formState.message}</p>}
 
       <p>
-        <button type="submit" disabled={formState.loading}>
+        <button type="submit" className="button" disabled={formState.loading}>
           {formState.loading ? "Registrace..." : "Vytvořit účet"}
         </button>
       </p>
-
-      <p>
-        <Link className="button" href="/login">Přihlásit se existujícím účtem.</Link>
+      <br></br>
+      <p style={{ textAlign: 'center' }}>
+        <Link className="button" href="/login">
+          Přihlásit se existujícím účtem.
+        </Link>
       </p>
     </form>
   );

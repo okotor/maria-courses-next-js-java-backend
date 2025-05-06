@@ -1,10 +1,11 @@
-// /** @type {import('next').NextConfig} */
+// next.config.js
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const nextConfig = {
   images: {
+    domains: ['marian-courses-bucket.s3.us-east-1.amazonaws.com'], // Add this line to allow images from this domain
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,9 +15,10 @@ const nextConfig = {
       },
     ],
   },
-  // env: {
-  //   DATABASE_URL: process.env.DATABASE_URL, // Example: Making env variables available
-  // },
+  experimental: { serverActions: true },
+  middleware: {
+    matcher: ['/login', '/register'],
+  },
 };
 
 export default nextConfig;

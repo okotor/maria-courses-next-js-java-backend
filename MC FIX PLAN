@@ -8,17 +8,12 @@ b. Make the old one work online so it is presentable and working
 
     I. Login & Logout Logic
 
-            a. Issue: The refreshToken method in JwtService does not validate the refresh token against the database.
-                    Recommendation: Store refresh tokens in the database and validate them during the refresh process.
-            b. Issue: The UserController does not handle errors properly during registration and login.
-                    Recommendation: Implement error handling middleware to manage exceptions and provide user feedback.
-                    This can be done by creating a custom error handler that catches exceptions and sends appropriate responses to the client.
-            c. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
+            a. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
                     Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
-            d. prevent access to /login when logged in
-            e. if manually entered a protected resource, the webpage redirects to login
-            f. differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests)
-            g. call regularly into Render to keep it refreshed
+            b. if manually entered a protected resource, the webpage redirects to login
+            c. differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests)
+            d. call regularly into Render to keep it refreshed
+            e. TESTING
     
     II. FE CODE UNDERSTAND
 
@@ -29,8 +24,10 @@ b. Make the old one work online so it is presentable and working
         3. app & components
         
         4. (React Auth Kit)
+
+    III. REACT LEARN - the COURSE!
         
-    III. PORTFOLIO FIX
+    IV. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
 

@@ -1,7 +1,20 @@
-import RegisterForm from "@/components/RegisterForm/RegisterForm";
+'use client';
 
-export default async function Register() {
-    return <RegisterForm />;
+import { useState } from 'react';
+import { useAuthRedirect } from '@/hooks/useAuthRedirect';
+import RegisterForm from '@/components/RegisterForm/RegisterForm';
+
+export default function Register() {
+  useAuthRedirect("/my-courses"); // Redirect if authenticated
+
+  const [loading, setLoading] = useState(false);
+
+  // Render loading state while the page is still processing authentication
+  if (loading) {
+    return <div className="loading">Načítání...</div>;
+  }
+
+  return <RegisterForm />;
 }
 
 // import RegisterBox from '@/components/RegisterBox.js';

@@ -18,7 +18,7 @@ export default function MainHeader() {
   return (
     <>
     <MainHeaderBackground />
-      <header className={classes.header}>
+      <header className="main-header">
         <div>
           <Image src={MariaPicture} className={classes.logo} alt='Website logo'/>
           <nav className={classes.nav}>
