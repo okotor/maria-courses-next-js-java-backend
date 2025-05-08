@@ -11,25 +11,9 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   // const { isAdmin } = useAuth();
   const { isAdmin } = false;
 
-  // Only log if date is not a string (hydration risk)
-  if (typeof date !== 'string') {
-    console.warn('CourseItem: date is not a string!', date, typeof date);
-  }
-
-  // Format date safely
-  let formattedDate = 'Neznámé datum';
-  if (typeof date === 'string' || typeof date === 'number') {
-    const d = new Date(date);
-    if (!isNaN(d)) {
-      formattedDate = d.toLocaleDateString('cs-CZ', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    }
-  }
-
   // Defensive: ensure correct types for all fields
+  const formattedDate = date || 'Datum není dostupné';  // Directly use the formatted date from the service
+
   const safeTitle = typeof title === 'string' ? title : 'Bez názvu';
   const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
   const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';
@@ -37,12 +21,12 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
 
   // Define functions to handle delete and edit
   const handleDelete = () => {
-          alert('Need to define.');
-      }   
+    alert('Need to define.');
+  };
 
   const handleEdit = () => {
-        alert('Need to define.');
-    }   
+    alert('Need to define.');
+  };  
 
   return (
     <article className={classes.course}>

@@ -1,6 +1,6 @@
 import { getCourses } from "@/lib/courseService";
-import CoursesGrid from "@/components/Courses/CoursesGrid";
-// import CoursesOverview from "@/components/Courses/CoursesOverview";
+import CoursesOverview from "@/components/Courses/CoursesOverview";
+import classes from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,6 +15,5 @@ export default async function CoursesPage(){
     );
   }
 
-  // return <CoursesOverview courses={courses} />;
-  return <CoursesGrid courses={courses} />;
+  return <CoursesOverview courses={courses} />;
 }
