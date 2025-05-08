@@ -15,7 +15,13 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   console.log('CourseItem Props:', { date, title, slug, image, summary, lecturer });
 
   // Format date
-  const formattedDate = new Date(date).toLocaleDateString();
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString('cs-CZ', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Neznámé datum';
 
   // Handle undefined or non-string fields
   const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
@@ -46,7 +52,7 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           )}
           </div>
           <div className={classes.headerText}>
-            <h2>{title}</h2>
+            <h2>{title || 'Bez názvu'}</h2>
               <p>Vedoucí: {safeLecturer}</p>
               <p>Publikováno: {formattedDate}</p>
           </div>
@@ -56,7 +62,7 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
         {safeSummary}
         </p>
           <div className={classes.actions}>
-            <Link href={`/courses/${slug}`}>Více informací</Link>
+            <Link href={`/courses/${slug || ''}`}>Více informací</Link>
             {/* Show these icons only if the user is an admin */}
             {isAdmin && (
                         <>
