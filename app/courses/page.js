@@ -43,15 +43,22 @@ export default function CoursesPage(){
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    getCourses().then(data => {
-      console.log("Fetched courses:", data); // Log the fetched data
+    getCourses()
+    .then(data => {
+      console.log("Načtené kurzy:", data);
+
       // Sort courses by date in descending order
-      const sortedCourses = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const hydrated = data.map(course => ({
+        ...course,
+        date: new Date(course.date),
+      }));
+
+      const sortedCourses = hydrated.sort((a, b) => b.date - a.date);
       setCourses(sortedCourses);
       setFilteredCourses(sortedCourses); // Initialize filtered courses
     })
     .catch(error => {
-      console.error("Error fetching courses:", error);
+      console.error("Nepodařilo se načíst kurzy:", error);
     })
     .finally(() => setLoading(false)); // Set loading to false after fetching;
   }, []);
