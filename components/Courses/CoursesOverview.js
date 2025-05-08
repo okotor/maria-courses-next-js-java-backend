@@ -5,13 +5,11 @@ import CourseSearchBar from './CourseSearchBar';
 import CoursesGrid from './CoursesGrid';
 
 export default function CoursesOverview({ courses }) {
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+
   if (!Array.isArray(courses)) {
     return <p>No courses available.</p>;
   }
-  if (courses.length === 0) {
-    return <p>No courses available.</p>;
-  }
-  const [filteredCourses, setFilteredCourses] = useState(courses);
 
   const handleSearch = (searchTerm) => {
     const lowercasedTerm = searchTerm.toLowerCase();
