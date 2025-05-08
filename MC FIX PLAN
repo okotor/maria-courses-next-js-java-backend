@@ -14,7 +14,7 @@ b. Make the old one work online so it is presentable and working
 
         3. DELETE account and CHANGE user details - Telusko Course
 
-        4. CSS (& how it is read - some texts white rather than green or red) & Layout fix
+        4. forceful login page redirect - auth/check & CSS (& how it is read - some texts white rather than green or red) & Layout fix
 
         5. (GIT HUB ACTIONS & RENDER)
 

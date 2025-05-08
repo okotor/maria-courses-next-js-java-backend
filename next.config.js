@@ -1,4 +1,3 @@
-// next.config.js
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -16,6 +15,14 @@ const nextConfig = {
     ],
   },
   experimental: { serverActions: true },
+
+  webpack(config, { isServer }) {
+    // Disable minification in production for client-side bundles
+    if (!isServer) {
+      config.optimization.minimize = false; // Disable minification
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
