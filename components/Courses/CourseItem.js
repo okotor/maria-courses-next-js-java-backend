@@ -11,6 +11,9 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   // const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
   const { isAdmin } = false; // For testing purposes, set isAdmin to false
 
+  // Add console logs to check each prop
+  console.log('CourseItem Props:', { date, title, slug, image, summary, lecturer });
+
   // Format date
   const formattedDate = new Date(date).toLocaleDateString();
 
