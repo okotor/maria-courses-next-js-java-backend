@@ -13,7 +13,7 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
 
   // Only log if date is not a string (hydration risk)
   if (typeof date !== 'string') {
-    console.warn('CourseItem: date is not a string!', date);
+    console.warn('CourseItem: date is not a string!', date, typeof date);
   }
 
   // Format date safely
