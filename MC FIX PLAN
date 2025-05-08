@@ -16,9 +16,9 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE - saving the image to S3 Bucket ✔
 
-        4. REGISTER & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test & CourseYears Fix
+        4. UX register & login form showing success & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test & CourseYears Fix
 
-        5. CSS (& how it is read) & Layout fix
+        5. CSS (& how it is read - some texts white rather than green or red) & Layout fix
 
         6. Python Two Apps Optimise (Dockerise?) and Upload
 
