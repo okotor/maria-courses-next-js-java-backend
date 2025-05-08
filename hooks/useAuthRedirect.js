@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
+// import { useEffect } from 'react';
+// import { useRouter } from 'next/navigation';
+// import { useAuth } from '@/context/AuthContext';
 
-const useAuthRedirect = (redirectTo = "/my-courses") => {
-  const { authenticated, loading } = useAuth();
-  const router = useRouter();
+// const useAuthRedirect = (redirectTo = "/my-courses") => {
+//   const { authenticated, loading } = useAuth();
+//   const router = useRouter();
 
-  useEffect(() => {
-    if (authenticated) {
-      router.replace(redirectTo);
-    }
-  }, [authenticated, router, redirectTo]);
+//   useEffect(() => {
+//     if (authenticated) {
+//       router.replace(redirectTo);
+//     }
+//   }, [authenticated, router, redirectTo]);
 
-  return { loading, authenticated };
-};
+//   return { loading, authenticated };
+// };
 
-export default useAuthRedirect;
+// export default useAuthRedirect;

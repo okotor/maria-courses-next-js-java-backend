@@ -4,30 +4,15 @@ b. Make the old one work online so it is presentable and working
 
     0. Job Offers & ChatGPT 20 Key Skills Research: 
 
-        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions).
+        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching.
 
     I. Login & Logout Logic
 
-            a. Issue: The GoogleTokenValidatorService class creates a new GoogleIdTokenVerifier instance for each request.
-                    Recommendation: Make the GoogleIdTokenVerifier instance a singleton to improve performance.
-            b. if manually entered a protected resource, the webpage redirects to login
-            c. differentiate when check token and when not - set it (right now JWT token check is done even with public resource GET requests)
-            d. call regularly into Render to keep it refreshed
-            e. TESTING
-    
-    II. FE CODE UNDERSTAND
+            a. CourseService inspect & FINAL BACKEND LOGIC INSPECTION (UNDERSTAND THE FLOW OF THE CODE)
 
-        1. next.config.js -> jsconfig.json -> eslint.config.mjs
-
-        2. .github -> .idea -> .next 
-
-        3. app & components
+    II. REACT LEARN - the COURSE!
         
-        4. (React Auth Kit)
-
-    III. REACT LEARN - the COURSE!
-        
-    IV. PORTFOLIO FIX
+    III. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
 
@@ -35,9 +20,9 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE - saving the image to S3 Bucket ✔
 
-        4. REGISTER & ALL COURSES SHOW & ADD A COURSE - test
+        4. REGISTER & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test
 
-        5. CSS & Layout fix / Other Obvious Code Fixes
+        5. CSS (& how it is read) & Layout fix / Other Obvious Code Fixes
 
         6. Python Two Apps Optimise (Dockerise?) and Upload
 

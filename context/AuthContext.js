@@ -1,17 +1,18 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo, useState, useRef } from "react";
+import { createContext, useContext,
+           useEffect, useMemo, 
+            useState, /*useRef - INACTIVITY LOGOUT*/ } from "react";
 import { useRouter } from "next/navigation";
 import api, { setLogoutFunction }  from "@/utils/api";
+import { SESSION_REFRESH_INTERVAL } from "@/utils/constants";
 // import { useAuthCheck } from "@/hooks/useAuthCheck";
-
 //INACTIVITY LOGOUT
-const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
-// const INACTIVITY_TIMEOUT = 20 * 60 * 1000; // 20 minutes
+// import { INACTIVITY_TIMEOUT } from "@/utils/constants";
 
 const AuthContext = createContext();
 
-// Create the BroadcastChannel
+// Create a BroadcastChannel
 const authChannel = typeof window !== "undefined" ? new BroadcastChannel("auth") : null;
 
 export const AuthProvider = ({ children }) => {
