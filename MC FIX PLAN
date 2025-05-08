@@ -2,27 +2,23 @@ a. Wedding Webpage - Next.js (Reusable Components)
 
 b. Make the old one work online so it is presentable and working
 
-    0. Job Offers & ChatGPT 20 Key Skills Research: 
+    I. Job Offers & ChatGPT 20 Key Skills Research: 
 
         - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching.
-
-    I. REACT LEARN - the COURSE!
         
     II. PORTFOLIO FIX
 
-        1. GOOGLE LOGIN ✔
+        1. ALL COURSES SHOW (and remove this Načítám... that won't disappear) & CourseYears Fix
 
-        2. CLOUD STORAGE CONNECTION - access to images for latest courses ✔
+        2. REACT LEARN - the COURSE!
 
-        3. ADDING A COURSE - saving the image to S3 Bucket ✔
+        3. DELETE account and CHANGE user details - Telusko Course
 
-        4. UX register & login form showing success & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test & CourseYears Fix
+        4. CSS (& how it is read - some texts white rather than green or red) & Layout fix
 
-        5. CSS (& how it is read - some texts white rather than green or red) & Layout fix
+        5. (GIT HUB ACTIONS & RENDER)
 
         6. Python Two Apps Optimise (Dockerise?) and Upload
-
-        6.5 (GIT HUB ACTIONS & RENDER)
 
         7. CV Fix & Agree with M'u about Negotiation Prep 
 

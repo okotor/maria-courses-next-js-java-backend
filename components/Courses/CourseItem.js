@@ -25,12 +25,15 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
       <article className={classes.course}>
         <header>
           <div className={classes.image}>
+          {image ? (
             <Image
               src={`https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}`} 
-              // https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/
               alt={title}
               fill
             />
+          ) : (
+            <div className={classes.placeholderImage}>No Image Available</div>
+          )}
           </div>
           <div className={classes.headerText}>
             <h2>{title}</h2>
