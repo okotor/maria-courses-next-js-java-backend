@@ -8,8 +8,15 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
-    // const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
-    const { isAdmin } = false; // For testing purposes, set isAdmin to false
+  // const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
+  const { isAdmin } = false; // For testing purposes, set isAdmin to false
+
+  // Format date
+  const formattedDate = new Date(date).toLocaleDateString();
+
+  // Handle undefined or non-string fields
+  const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
+  const safeSummary = typeof summary === 'string' ? summary : '';'Neznámý';
 
     // Define functions to handle delete and edit
     const handleDelete = () => {
@@ -37,12 +44,14 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           </div>
           <div className={classes.headerText}>
             <h2>{title}</h2>
-            <p>Vedoucí: {lecturer}</p>
-            <p>Publikováno: {date}</p>
+              <p>Vedoucí: {safeLecturer}</p>
+              <p>Publikováno: {formattedDate}</p>
           </div>
         </header>
         <div className={classes.content}>
-          <p className={classes.summary}>{summary}</p>
+        <p className={classes.summary}>
+        {safeSummary}
+        </p>
           <div className={classes.actions}>
             <Link href={`/courses/${slug}`}>Více informací</Link>
             {/* Show these icons only if the user is an admin */}
