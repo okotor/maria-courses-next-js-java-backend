@@ -23,6 +23,11 @@ export default function CreateACoursePage() {
         e.preventDefault();
         const formData = new FormData(e.target);
 
+        // Debugging: Log FormData contents
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
+        }
+        
         try {
             const response = await saveCourse(formData);
             setState({ success: true, message: "Kurz byl úspěšně uložen!" });

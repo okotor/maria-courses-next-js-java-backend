@@ -6,13 +6,9 @@ b. Make the old one work online so it is presentable and working
 
         - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching.
 
-    I. Login & Logout Logic
-
-            a. CourseService inspect & FINAL BACKEND LOGIC INSPECTION (UNDERSTAND THE FLOW OF THE CODE)
-
-    II. REACT LEARN - the COURSE!
+    I. REACT LEARN - the COURSE!
         
-    III. PORTFOLIO FIX
+    II. PORTFOLIO FIX
 
         1. GOOGLE LOGIN ✔
 
@@ -20,9 +16,9 @@ b. Make the old one work online so it is presentable and working
 
         3. ADDING A COURSE - saving the image to S3 Bucket ✔
 
-        4. REGISTER & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test
+        4. REGISTER & ALL COURSES SHOW (and remove this Načítám... that won't disappear) & ADD A COURSE - test & CourseYears Fix
 
-        5. CSS (& how it is read) & Layout fix / Other Obvious Code Fixes
+        5. CSS (& how it is read) & Layout fix
 
         6. Python Two Apps Optimise (Dockerise?) and Upload
 
