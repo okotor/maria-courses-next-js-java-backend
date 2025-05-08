@@ -13,6 +13,13 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
 
   // Add console logs to check each prop individually
   console.log('CourseItem Props:', { date, title, slug, image, summary, lecturer });
+  console.log('Types:', {
+    title: typeof title,
+    summary: typeof summary,
+    lecturer: typeof lecturer,
+    slug: typeof slug,
+    date: typeof date,
+  });
 
   // Format date safely
   let formattedDate = 'Neznámé datum';
@@ -34,10 +41,18 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   }
 
   // Defensive: ensure correct types for all fields
-  const safeTitle = typeof title === 'string' ? title : 'Bez názvu';
-  const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
-  const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';
-  const safeSlug = typeof slug === 'string' ? slug : '';
+  const safeTitle = typeof title === 'string'
+    ? title
+    : (title !== undefined && title !== null ? JSON.stringify(title) : 'Bez názvu');
+  const safeLecturer = typeof lecturer === 'string'
+    ? lecturer
+    : (lecturer !== undefined && lecturer !== null ? JSON.stringify(lecturer) : 'Neznámý');
+  const safeSummary = typeof summary === 'string'
+    ? summary
+    : (summary !== undefined && summary !== null ? JSON.stringify(summary) : 'Neznámý');
+  const safeSlug = typeof slug === 'string'
+    ? slug
+    : (slug !== undefined && slug !== null ? JSON.stringify(slug) : '');
 
   // Define functions to handle delete and edit
   const handleDelete = () => {

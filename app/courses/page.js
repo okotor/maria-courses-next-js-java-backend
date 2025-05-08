@@ -66,10 +66,10 @@ export default function CoursesPage(){
   const handleSearch = (searchTerm) => {
     const lowercasedTerm = searchTerm.toLowerCase();
     const filtered = courses.filter(course =>
-      course.title.toLowerCase().includes(lowercasedTerm) ||
-      course.summary.toLowerCase().includes(lowercasedTerm) ||
-      course.courseDescription.toLowerCase().includes(lowercasedTerm) ||
-      course.lecturer.toLowerCase().includes(lowercasedTerm)
+      (typeof course.title === 'string' && course.title.toLowerCase().includes(lowercasedTerm)) ||
+      (typeof course.summary === 'string' && course.summary.toLowerCase().includes(lowercasedTerm)) ||
+      (typeof course.courseDescription === 'string' && course.courseDescription.toLowerCase().includes(lowercasedTerm)) ||
+      (typeof course.lecturer === 'string' && course.lecturer.toLowerCase().includes(lowercasedTerm))
     );
     setFilteredCourses(filtered);
   };
