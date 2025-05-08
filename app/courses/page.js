@@ -47,13 +47,7 @@ export default function CoursesPage(){
     .then(data => {
       console.log("Načtené kurzy:", data);
 
-      // Sort courses by date in descending order
-      const hydrated = data.map(course => ({
-        ...course,
-        date: new Date(course.date),
-      }));
-
-      const sortedCourses = hydrated.sort((a, b) => b.date - a.date);
+      const sortedCourses = data.sort((a, b) => new Date(b.date) - new Date(a.date));
       setCourses(sortedCourses);
       setFilteredCourses(sortedCourses); // Initialize filtered courses
     })
