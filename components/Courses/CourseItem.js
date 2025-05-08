@@ -8,28 +8,17 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
-  // const { isAdmin } = useAuth(); // Get isAdmin from AuthContext
-  const { isAdmin } = false; // For testing purposes, set isAdmin to false
+  // const { isAdmin } = useAuth();
+  const { isAdmin } = false;
 
-  // Add console logs to check each prop individually
-  console.log('CourseItem Props:', { date, title, slug, image, summary, lecturer });
-  console.log('Types:', {
-    title: typeof title,
-    summary: typeof summary,
-    lecturer: typeof lecturer,
-    slug: typeof slug,
-    date: typeof date,
-  });
+  // Only log if date is not a string (hydration risk)
+  if (typeof date !== 'string') {
+    console.warn('CourseItem: date is not a string!', date);
+  }
 
   // Format date safely
   let formattedDate = 'Neznámé datum';
-  if (date instanceof Date && !isNaN(date)) {
-    formattedDate = date.toLocaleDateString('cs-CZ', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  } else if (typeof date === 'string' || typeof date === 'number') {
+  if (typeof date === 'string' || typeof date === 'number') {
     const d = new Date(date);
     if (!isNaN(d)) {
       formattedDate = d.toLocaleDateString('cs-CZ', {
@@ -41,18 +30,10 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   }
 
   // Defensive: ensure correct types for all fields
-  const safeTitle = typeof title === 'string'
-    ? title
-    : (title !== undefined && title !== null ? JSON.stringify(title) : 'Bez názvu');
-  const safeLecturer = typeof lecturer === 'string'
-    ? lecturer
-    : (lecturer !== undefined && lecturer !== null ? JSON.stringify(lecturer) : 'Neznámý');
-  const safeSummary = typeof summary === 'string'
-    ? summary
-    : (summary !== undefined && summary !== null ? JSON.stringify(summary) : 'Neznámý');
-  const safeSlug = typeof slug === 'string'
-    ? slug
-    : (slug !== undefined && slug !== null ? JSON.stringify(slug) : '');
+  const safeTitle = typeof title === 'string' ? title : 'Bez názvu';
+  const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
+  const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';
+  const safeSlug = typeof slug === 'string' ? slug : '';
 
   // Define functions to handle delete and edit
   const handleDelete = () => {
@@ -62,7 +43,6 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   const handleEdit = () => {
         alert('Need to define.');
     }   
-
 
   return (
     <article className={classes.course}>
