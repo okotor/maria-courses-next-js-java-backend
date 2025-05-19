@@ -2,6 +2,7 @@
 import { getCoursesForYear } from "@/lib/courseService";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
 import YearHeader from "@/components/Archive/YearHeader";
+import classes from '@/app/page.module.css'
 
 // function LoadingFilteredCourses(courses) {
 //     return <CoursesGrid courses={courses}/>
@@ -24,9 +25,9 @@ export default async function FilteredCoursesPage({params}) {
     }
 
     return (
-        <>
+        <div className={classes.section}>
             <YearHeader />
             {courseContent}
-        </>
+        </div>
     );
 }

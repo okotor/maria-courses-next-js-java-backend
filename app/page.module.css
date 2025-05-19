@@ -14,11 +14,13 @@
 }
 
 .highlight.subheader {
+  font-size: 1.2rem;
   display: flex;
   flex-direction: column; /* Stack header and list */
   align-items: center; /* Center align */
   gap: 1rem; /* Space between header and year list */
   text-align: center;
+  margin-top: 7rem;
 }
 
 .main {
@@ -112,12 +114,25 @@
 .section {
   display: flex;
   flex-direction: column;
+  align-items: center;
   color: #353432;
   font-size: 1.5rem;
   max-width: 50rem;
   width: 90%;
-  margin: 2rem auto;
+  margin: 2.5rem auto 2rem auto;
   text-align: center;
+  padding: 1.5rem 0;
+}
+
+.section p {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  padding: 0.7rem 0;
+  font-size: 1.2rem;
+  align-self: center;
 }
 
 

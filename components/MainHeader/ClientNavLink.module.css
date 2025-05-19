@@ -1,24 +1,31 @@
 .link {
-    text-decoration: none;
-    color: #949290;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-  }
-  
-  .link:hover,
-  .link:active {
-    background: linear-gradient(90deg, #5c5a5a, #7a7a7a);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 18px rgba(34, 34, 34, 0.8);
-  }  
+  display: inline-block;
+  font-size: 1.35rem;
+  padding: 0.7rem 1.5rem;
+  margin: 0 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #949290;
+  transition: background 0.2s, color 0.2s;
+  min-width: 120px;
+  text-align: center;
+}
 
-.active {
-    background: linear-gradient(90deg, #1b1b1b, #f9b331);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
+.link:hover,
+.link:active {
+  background: #ffe0b2;
+  color: #d35400;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+/* Ensure active stays highlighted even on hover */
+.active,
+.active:hover,
+.active:active {
+  background: #ffe0b2;
+  color: #d35400;
+  font-weight: bold;
+  text-shadow: none;
+}
