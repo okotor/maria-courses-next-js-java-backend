@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import { useRouter } from 'next/navigation';
 import { deleteCourse } from '@/lib/courseService';
@@ -85,12 +84,22 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
             <div className={classes.actionsRow}>
               <Link href={`/courses/${safeSlug}`}>Více informací</Link>
               {/* Show these icons only if the user is an admin. */}
-              {/* {isAdmin && typeof DeleteIcon === 'function' && typeof EditIcon === 'function' && (
+              {isAdmin && (
                 <>
-                  <DeleteIcon onClick={openModal} className={classes.iconButton} title="Smazat kurz" />
-                  <EditIcon onClick={handleEdit} className={classes.iconButton} title="Upravit kurz" />
+                  <FaTrash 
+                    onClick={openModal} 
+                    className={classes.iconButton} 
+                    title="Smazat kurz" 
+                    role="button"
+                  />
+                  <FaEdit 
+                    onClick={handleEdit} 
+                    className={classes.iconButton} 
+                    title="Upravit kurz" 
+                    role="button"
+                  />
                 </>
-              )} */}
+              )}
             </div>
           </div>
         </div>
