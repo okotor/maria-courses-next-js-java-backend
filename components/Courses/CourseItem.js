@@ -85,12 +85,12 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
             <div className={classes.actionsRow}>
               <Link href={`/courses/${safeSlug}`}>Více informací</Link>
               {/* Show these icons only if the user is an admin. */}
-              {isAdmin && typeof DeleteIcon === 'function' && typeof EditIcon === 'function' && (
+              {/* {isAdmin && typeof DeleteIcon === 'function' && typeof EditIcon === 'function' && (
                 <>
                   <DeleteIcon onClick={openModal} className={classes.iconButton} title="Smazat kurz" />
                   <EditIcon onClick={handleEdit} className={classes.iconButton} title="Upravit kurz" />
                 </>
-              )}
+              )} */}
             </div>
           </div>
         </div>
