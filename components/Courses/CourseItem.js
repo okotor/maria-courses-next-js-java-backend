@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import { useRouter } from 'next/navigation';
 import { deleteCourse } from '@/lib/courseService';
 import { useState } from 'react';
-import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+// import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
@@ -87,22 +87,22 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
               {/* Show these icons only if the user is an admin. */}
               {isAdmin && (
                           <>
-                              <DeleteIcon onClick={openModal} className={classes.iconButton} title="Smazat kurz"/>
-                              <EditIcon onClick={handleEdit} className={classes.iconButton} title="Upravit kurz"/>
+                              <DeleteIcon onClick={openModal} className={classes.iconButton}/>
+                              <EditIcon onClick={handleEdit} className={classes.iconButton}/>
                           </>
                       )}
             </div>
           </div>
         </div>
       </article>
-       <ConfirmationModal
+       {/* <ConfirmationModal
           isOpen={isModalOpen}
           message={`Opravdu chcete smazat kurz "${safeTitle}"?`}
           onConfirm={handleDelete}
           onCancel={closeModal}
           cancelText="Nemazat"
           confirmText="Smazat"
-        />
+        /> */}
     </>  
   );
 }
