@@ -12,17 +12,23 @@ import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
   const auth = useAuth();
-  console.log('useAuth:', auth);
   const { isAdmin } = auth || {};
-  console.log('isAdmin:', isAdmin);
-  console.log('image:', image);
   const router = useRouter();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
 
-  // Defensive: ensure correct types for all fields
-  const formattedDate = date || 'Datum není dostupné';  // Directly use the formatted date from the service
+   // Format the date string into Czech localized format with month names like "května"
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Datum není dostupné';
+    return new Date(dateString).toLocaleDateString('cs-CZ', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  const formattedDate = formatDate(date)
   const safeTitle = typeof title === 'string' ? title : 'Bez názvu';
   const safeLecturer = typeof lecturer === 'string' ? lecturer : 'Neznámý';
   const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';

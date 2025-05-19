@@ -30,7 +30,7 @@ export default function CoursesOverview({ courses }) {
         <h1>
           Kurzy vytvořené <span className={classes.highlight}>jen pro vás</span>
         </h1>
-        <p>Vyberte svůj kurz na míru a zažijte proměnu!</p>
+        <p>Najděte svůj kurz na míru a zažijte proměnu!</p>
       </header>
 
       <main className={classes.main}>
