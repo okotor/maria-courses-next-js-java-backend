@@ -88,13 +88,14 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           </div>
         </div>
       </article>
-       {isModalOpen && (
-          <div style={{backgroundColor: 'white', padding: '20px'}}>
-            <p>{`Opravdu chcete smazat kurz "${safeTitle}"?`}</p>
-            <button onClick={closeModal}>Nemazat</button>
-            <button onClick={handleDelete}>Smazat</button>
-          </div>
-        )}
+       <ConfirmationModal
+          isOpen={isModalOpen}
+          message={`Opravdu chcete smazat kurz "${safeTitle}"?`}
+          onConfirm={handleDelete}
+          onCancel={closeModal}
+          cancelText="Nemazat"
+          confirmText="Smazat"
+        />
     </>  
   );
 }
