@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import { useRouter } from 'next/navigation';
 import { deleteCourse } from '@/lib/courseService';
 import { useState } from 'react';
-import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal.js';
+import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
@@ -88,14 +88,13 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           </div>
         </div>
       </article>
-       <ConfirmationModal
-          isOpen={isModalOpen}
-          message={`Opravdu chcete smazat kurz "${safeTitle}"?`}
-          onConfirm={handleDelete}
-          onCancel={closeModal}
-          cancelText="Nemazat"
-          confirmText="Smazat"
-        />
+       {isModalOpen && (
+          <div style={{backgroundColor: 'white', padding: '20px'}}>
+            <p>{`Opravdu chcete smazat kurz "${safeTitle}"?`}</p>
+            <button onClick={closeModal}>Nemazat</button>
+            <button onClick={handleDelete}>Smazat</button>
+          </div>
+        )}
     </>  
   );
 }
