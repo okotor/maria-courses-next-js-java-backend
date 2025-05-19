@@ -1,10 +1,10 @@
 'use client';
 
 import { createContext, useContext,
-           useEffect, useMemo, 
-            useState, /*useRef - INACTIVITY LOGOUT*/ } from "react";
+           useEffect, useMemo, useRef, 
+            useState } from "react";
 import { useRouter } from "next/navigation";
-import api, { setLogoutFunction }  from "@/utils/api";
+import api, { setLogoutFunction, setIsAuthenticatedGetter }  from "@/utils/api";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/constants";
 // import { useAuthCheck } from "@/hooks/useAuthCheck";
 //INACTIVITY LOGOUT
@@ -16,8 +16,8 @@ const AuthContext = createContext();
 const authChannel = typeof window !== "undefined" ? new BroadcastChannel("auth") : null;
 
 export const AuthProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [authenticated, setAuthenticated] = useState(null); // null until checked
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true); // NEW
   const router = useRouter();
   //INACTIVITY LOGOUT
@@ -53,10 +53,18 @@ export const AuthProvider = ({ children }) => {
   //   };
   // }, []);
 
+  // Expose current auth state for api.js to check
+  const authStateRef = useRef(authenticated);
+  useEffect(() => {
+    authStateRef.current = authenticated;
+  }, [authenticated]);
+
   //Recheck auth status every 5 minutes
   useEffect(() => {
     console.log("AuthProvider mounted, setting up auth check.");
     setLogoutFunction(logout); // let interceptor access logout
+    setIsAuthenticatedGetter(() => authStateRef.current);
+
     const doCheck = async () => {
       await checkAuth();
       setLoading(false); // ✅ now we’re ready to render
@@ -64,8 +72,8 @@ export const AuthProvider = ({ children }) => {
   
     doCheck(); // run on mount
     const interval = setInterval(checkAuth, SESSION_REFRESH_INTERVAL);
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
   // Sync auth state across tabs using BroadcastChannel
   useEffect(() => {
@@ -77,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
       if (type === "logout") {
         console.log("Detected logout from another tab");
-        await logout(false); // Do not rebroadcast
+        await performLogout(false); // no rebroadcast
       }
 
       if (type === "login" && user) {
@@ -86,7 +94,6 @@ export const AuthProvider = ({ children }) => {
             await checkAuth(); // re-validate on this tab
           } catch (err) {
             console.error("Post-login checkAuth failed", err);
-            logout(); // force logout if cookies not usable
           }
       }
     };
@@ -106,11 +113,17 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error("Auth check failed", err);
       if (retryCount < 1) {
-        console.log("Retrying checkAuth in 2 seconds...");
+        console.log("Retrying checkAuth in 4 seconds...");
         setTimeout(() => checkAuth(retryCount + 1), 4000);
       } else {
-        console.warn("Max retries reached. Logging out.");
-        logout(); // fallback
+        console.warn("Max retries reached.");
+        if (authenticated) {
+          console.log("Was previously authenticated, but check failed.");
+        } else {
+          console.log('User was never authenticated. Updating state.');
+        }
+        setAuthenticated(false);
+        setIsAdmin(false);
       }
     }
   };
@@ -125,10 +138,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async (broadcast = true) => {
+    await performLogout(broadcast);
+  };
+
+  const performLogout = async (broadcast) => {
     if (broadcast && authChannel) {
       console.log("[Logout] Broadcasting logout");
       authChannel.postMessage({ type: "logout" });
     }
+
     try {
       await api.post("/auth/logout", {}, { withCredentials: true });
       console.log("[Logout] API logout successful");

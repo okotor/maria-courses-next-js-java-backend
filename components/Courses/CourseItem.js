@@ -8,8 +8,7 @@ import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
-  // const { isAdmin } = useAuth();
-  const { isAdmin } = false;
+  const { isAdmin } = useAuth(); // Get isAdmin from the context
 
   // Defensive: ensure correct types for all fields
   const formattedDate = date || 'Datum není dostupné';  // Directly use the formatted date from the service
@@ -37,6 +36,7 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
             src={`https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}`} 
             alt={title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div className={classes.placeholderImage}>No Image Available</div>

@@ -8,7 +8,9 @@ export default function CoursesGrid({ courses }) {
     if (!Array.isArray(courses) || courses.length === 0) {
         return <p>No courses available.</p>;
       }
-    
+
+    console.log('COURSES:', courses);
+
     return (
         <ul className={classes.courses}>
             {courses.map(course => (

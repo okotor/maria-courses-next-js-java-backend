@@ -12,9 +12,14 @@ let isRefreshing = false;
 let failedQueue = [];
 let logoutFn = null;
 let isLoggingOut = false;
+let getIsAuthenticated = () => false;
 
 export const setLogoutFunction = (fn) => {
   logoutFn = fn;
+};
+
+export const setIsAuthenticatedGetter = (getterFn) => {
+  getIsAuthenticated = getterFn;
 };
 
 const processQueue = (error) => {
@@ -52,7 +57,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
-        if (logoutFn && !isLoggingOut) {
+        if (logoutFn && !isLoggingOut && getIsAuthenticated()) {
           isLoggingOut = true;
           await logoutFn(); // Prevent double logout
         }
