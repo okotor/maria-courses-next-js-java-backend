@@ -4,7 +4,7 @@ export default function ArchiveLayout({ archive, latest }) {
     return (
         <>
             <header className={classes.header}>
-                <h1>Všechny kurzy</h1>
+                <h1>Vítejte na portálu kurzů Marie!</h1>
             </header>
             <section id="archive-latest"> {latest}</section>
             <section id="archive-filter">{archive}</section>

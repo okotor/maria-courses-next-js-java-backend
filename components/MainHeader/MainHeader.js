@@ -24,7 +24,6 @@ export default function MainHeader() {
           <nav className={classes.nav}>
             <ClientNavLink href="/">Home</ClientNavLink>
             <ClientNavLink href="/about">O nás</ClientNavLink>
-            <ClientNavLink href="/archive">Nejnovější kurzy & Archiv</ClientNavLink>
             <ClientNavLink href="/courses">Všechny kurzy</ClientNavLink>
             {isAdmin && (
               <>

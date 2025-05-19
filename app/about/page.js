@@ -13,7 +13,7 @@ const AboutPage = () => {
         <h1>
           Naší vášní je: <span className={classes.highlight}>Vnitřní proměna</span>
         </h1>
-        <p>Zůčastněte se našich jedinečných kurzů a staňte se tak součástí nové vlny proměny v naší zemi.</p>
+        <p>Zůčastněte se našich jedinečných kurzů a staňte se tak součástí nové vlny proměny ve vaší komunitě.</p>
       </header>
       <main className={classes.main}>
          <ul className={classes.perks}>
@@ -43,6 +43,29 @@ const AboutPage = () => {
             
           </li>
         </ul>
+        <br />
+        <br />
+        <br />
+        <h1>Kurzy Marie</h1>
+        <section className={classes.infoSection}>
+          <div className={classes.infoColumns}>
+            <div className={classes.infoColumn}>
+              <ul>
+                <li>Vám umožňují upevnit své dovednosti v oblasti seberozvoje.</li>
+                <li>Vám poskytují znalosti, které můžete okamžitě aplikovat ve svém každodenním životě.</li>
+                <li>Vám pomáhají vytyčit si své osobní cíle a dosáhnout jich.</li>
+              </ul>
+            </div>
+            <div className={classes.infoColumn}>
+              <ul>
+                <li>Jsou vedeny zkušenými lektory s bohatými zkušenostmi z oboru.</li>
+                <li>Můžete absolvovat vlastním tempem a tím je jednoduše začlenit do vašeho nabitého rozvrhu.</li>
+                
+                <li>Vám umožňují nalézt nové přátele s podobnými zájmy.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </main>
     </>
     );

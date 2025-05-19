@@ -35,7 +35,7 @@ export default function CoursesOverview({ courses }) {
 
       <main className={classes.main}>
         <CourseSearchBar onSearch={handleSearch} />
-        <CoursesGrid courses={filteredCourses} />
+        <CoursesGrid courses={courses} />
       </main>
     </>
   );

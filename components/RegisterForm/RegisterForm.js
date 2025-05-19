@@ -78,7 +78,7 @@ export default function RegisterForm() {
         </button>
       </p>
       <br></br>
-      <p style={{ textAlign: 'center' }}>
+      <p /*style={{ textAlign: 'center' }}*/>
         <Link className="button" href="/login">
           Přihlásit se existujícím účtem.
         </Link>
