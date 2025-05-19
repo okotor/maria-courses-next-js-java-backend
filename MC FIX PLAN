@@ -8,13 +8,16 @@ b. Make the old one work online so it is presentable and working
         
     II. PORTFOLIO FIX
 
-        1. ALL COURSES SHOW (and remove this Načítám... that won't disappear) & CourseYears Fix
+        1. All Courses - first the newest ones
 
         2. REACT LEARN - the COURSE!
 
-        3. DELETE account and CHANGE user details - Telusko Course
+        3. Check email exists when registering & DELETE account and CHANGE user details - Telusko Course
 
-        4. forceful login page redirect - auth/check & CSS (& how it is read - some texts white rather than green or red) & Layout fix
+        4. CSS Layout fix - some slugs, colour of slug background & Add DELETE and EDIT ICONS into Courseslug, Archive - let courses show on the side, 4 courses per row and round corners and more padding/margin
+            & Text over the header & Delete the First heading from the HomePage
+
+        4.5 Zapsat Kurz functionality for logged in users - the Courses will be displayed in the "Moje kurzy" section
 
         5. (GIT HUB ACTIONS & RENDER)
 

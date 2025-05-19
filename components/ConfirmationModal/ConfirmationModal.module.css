@@ -1,0 +1,73 @@
+/* ConfirmationModal.module.css */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(42, 42, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--form-bg);
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  max-width: 650px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: 'Quicksand', sans-serif;
+  color: var(--foreground);
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.modal p,
+.modal button {
+  font-size: 1.4rem;     /* same font size for both */
+  font-weight: 700;      /* bold text */
+}
+
+.modal p {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Scoped button styles inside the modal */
+.modal button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2.5rem;
+  font-family: inherit;
+  transition: background-color 0.25s ease;
+}
+
+.modal button.cancel {
+  background-color: #ccc;
+  color: var(--foreground);
+}
+
+.modal button.cancel:hover {
+  background-color: #b3b3b3;
+}
+
+.modal button.confirm {
+  background-color: var(--accent);
+  color: white;
+}
+
+.modal button.confirm:hover {
+  background-color: #ffae50;
+}

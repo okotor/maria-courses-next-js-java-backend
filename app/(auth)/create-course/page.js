@@ -1,9 +1,10 @@
 'use client';
 
-import ProtectedRoute from "@/components/Authentication/AuthRequired";
+import React from 'react';
+import ProtectedRoute from "@/components/Authentication/ProtectedRoute";
 import CourseCreateForm from "@/components/Courses/CourseCreateForm";
 
-export default function CreateACoursePage() {
+export default function CourseCreatePage() {
     return (
         <ProtectedRoute requireAdmin={true}>
             <CourseCreateForm />

@@ -1,6 +1,6 @@
 "use client";
 
-import ProtectedRoute from "@/components/Authentication/AuthRequired"
+import ProtectedRoute from "@/components/Authentication/ProtectedRoute"
 
 export default function AdminDashboard() {
   return (

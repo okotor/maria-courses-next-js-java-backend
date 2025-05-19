@@ -28,7 +28,7 @@ export default function MainHeader() {
             {isAdmin && (
               <>
                 <ClientNavLink href="/admin-dashboard">Admin Panel</ClientNavLink>
-                <ClientNavLink href="/create-a-course">Vytvořit kurz</ClientNavLink>
+                <ClientNavLink href="/create-course">Vytvořit kurz</ClientNavLink>
               </>
             )}
 
@@ -43,7 +43,7 @@ export default function MainHeader() {
               <>
                 <ClientNavLink href="/my-courses">Moje kurzy</ClientNavLink>
                 <ClientNavLink href="/account">Můj účet</ClientNavLink>
-                <button onClick={handleLogout}>Odhlásit se</button>
+                <button onClick={handleLogout} className={classes.logoutBtn}>Odhlásit se</button>
               </>
             )}
           </nav>

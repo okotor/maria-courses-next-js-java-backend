@@ -1,11 +1,7 @@
 'use client';
 
-import { useFormStatus } from "react-dom";
+import CourseActionButton from './CourseActionButton';
 
 export default function CourseCreateButton() {
-    const { pending } = useFormStatus();
-
-    return <button disabled={pending}>
-        {pending ? 'Vytvářím kurz...' : 'Vytvořit kurz'}
-    </button>
+  return <CourseActionButton actionType="create" />;
 }

@@ -51,4 +51,10 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
   
-  
+.logoutBtn {
+  font-size: 1.35rem;    /* Make text bigger */
+  padding: 0.7rem 1.5rem; /* Make button bigger */
+  min-width: 120px;      /* Optional: match nav link width */
+  font-weight: bold;     /* Optional: bold text */
+  margin-left: 2rem;
+}
