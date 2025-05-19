@@ -13,8 +13,7 @@ export default function CoursesGrid({ courses }) {
         <ul className={classes.courses}>
             {courses.map(course => (
                 <li key={course.cId || course.slug}>
-                    {/* <CourseItem {...course} /> */}
-                    <div>{course.title}</div>
+                    <CourseItem {...course} />
                 </li>
             ))}
         </ul>

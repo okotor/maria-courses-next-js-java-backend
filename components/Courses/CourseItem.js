@@ -12,7 +12,11 @@ import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal'
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
-  const { isAdmin } = useAuth();
+  const auth = useAuth();
+  console.log('useAuth:', auth);
+  const { isAdmin } = auth || {};
+  console.log('isAdmin:', isAdmin);
+  console.log('image:', image);
   const router = useRouter();
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -29,24 +33,27 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   const closeModal = () => setModalOpen(false);
 
   // Confirm & delete course then refresh list or navigate
-  const handleDelete = async () => {
-    setDeleting(true);
-    try {
-      await deleteCourse(safeSlug);
-      router.refresh();
-    } catch (error) {
-      console.error('Error deleting course:', error);
-      // Optionally show a toast or message here
-    } finally {
-      setDeleting(false);
-      closeModal();
-    }
-  };
+  // const handleDelete = async () => {
+  //   setDeleting(true);
+  //   try {
+  //     await deleteCourse(safeSlug);
+  //     router.refresh();
+  //   } catch (error) {
+  //     console.error('Error deleting course:', error);
+  //     // Optionally show a toast or message here
+  //   } finally {
+  //     setDeleting(false);
+  //     closeModal();
+  //   }
+  // };
 
-  // Navigate to edit page
-  const handleEdit = () => {
-    router.push(`/edit-course/${safeSlug}`);
-  }; 
+  // // Navigate to edit page
+  // const handleEdit = () => {
+  //   router.push(`/edit-course/${safeSlug}`);
+  // }; 
+
+  const handleDelete = () => {};
+  const handleEdit = () => {};
 
   return (
     <>
