@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import { useAuth } from '@/context/AuthContext'; // Import useAuth hook
+import { useAuth } from '@/context/AuthContext'; 
 import { useRouter } from 'next/navigation';
 import { deleteCourse } from '@/lib/courseService';
 import { useState } from 'react';
-// import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
@@ -32,27 +32,24 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
   const closeModal = () => setModalOpen(false);
 
   // Confirm & delete course then refresh list or navigate
-  // const handleDelete = async () => {
-  //   setDeleting(true);
-  //   try {
-  //     await deleteCourse(safeSlug);
-  //     router.refresh();
-  //   } catch (error) {
-  //     console.error('Error deleting course:', error);
-  //     // Optionally show a toast or message here
-  //   } finally {
-  //     setDeleting(false);
-  //     closeModal();
-  //   }
-  // };
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await deleteCourse(safeSlug);
+      router.refresh();
+    } catch (error) {
+      console.error('Error deleting course:', error);
+      // Optionally show a toast or message here
+    } finally {
+      setDeleting(false);
+      closeModal();
+    }
+  };
 
-  // // Navigate to edit page
-  // const handleEdit = () => {
-  //   router.push(`/edit-course/${safeSlug}`);
-  // }; 
-
-  const handleDelete = () => {};
-  const handleEdit = () => {};
+  // Navigate to edit page
+  const handleEdit = () => {
+    router.push(`/edit-course/${safeSlug}`);
+  }; 
 
   return (
     <>
@@ -104,14 +101,14 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
           </div>
         </div>
       </article>
-       {/* <ConfirmationModal
+       <ConfirmationModal
           isOpen={isModalOpen}
           message={`Opravdu chcete smazat kurz "${safeTitle}"?`}
           onConfirm={handleDelete}
           onCancel={closeModal}
           cancelText="Nemazat"
           confirmText="Smazat"
-        /> */}
+        />
     </>  
   );
 }
