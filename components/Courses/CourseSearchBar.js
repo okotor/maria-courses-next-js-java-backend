@@ -1,6 +1,6 @@
 'use client'
 
-import SearchIcon from '@mui/icons-material/Search';
+import { FaSearch } from 'react-icons/fa';
 import { InputAdornment, TextField } from "@mui/material";
 import { useState } from 'react';
 
@@ -23,7 +23,7 @@ export default function CourseSearchBar({ onSearch }) {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon />
+            <FaSearch style={{ color: '#888', fontSize: '1.2rem' }} />
           </InputAdornment>
         ),
       }}
