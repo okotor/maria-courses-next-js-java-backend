@@ -78,11 +78,11 @@ export default function LoginForm() {
           </p>
 
           {formState.errors && (
-            <p style={{ color: 'red' }}>{formState.errors}</p>
+            <p className="form-message" style={{ color: 'red' }}>{formState.errors}</p>
           )}
 
           {formState.message && (
-            <p style={{ color: 'green' }}>{formState.message}</p>
+            <p className="form-message" style={{ color: 'green' }}>{formState.message}</p>
           )}
 
           <p>

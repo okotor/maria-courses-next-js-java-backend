@@ -31,7 +31,11 @@ export default function RegisterForm() {
         throw new Error(data.error || "Registrace selhala. Zkuste to znovu.");
       }
 
-      setFormState({ errors: null, message: "Úspěšná registrace! Můžete se nyní přihlásit.", loading: false });
+      setFormState({
+        errors: null,
+        message: "Úspěšná registrace! Zkontrolujte svůj e-mail a potvrďte registraci, než se přihlásíte.",
+        loading: false
+      });
       e.target.reset(); // Clear form on success
 
     } catch (error) {
@@ -69,8 +73,8 @@ export default function RegisterForm() {
         />
       </p>
 
-      {formState.errors && <p style={{ color: 'red' }}>{formState.errors}</p>}
-      {formState.message && <p style={{ color: 'green' }}>{formState.message}</p>}
+      {formState.errors && <p className="form-message" style={{ color: 'red' }}>{formState.errors}</p>}
+      {formState.message && <p className="form-message" style={{ color: 'green' }}>{formState.message}</p>}
 
       <p>
         <button type="submit" className="button" disabled={formState.loading}>

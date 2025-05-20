@@ -53,6 +53,19 @@
   font-weight: 600;
 }
 
+.auth-form p {
+  margin: 1rem 0;
+}
+
+.auth-form p:last-child {
+  margin-bottom: 0;
+}
+
+/* Specifically target error/success messages if needed */
+.auth-form .form-message {
+  margin: 1rem 0;
+}
+
 .slideshow {
   width: 40rem;
   height: 25rem;
