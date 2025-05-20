@@ -1,6 +1,6 @@
 'use client';
 
-import ProtectedRoute from "@/components/Authentication/ProtectedRoute"
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute"
 import classes from '../../page.module.css';
 
 export default function MyCoursesPage() {

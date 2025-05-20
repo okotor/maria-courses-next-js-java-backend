@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import axios from '@/utils/api';
 
 export default function ConfirmEmailPage() {
@@ -10,11 +11,12 @@ export default function ConfirmEmailPage() {
   const token = searchParams.get('token');
   const [status, setStatus] = useState('loading');
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     if (!token) {
       setStatus('error');
-      setMessage('Ověřovací token chybí.');
+      setMessage('Chybí ověřovací token.');
       return;
     }
 
@@ -22,7 +24,10 @@ export default function ConfirmEmailPage() {
       .post('/confirm-email', { token })
       .then(() => {
         setStatus('success');
-        setMessage('Váš e-mail byl úspěšně ověřen.');
+        setMessage('Váš e-mail byl úspěšně ověřen. Budete přesměrováni na přihlášení.');
+        setTimeout(() => {
+            router.push('/login'); // Redirect after 3 seconds
+        }, 3000);
       })
       .catch(() => {
         setStatus('error');

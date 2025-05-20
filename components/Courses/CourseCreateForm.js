@@ -1,3 +1,59 @@
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { saveCourse } from '@/lib/courseService';
+import CourseFields from './CourseFields';
+import CourseCreateButton from '@/components/Courses/CourseCreateButton';
+import classes from './page.module.css';
+
+export default function CourseCreateForm() {
+  const [state, setState] = useState({ success: false, message: null });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      router.push('/courses');
+    }
+  }, [state.success, router]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    try {
+      await saveCourse(formData);
+      setState({ success: true, message: 'Kurz byl úspěšně uložen!' });
+    } catch (error) {
+      console.error('Error saving course:', error);
+      setState({ success: false, message: 'Chyba při ukládání kurzu.' });
+    }
+  };
+
+  return (
+    <>
+      <header className={classes.header}>
+        <h1>
+          Vytvoření <span className={classes.highlight}>nového kurzu</span>
+        </h1>
+        <p>
+          Zkontroluj si prosím správnost veškerého textu v textovém editoru a příslušné kusy
+          zkopíruj do příslušných políček. Až poté odešli.
+        </p>
+      </header>
+      <main className={classes.main}>
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <CourseFields />
+          {state.message && (
+            <p style={{ color: state.success ? 'green' : 'red' }}>{state.message}</p>
+          )}
+          <p className={classes.actions}>
+            <CourseCreateButton />
+          </p>
+        </form>
+      </main>
+    </>
+  );
+}
+
 // import React, { useState, useEffect } from 'react';
 // import { useRouter } from 'next/navigation';
 // import { saveCourse } from '@/lib/courseService';
@@ -87,58 +143,3 @@
 //     );
 // }
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { saveCourse } from '@/lib/courseService';
-import CourseFields from './CourseFields';
-import CourseCreateButton from '@/components/Courses/CourseCreateButton';
-import classes from '@/app/(auth)/create-course/page.module.css';
-
-export default function CourseCreateForm() {
-  const [state, setState] = useState({ success: false, message: null });
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state.success) {
-      router.push('/courses');
-    }
-  }, [state.success, router]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-
-    try {
-      await saveCourse(formData);
-      setState({ success: true, message: 'Kurz byl úspěšně uložen!' });
-    } catch (error) {
-      console.error('Error saving course:', error);
-      setState({ success: false, message: 'Chyba při ukládání kurzu.' });
-    }
-  };
-
-  return (
-    <>
-      <header className={classes.header}>
-        <h1>
-          Vytvoření <span className={classes.highlight}>nového kurzu</span>
-        </h1>
-        <p>
-          Zkontroluj si prosím správnost veškerého textu v textovém editoru a příslušné kusy
-          zkopíruj do příslušných políček. Až poté odešli.
-        </p>
-      </header>
-      <main className={classes.main}>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <CourseFields />
-          {state.message && (
-            <p style={{ color: state.success ? 'green' : 'red' }}>{state.message}</p>
-          )}
-          <p className={classes.actions}>
-            <CourseCreateButton />
-          </p>
-        </form>
-      </main>
-    </>
-  );
-}

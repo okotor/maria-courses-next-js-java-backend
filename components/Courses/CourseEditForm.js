@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getCourse, updateCourse } from '@/lib/courseService';
 import CourseFields from './CourseFields';
 import CourseActionButton from './CourseActionButton';
-import classes from '@/app/(auth)/create-course/page.module.css';
+import classes from './page.module.css';
 
 export default function CourseEditForm({ slug }) {
   const [course, setCourse] = useState(null);

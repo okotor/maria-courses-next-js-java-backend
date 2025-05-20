@@ -124,30 +124,18 @@
   color: #4e4c48;
 }
 
-.section {
+.form-footer {
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #353432;
-  font-size: 1.5rem;
-  max-width: 50rem;
-  width: 90%;
-  margin: 2.5rem auto 2rem auto;
-  text-align: center;
-  padding: 1.5rem 0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.section p {
-  display: block;
-  width: 100%;
-  max-width: 30rem;
-  margin: 2rem auto 0 auto;
-  text-align: center;
-  padding: 0.7rem 0;
-  font-size: 1.2rem;
-  align-self: center;
+.separator {
+  padding: 0 0.25rem;
 }
-
 
 .ctas {
   display: flex;
@@ -238,6 +226,30 @@ a.secondary {
   .logo {
     filter: invert();
   }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #353432;
+  font-size: 1.5rem;
+  max-width: 50rem;
+  width: 90%;
+  margin: 2.5rem auto 2rem auto;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.section p {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  padding: 0.7rem 0;
+  font-size: 1.2rem;
+  align-self: center;
 }
 
 .yearslist {

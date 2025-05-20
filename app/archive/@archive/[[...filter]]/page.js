@@ -1,7 +1,7 @@
 // import CourseList from "@/components/Courses/CourseList";
 import { getCoursesForYear } from "@/lib/courseService";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
-import YearHeader from "@/components/Archive/YearHeader";
+import YearHeader from "@/components/Courses/YearHeader";
 import classes from '@/app/page.module.css'
 
 // function LoadingFilteredCourses(courses) {
