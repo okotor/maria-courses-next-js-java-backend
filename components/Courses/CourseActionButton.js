@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-import classes from '@/app/(auth)/create-course/page.module.css';
+import classes from './page.module.css';
 
 export default function CourseActionButton({ actionType = 'create' }) {
   const { pending } = useFormStatus();

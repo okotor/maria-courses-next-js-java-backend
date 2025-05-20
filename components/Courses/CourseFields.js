@@ -1,6 +1,7 @@
 import React from 'react';
 import ImagePicker from '@/components/Courses/ImagePicker';
-import classes from '@/app/(auth)/create-course/page.module.css';
+import classes from './page.module.css';
+
 
 export default function CourseFields({ defaultValues = {} }) {
   return (
