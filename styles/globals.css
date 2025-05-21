@@ -148,6 +148,17 @@ button:disabled,
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   color: var(--foreground);
 }
+
+.auth-form .form-message {
+  margin: 0rem 0; /* tighter default */
+}
+
+
+.form-message + p > button {
+  margin-top: 1rem;
+}
+
+
 .auth-form h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;

@@ -6,9 +6,11 @@ import styles from '@/styles/form.module.css';
 export default function AuthFormWrapper({
   onSubmit,
   title,
+  buttonText,
   message,
   error,
   loading,
+  includeEmail = true,
   includePassword = false,
   currentPage = '',
   children
@@ -18,14 +20,16 @@ export default function AuthFormWrapper({
       <form className="auth-form" onSubmit={onSubmit}>
         <h2>{title}</h2>
 
-        <FormInput
-          label="Email"
-          type="email"
-          name="email"
-          required
-          disabled={loading}
-          placeholder="Zadejte svůj email"
-        />
+        {includeEmail && (
+          <FormInput
+            label="Email"
+            type="email"
+            name="email"
+            required
+            disabled={loading}
+            placeholder="Zadejte svůj email"
+          />
+        )}
 
         <ConditionalPasswordInput
           include={includePassword}
@@ -36,7 +40,7 @@ export default function AuthFormWrapper({
 
         <p>
           <button type="submit" className="button" disabled={loading}>
-            {loading ? `${title}...` : title}
+            {loading ? `${buttonText}...` : buttonText}
           </button>
         </p>
 

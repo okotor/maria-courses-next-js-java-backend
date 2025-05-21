@@ -41,7 +41,8 @@ export default function ResendConfirmationForm() {
   return (
     <AuthFormWrapper
       onSubmit={handleSubmit}
-      title="Znovu odeslat potvrzení"
+      title="Opětovné potvrzení registrace"
+      buttonText="Odeslat potvrzení"
       message={formState.message}
       error={formState.error}
       loading={formState.loading}

@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import router
 import { useAuth } from "@/context/AuthContext";
 import axios from "@/utils/api";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { GOOGLE_CLIENT_ID, BACKEND_URL } from "@/utils/constants";
+import { BACKEND_URL } from "@/utils/constants";
 import AuthFormWrapper from "@/components/AuthForms/AuthFormWrapper";
+import GoogleLoginButton from "@/components/AuthForms/GoogleLoginButton";
 
 export default function LoginForm() {
   const [formState, setFormState] = useState({ errors: null, message: null, loading: false });
-  const { login, authenticated } = useAuth();
+  const { login } = useAuth();
   const router = useRouter(); // Get router instance
 
   const handleResponse = (data) => {
@@ -40,32 +40,18 @@ export default function LoginForm() {
     await handleLoginRequest(`${BACKEND_URL}/login`, { email, password });
   };
 
-  const handleGoogleLoginSuccess = async ({ credential }) => {
-    if (!credential) {
-      setFormState({ error: "Přihlášení s Googlem selhalo.", message: null });
-      return;
-    }
-    await handleLoginRequest(`${BACKEND_URL}/google-login`, { token: credential });
-  };
-
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <AuthFormWrapper
-        onSubmit={handleSubmit}
-        title="Přihlášení"
-        message={formState.message}
-        error={formState.error}
-        loading={formState.loading}
-        includePassword={true}
-        currentPage="login"
-      >
-        <div className="google-login-container" style={{ marginTop: '1rem' }}>
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={() => setFormState({ error: "Přihlášení s Googlem selhalo.", message: null })}
-          />
-        </div>
-      </AuthFormWrapper>
-    </GoogleOAuthProvider>
+    <AuthFormWrapper
+      onSubmit={handleSubmit}
+      title="Přihlášení"
+      buttonText="Přihlásit se"
+      message={formState.message}
+      error={formState.error}
+      loading={formState.loading}
+      includePassword={true}
+      currentPage="login"
+    >
+      <GoogleLoginButton onSuccessRedirect="/my-courses" />
+    </AuthFormWrapper>
   );
 }

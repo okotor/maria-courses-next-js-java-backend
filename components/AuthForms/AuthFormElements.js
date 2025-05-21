@@ -30,7 +30,7 @@ export function FormFooterLinks({ exclude = [] }) {
     { href: '/login', label: 'Přihlásit se', key: 'login' },
     { href: '/register', label: 'Registrovat se', key: 'register' },
     { href: '/forgotten-password', label: 'Zapomenuté heslo', key: 'forgotten' },
-    { href: '/resend-confirmation', label: 'Znovu odeslat potvrzení', key: 'resend' },
+    { href: '/resend-confirmation', label: 'Opětovné potvrzení registrace', key: 'resend' },
   ];
 
   const filteredLinks = allLinks.filter(link => !exclude.includes(link.key));

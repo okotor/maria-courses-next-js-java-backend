@@ -41,7 +41,8 @@ export default function ForgottenPasswordForm() {
   return (
     <AuthFormWrapper
       onSubmit={handleSubmit}
-      title="Obnovit heslo"
+      title="Obnovení hesla"
+      buttonText="Obnovit heslo"
       message={formState.message}
       error={formState.error}
       loading={formState.loading}

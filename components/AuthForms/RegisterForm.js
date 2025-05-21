@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { BACKEND_URL } from "@/utils/constants"; 
 import AuthFormWrapper from "@/components/AuthForms/AuthFormWrapper";
+import GoogleLoginButton from "@/components/AuthForms/GoogleLoginButton";
 
 export default function RegisterForm() {
   const [formState, setFormState] = useState({ errors: null, message: null, loading: false });
@@ -44,12 +45,15 @@ export default function RegisterForm() {
     <AuthFormWrapper
       onSubmit={handleSubmit}
       title="Registrace"
+      buttonText="Registrovat se"
       message={formState.message}
       error={formState.error}
       loading={formState.loading}
       includePassword={true}
       currentPage="register"
-    />
+    >
+      <GoogleLoginButton onSuccessRedirect="/my-courses" />
+    </AuthFormWrapper>
   );
 }
 
