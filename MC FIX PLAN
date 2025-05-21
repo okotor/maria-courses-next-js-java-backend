@@ -8,16 +8,14 @@ b. Make the old one work online so it is presentable and working
         
     II. PORTFOLIO FIX
 
-        1.The Four Forms working seamlessly and logically? - error messages - bad credential & refresh token chybí ...
+        1. REACT LEARN - the COURSE!
 
-        2. REACT LEARN - the COURSE!
+        2. Check email exists when registering & DELETE account and CHANGE user details
 
-        3. Check email exists when registering & DELETE account and CHANGE user details - Telusko Course
-
-        4. CSS Layout fix - some slugs, colour of slug background & Add DELETE and EDIT ICONS into Courseslug, Archive - let courses show on the side, 4 courses per row and round corners and more padding/margin
+        3. CSS Layout fix - some slugs, colour of slug background & Add DELETE and EDIT ICONS into Courseslug, Archive - let courses show on the side, 4 courses per row and round corners and more padding/margin
             & Text over the header & Delete the First heading from the HomePage
 
-        4.5 Zapsat Kurz functionality for logged in users - the Courses will be displayed in the "Moje kurzy" section
+        4. Zapsat Kurz functionality for logged in users - the Courses will be displayed in the "Moje kurzy" section
 
         5. (GIT HUB ACTIONS & RENDER)
 

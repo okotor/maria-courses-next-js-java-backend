@@ -37,8 +37,9 @@ api.interceptors.response.use(
 
     const isAuthError = error.response?.status === 401;
     const isRefreshAttempt = originalRequest.url.includes("/auth/refresh");
+    const isLoginOrRegister = originalRequest.url.includes("/login") || originalRequest.url.includes("/register");
 
-    if (isAuthError && !originalRequest._retry && !isRefreshAttempt) {
+    if (isAuthError && !originalRequest._retry && !isRefreshAttempt && !isLoginOrRegister) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({

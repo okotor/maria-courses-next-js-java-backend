@@ -6,7 +6,7 @@ import AuthFormWrapper from "@/components/AuthForms/AuthFormWrapper";
 import GoogleLoginButton from "@/components/AuthForms/GoogleLoginButton";
 
 export default function RegisterForm() {
-  const [formState, setFormState] = useState({ errors: null, message: null, loading: false });
+  const [formState, setFormState] = useState({ error: null, message: null, loading: false });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,8 @@ export default function RegisterForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Registrace selhala. Zkuste to znovu.");
+        const errorMessage = data.message || "Registrace selhala. Zkuste to znovu.";
+        throw new Error(errorMessage);
       }
 
       setFormState({
@@ -37,7 +38,7 @@ export default function RegisterForm() {
 
       e.target.reset(); // Clear form on success
     } catch (error) {
-      setFormState({ errors: error.message, message: null, loading: false });
+      setFormState({ error: error.message, message: null, loading: false });
     }
   };
 
