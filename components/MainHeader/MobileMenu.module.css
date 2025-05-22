@@ -37,13 +37,28 @@
   font-size: 1.2rem;
 }
 
+.navLinks a,
+.logoutButton {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.navLinks a:hover,
+.logoutButton:hover {
+  background-color: #f2f2f2;
+}
+
 .logoutButton {
   background: none;
   border: none;
   color: #e04e2c;
   font-weight: bold;
   cursor: pointer;
-  padding: 0;
   text-align: left;
 }
 
