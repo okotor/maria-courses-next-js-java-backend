@@ -6,10 +6,15 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background: none;
-  border: none;
+  background-color: #e04e2c; /* orange background */
+  border: 2px solid white; /* white border */
+  border-radius: 8px;
+  padding: 0.5rem;
   z-index: 1001;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menuPanel {
