@@ -15,6 +15,8 @@ export default function MobileMenu() {
     setOpen(false);
   };
 
+  const closeMenu = () => setOpen(false);
+
   return (
     <div className={styles.mobileMenuWrapper}>
       <button
@@ -24,6 +26,8 @@ export default function MobileMenu() {
       >
         {open ? <X size={32} /> : <Menu size={32} />}
       </button>
+
+      {open && <div className={styles.backdrop} onClick={closeMenu} />}
 
       <div className={`${styles.menuPanel} ${open ? styles.open : ''}`}>
         <nav className={styles.navLinks}>

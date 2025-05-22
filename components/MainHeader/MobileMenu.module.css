@@ -8,25 +8,24 @@
   right: 1rem;
   background: none;
   border: none;
-  cursor: pointer;
   z-index: 1001;
+  cursor: pointer;
 }
 
 .menuPanel {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 75%;
-  max-width: 300px;
+  height: 100vh;
+  width: 250px;
   background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 1002;
 }
 
-.open {
+.menuPanel.open {
   transform: translateX(0);
 }
 
@@ -34,14 +33,26 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  gap: 1rem;
+  gap: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .logoutButton {
-  color: red;
-  font-weight: bold;
   background: none;
   border: none;
-  text-align: left;
+  color: #e04e2c;
+  font-weight: bold;
   cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
 }
