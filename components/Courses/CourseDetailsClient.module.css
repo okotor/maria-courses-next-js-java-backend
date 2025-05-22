@@ -1,3 +1,10 @@
+.actionsRow {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 .header {
   display: flex;
   padding: 2rem 1rem;
@@ -6,10 +13,37 @@
   max-width: 80rem;
 }
 
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .headerText {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .headerText h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+.summary {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+  .image {
+    width: 100%;
+  }
+}
+
 .image {
-  position: relative;
-  width: 58rem;
-  height: 23rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .header img {
@@ -63,11 +97,12 @@
 .instructions {
   font-size: 1.25rem;
   line-height: 1.5;
-  background-color: #6e6464;
-  color: #13120f;
-  border-radius: 8px;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  background-color: transparent; /* matches --page-gradient tones */
+  color: #2a2a2a;
   padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 2rem auto;
   max-width: 60rem;
   margin: 2rem auto;
   animation: fade-slide-in-from-bottom 1s ease-out forwards;

@@ -23,6 +23,16 @@
   margin-top: 7rem;
 }
 
+.instructions {
+  background-color: #fff8f0; /* matches --page-gradient tones */
+  color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  max-width: 60rem;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -66,28 +76,6 @@
   margin: 1rem 0;
 }
 
-.slideshow {
-  width: 40rem;
-  height: 25rem;
-}
-
-.hero {
-  color: #7a5a21;
-  font-size: 1.5rem;
-}
-
-.hero h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: 0.15rem;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #272423, #4e4833);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .cta {
   font-size: 2rem;
   display: flex;
@@ -122,6 +110,23 @@
 .cta a:first-child:active {
   background: transparent;
   color: #4e4c48;
+}
+
+.hero {
+  color: #7a5a21;
+  font-size: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #272423, #4e4833);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .form-footer {
@@ -252,7 +257,14 @@ a.secondary {
   align-self: center;
 }
 
+.slideshow {
+  width: 40rem;
+  height: 25rem;
+}
+
 .yearslist {
+  flex-wrap: wrap;
+  overflow-x: hidden;
   margin-top: 15rem;
   list-style-type: none; /* Remove default bullets */
   padding: 0;            /* Remove default padding */

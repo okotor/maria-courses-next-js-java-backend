@@ -1,0 +1,12 @@
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.searchInput {
+  width: 50%;        /* Roughly half the width of the parent */
+  min-width: 300px;  /* Prevents it from being too small on smaller screens */
+  max-width:800px;  /* Optional: limits extreme widening on very large screens */
+  background-color: white;
+}

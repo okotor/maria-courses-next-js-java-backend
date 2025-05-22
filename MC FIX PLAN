@@ -6,7 +6,7 @@ b. Make the old one work online so it is presentable and working
 
         - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching, Jest, React Testing Library, Cypress, or Pytest, Add react-i18next with Czech + English
 
-        - Top 1: New App - React & TypeScript frontend & Django/TypeScript backend, Tailwind/Bootstrap/... Template, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
+        - Top 1: New App - React & TypeScript frontend & Node.js & Typescript backend, Tailwind CSS - import, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
 
         - Top 2: Marian Courses App - Add React functionalities, WebSockets, Kafka/RabbitMQ - each course video streaming, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile Version - PWA
 
@@ -16,8 +16,8 @@ b. Make the old one work online so it is presentable and working
 
         1. REACT LEARN - the COURSE!
 
-        2 Mobile&PC menu fix in Home & Course slug.
-         CSS Layout fix - some slugs, colour of slug background & Add DELETE and EDIT ICONS into Courseslug, Archive - let courses show on the side, 4 courses per row and round corners and more padding/margin
+        2. Mobile&PC menu fix in Home & Fix EDIT and DELETE course - Mazání vyblednout & refresh page & VIDEO MODAL
+         Let courses show on the side, 4 courses per row and round corners and more padding/margin
             & Text over the header & Delete the First heading from the HomePage
 
         3. Cookies pop-up

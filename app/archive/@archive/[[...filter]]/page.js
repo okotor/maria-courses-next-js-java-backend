@@ -25,7 +25,7 @@ export default async function FilteredCoursesPage({params}) {
     }
 
     return (
-        <div className={classes.section}>
+        <div className={classes.main}>
             <YearHeader />
             {courseContent}
         </div>

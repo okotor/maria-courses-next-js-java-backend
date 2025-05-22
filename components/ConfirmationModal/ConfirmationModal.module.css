@@ -28,23 +28,39 @@
 
 .modal p,
 .modal button {
-  font-size: 1.4rem;     /* same font size for both */
-  font-weight: 700;      /* bold text */
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .modal p {
   line-height: 1.6;
   margin-bottom: 2rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.confirmationInput {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin: 2rem auto;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: var(--foreground);
+  text-align: center;
 }
 
 .actions {
-  margin-top: 2rem;
+  margin-top: 0;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
 }
 
-/* Scoped button styles inside the modal */
 .modal button {
   cursor: pointer;
   border: none;

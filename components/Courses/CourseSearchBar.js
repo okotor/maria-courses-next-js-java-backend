@@ -3,6 +3,7 @@
 import { FaSearch } from 'react-icons/fa';
 import { InputAdornment, TextField } from "@mui/material";
 import { useState } from 'react';
+import classes from './CourseSearchBar.module.css';
 
 export default function CourseSearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,19 +15,20 @@ export default function CourseSearchBar({ onSearch }) {
   };
 
   return (
-    <TextField
-      value={searchTerm}
-      onChange={handleInputChange}
-      placeholder="Najdi kurz podle klíčového slova..."
-      fullWidth
-      sx={{ width: '75%', margin: '0 auto 2rem auto' }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <FaSearch style={{ color: '#888', fontSize: '1.2rem' }} />
-          </InputAdornment>
-        ),
-      }}
-    />
+    <div className={classes.searchWrapper}>
+      <TextField
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Najdi kurz podle klíčového slova..."
+        className={classes.searchInput}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <FaSearch style={{ color: '#888', fontSize: '1.2rem' }} />
+            </InputAdornment>
+          ),
+        }}
+      />
+    </div>
   );
 }
