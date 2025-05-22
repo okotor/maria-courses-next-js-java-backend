@@ -3,6 +3,7 @@ import classes from './ConfirmationModal.module.css';
 
 export default function ConfirmationModal({ 
   message, 
+  children,
   onConfirm, 
   onCancel, 
   isOpen, 
@@ -14,7 +15,9 @@ export default function ConfirmationModal({
   return (
     <div className={classes.backdrop}>
       <div className={classes.modal}>
-        <p>{message}</p>
+        {/* Use children if provided, fallback to plain <p> message */}
+        {children || <p>{message}</p>}
+
         <div className={classes.actions}>
           <button onClick={onCancel} className={classes.cancel}>{cancelText}</button>
           <button onClick={onConfirm} className={classes.confirm}>{confirmText}</button>
