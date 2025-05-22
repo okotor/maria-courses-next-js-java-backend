@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .menuPanel.open {
@@ -40,17 +41,19 @@
   font-size: 1.2rem;
   color: #949290;
   flex-grow: 1;
+  align-items: center;
 }
 
 .navLinks a {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  min-width: 120px;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   text-decoration: none;
   color: #949290;
   transition: background-color 0.2s, color 0.2s;
   font-weight: bold;
+  text-align: center;
 }
 
 .navLinks a:hover {
