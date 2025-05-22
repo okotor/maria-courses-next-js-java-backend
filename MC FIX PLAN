@@ -4,16 +4,13 @@ b. Make the old one work online so it is presentable and working
 
     I. Job Offers & ChatGPT 20 Key Skills Research: 
 
-        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching, Jest, React Testing Library, Cypress, or Pytest
+        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching, Jest, React Testing Library, Cypress, or Pytest, Add react-i18next with Czech + English
 
         - Top 1: New App - React & TypeScript frontend & Django/TypeScript backend, Tailwind/Bootstrap/... Template, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
 
-        - Top 2: Marian Courses App - Add React functionalities, WebSockets, Kafka/RabbitMQ - each course video streaming, CI/CD Pipelines (Github Actions), Redis - Caching
+        - Top 2: Marian Courses App - Add React functionalities, WebSockets, Kafka/RabbitMQ - each course video streaming, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile Version - PWA
 
         - Top 3: Jest, React Testing Library, Cypress, or Pytest
-
-        - Top 4:
-
         
     II. PORTFOLIO FIX
 
@@ -31,6 +28,135 @@ b. Make the old one work online so it is presentable and working
         7. CV Fix & Agree with M'u about Negotiation Prep 
 
 c. EXAMINE JOB OFFERS + Need a New React & Django/Flask/FastAPI Project (Marian Novelty/Štěpán/...? - Template / from Scratch, go along with the Course, also make some of your own stuff later)
+
+
+🛤️ Strategic Skill Enhancements: Prioritized by Impact and Effort
+Mastering Unit Testing in JavaScript (Jest, React Testing Library)
+
+Why: Testing is a cornerstone of robust applications. Employers value developers who can ensure code reliability.
+
+Effort: Low to Medium. Begin by writing tests for existing components.
+
+Benefit: High. Demonstrates professionalism and attention to detail.
+
+Deepening React State Management with Redux
+
+Why: While you've used Zustand and Context API, Redux remains prevalent in many codebases.
+
+Effort: Medium. Start with simple applications to grasp the core concepts.
+
+Benefit: High. Enhances your versatility in handling complex state scenarios.
+
+Implementing Responsive Design with Tailwind CSS
+
+Why: Modern applications must cater to various devices. Tailwind simplifies responsive design.
+
+Effort: Low. Tailwind's utility classes make adjustments straightforward.
+
+Benefit: High. Improves user experience across devices.
+
+Integrating Authentication in Node.js Applications
+
+Why: You've implemented authentication in Java Spring; replicating this in Node.js showcases adaptability.
+
+Effort: Medium. Utilize libraries like Passport.js or JWT for implementation.
+
+Benefit: High. Broadens your backend proficiency.
+
+Exploring Python Backends with Flask or FastAPI
+
+Why: Python's simplicity and versatility make it a valuable backend language.
+
+Effort: Medium. Start with basic APIs and gradually incorporate more features.
+
+Benefit: High. Diversifies your backend capabilities.
+
+Understanding WebSockets for Real-Time Communication
+
+Why: Real-time features enhance user engagement.
+
+Effort: Medium. Begin with chat applications to grasp the fundamentals.
+
+Benefit: Medium to High. Adds a dynamic layer to your applications.
+tecla.io
+
+Familiarizing with Docker for Containerization
+
+Why: Containerization ensures consistency across development and production environments.
+
+Effort: Medium. Start by containerizing simple applications.
+
+Benefit: High. Essential for modern DevOps practices.
+
+Implementing CI/CD Pipelines with GitHub Actions
+
+Why: Automating deployments streamlines the development process.
+
+Effort: Medium. Set up pipelines for testing and deployment.
+
+Benefit: High. Demonstrates a commitment to efficient workflows.
+nobledesktop.com
++6
+H1B Data
++6
+Glassdoor
++6
+
+Exploring Redis for Caching Mechanisms
+
+Why: Caching improves application performance.
+
+Effort: Medium. Integrate Redis into existing projects to cache frequent queries.
+
+Benefit: Medium. Enhances scalability and speed.
+
+Delving into Kafka or RabbitMQ for Message Queuing
+
+Why: Message brokers handle asynchronous tasks efficiently.
+
+Effort: High. Requires understanding of distributed systems.
+
+Benefit: Medium. Valuable for applications requiring high throughput.
+
+Enhancing Applications with AI Integrations
+
+Why: AI features, like chatbots or recommendations, enrich user experience.
+
+Effort: Medium. Utilize APIs like OpenAI for integration.
+
+Benefit: Medium. Positions you at the forefront of modern application development.
+
+Implementing Internationalization (i18n)
+
+Why: Catering to a diverse user base requires multilingual support.
+
+Effort: Medium. Use libraries like react-i18next.
+
+Benefit: Medium. Expands your application's reach.
+
+Prioritizing Accessibility (a11y) in UI Design
+
+Why: Inclusive design ensures usability for all users.
+
+Effort: Medium. Follow WCAG guidelines and use semantic HTML.
+
+Benefit: Medium. Demonstrates social responsibility and professionalism.
+
+Learning Infrastructure as Code with Terraform
+
+Why: Automating infrastructure setup enhances efficiency.
+
+Effort: High. Requires understanding of cloud resources.
+
+Benefit: Medium. Valuable for roles involving DevOps responsibilities.
+
+Engaging in Open Source Contributions
+
+Why: Contributing to open source projects showcases collaboration and initiative.
+
+Effort: High. Involves understanding existing codebases and contributing meaningfully.
+
+Benefit: Medium. Enhances your portfolio and professional network.
 
 
 
