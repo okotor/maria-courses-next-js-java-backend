@@ -1,16 +1,13 @@
-'use client';
-
-import React from 'react';
-import { use } from 'react';
+import { getCourse } from '@/lib/courseService';
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import CourseEditForm from '@/components/Courses/CourseEditForm';
 
-export default function CourseEditPage({ params }) {
-    const { slug } = use(params);
+export default async function CourseEditPage({ params }) {
+    const course = await getCourse(params.slug);
 
     return (
         <ProtectedRoute requireAdmin={true}>
-            <CourseEditForm slug={slug} />
+            <CourseEditForm course={course} />
         </ProtectedRoute>
     );
 }

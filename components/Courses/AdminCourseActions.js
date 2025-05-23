@@ -22,8 +22,12 @@ export default function AdminCourseActions({ slug, title, onDeleted }) {
     setDeleting(true);
     try {
       await deleteCourse(slug);
-      if (onDeleted) onDeleted();
-      else router.refresh();
+      if (onDeleted) {
+        onDeleted();
+      } else {
+        router.push('/courses');
+        router.refresh();
+      }
     } catch (error) {
       console.error('Chyba při mazání kurzu:', error);
     } finally {

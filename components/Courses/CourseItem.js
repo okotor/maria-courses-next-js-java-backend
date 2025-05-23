@@ -8,7 +8,7 @@ import { useState } from 'react';
 import AdminCourseActions from '@/components/Courses/AdminCourseActions';
 import classes from './CourseItem.module.css';
 
-export default function CourseItem({ date, title, slug, image, summary, lecturer }) {
+export default function CourseItem({ date, title, slug, image, summary, lecturer, onDeleted }) {
   const auth = useAuth();
   const { isAdmin } = auth || {};
 
@@ -57,7 +57,11 @@ export default function CourseItem({ date, title, slug, image, summary, lecturer
             <div className={classes.actionsRow}>
               <Link href={`/courses/${safeSlug}`}>Více informací</Link>
               {isAdmin && (
-                <AdminCourseActions slug={safeSlug} title={safeTitle} />
+                <AdminCourseActions
+                  slug={safeSlug}
+                  title={safeTitle}
+                  {...(onDeleted ? { onDeleted: () => onDeleted(safeSlug) } : {})}
+                />
               )}
             </div>
           </div>

@@ -6,6 +6,7 @@ import CoursesGrid from './CoursesGrid';
 import classes from '@/app/page.module.css';
 
 export default function CoursesOverview({ courses }) {
+  const [allCourses, setAllCourses] = useState(courses ?? []);
   const [filteredCourses, setFilteredCourses] = useState(courses ?? []);
 
   if (!Array.isArray(courses)) {
@@ -24,6 +25,12 @@ export default function CoursesOverview({ courses }) {
     setFilteredCourses(filtered);
   };
 
+  const handleCourseDeleted = (slug) => {
+    const updated = allCourses.filter(course => course.slug !== slug);
+    setAllCourses(updated);
+    setFilteredCourses(prev => prev.filter(course => course.slug !== slug));
+  };
+
   return (
     <>
       <header className={classes.header}>
@@ -35,7 +42,7 @@ export default function CoursesOverview({ courses }) {
 
       <main className={classes.main}>
         <CourseSearchBar onSearch={handleSearch} />
-        <CoursesGrid courses={filteredCourses} />
+        <CoursesGrid courses={filteredCourses} onDeleted={handleCourseDeleted} />
       </main>
     </>
   );

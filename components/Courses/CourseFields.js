@@ -1,11 +1,84 @@
-import React from 'react';
-import ImagePicker from '@/components/Courses/ImagePicker';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import ImagePicker from './ImagePicker';
+import CourseActionButton from './CourseActionButton';
 import classes from './page.module.css';
 
+export default function CourseFields({
+  defaultValues = {},
+  requireImage = false,
+  onSubmit,
+  actionType = 'create'
+}) {
+  const [state, setState] = useState({
+    loading: false,
+    success: false,
+    message: null,
+    errors: {}
+  });
 
-export default function CourseFields({ defaultValues = {} }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      router.push('/courses');
+    }
+  }, [state.success, router]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const image = e.target.elements.image?.files?.[0];
+
+    if (requireImage && !image) {
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        errors: { image: 'Nahrajte prosím obrázek.' },
+        message: null
+      }));
+      return;
+    }
+
+    const newErrors = {};
+    if (requireImage && (!image || image.size === 0)) {
+      newErrors.image = 'Prosím vyberte obrázek.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setState(prev => ({ ...prev, errors: newErrors, message: null, loading: false }));
+      return;
+    }
+
+    setState(prev => ({ ...prev, loading: true, errors: {}, message: null }));
+
+    try {
+      await onSubmit(formData);
+      setState({
+        loading: false,
+        success: true,
+        message: { text: 'Kurz byl úspěšně uložen!', success: true },
+        errors: {}
+      });
+    } catch (err) {
+      console.error('Submit error:', err);
+      setState({
+        loading: false,
+        success: false,
+        message: { text: 'Chyba při ukládání kurzu.', success: false },
+        errors: {}
+      });
+    }
+  };
+
+  const handleCancel = () => {
+    router.back();
+  };
+
   return (
-    <>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <div className={classes.row}>
         <p>
           <label htmlFor="name">Jméno přednášejícího</label>
@@ -61,7 +134,36 @@ export default function CourseFields({ defaultValues = {} }) {
           required
         ></textarea>
       </p>
-      <ImagePicker label="Obrázek" name="image" defaultValue={defaultValues.image} />
-    </>
+
+      <ImagePicker
+        label="Obrázek"
+        name="image"
+        defaultValue={defaultValues.image}
+        error={state.errors.image}
+      />
+
+      {state.message && (
+        <p style={{ color: state.message.success ? 'green' : 'red', marginTop: '1rem' }}>
+          {state.message.text}
+        </p>
+      )}
+
+      <div className={classes.actions} style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+        {actionType === 'edit' && (
+          <button
+            type="button"
+            onClick={handleCancel}
+            className={classes.cancelButton}
+          >
+            Zrušit
+          </button>
+        )}
+        <CourseActionButton
+          actionType={actionType}
+          loading={state.loading}
+          message={state.message}
+        />
+      </div>
+    </form>
   );
 }

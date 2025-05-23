@@ -1,5 +1,3 @@
-/* ConfirmationModal.module.css */
-
 .backdrop {
   position: fixed;
   top: 0;
@@ -31,6 +29,12 @@
   font-size: 1.4rem;
   font-weight: 700;
 }
+
+.modal button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 
 .modal p {
   line-height: 1.6;

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import classes from './ImagePicker.module.css';
 
-export default function ImagePicker({label, name}) {
+export default function ImagePicker({label, name, error = null }) {
     const [pickedImage, setPickedImage] = useState();
     const imageInput = useRef();
 
@@ -52,7 +52,6 @@ export default function ImagePicker({label, name}) {
                     name={name}
                     ref={imageInput}
                     onChange={handleImageChange}
-                    required
                 />
                 <button 
                     className={classes.button}
@@ -61,6 +60,7 @@ export default function ImagePicker({label, name}) {
                     Vyber obrázek
                 </button>
             </div>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }
