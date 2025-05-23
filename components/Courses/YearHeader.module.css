@@ -1,0 +1,13 @@
+.yearslist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.yearslist li {
+  flex: 0 0 calc(50% - 0.5rem); /* two per row */
+  text-align: center;
+}

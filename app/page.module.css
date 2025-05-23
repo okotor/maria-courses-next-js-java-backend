@@ -23,16 +23,6 @@
   margin-top: 7rem;
 }
 
-.instructions {
-  background-color: #fff8f0; /* matches --page-gradient tones */
-  color: #2a2a2a;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 2rem auto;
-  max-width: 60rem;
-}
-
 .main {
   display: flex;
   flex-direction: column;
