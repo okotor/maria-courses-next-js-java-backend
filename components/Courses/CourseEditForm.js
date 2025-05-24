@@ -12,10 +12,14 @@ export default function CourseEditForm({ course }) {
     if (!formData.get('image')?.name) {
       formData.delete('image');
     }
-    await fetch(`/api/courses/${course.slug}/edit`, {
+    const response = await fetch(`/api/courses/${course.slug}/edit`, {
       method: 'POST',
       body: formData,
-    }); 
+    });
+
+    if (response.redirected) {
+      window.location.href = response.url; // ✅ browser will load fresh, revalidated content
+    }
   };
 
   return (

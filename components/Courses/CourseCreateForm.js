@@ -10,10 +10,16 @@ export default function CourseCreateForm() {
       formData.delete('image');
     }
 
-    await fetch('/api/courses/create', {
+    // in your client component
+    const response = await fetch('/api/courses/create', {
       method: 'POST',
       body: formData,
     });
+
+    // Ensure browser follows redirect if it exists
+    if (response.redirected) {
+      window.location.href = response.url;
+    }
   };
 
   return (
