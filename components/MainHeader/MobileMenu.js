@@ -37,7 +37,6 @@ export default function MobileMenu() {
 
           {isAdmin && (
             <>
-              <ClientNavLink href="/admin-dashboard">Admin Panel</ClientNavLink>
               <ClientNavLink href="/create-course">Vytvořit kurz</ClientNavLink>
             </>
           )}
