@@ -20,11 +20,11 @@ export default function AdminCourseActions({ slug, title, onDeleted }) {
     if (confirmationInput !== 'Smazat') return;
     setDeleting(true);
     try {
-      await fetch(`/api/courses/${slug}/delete`, { method: 'DELETE' });
-      if (onDeleted) {
+      const res = await fetch(`/api/courses/${slug}/delete`, { method: 'DELETE' });
+      if (res.redirected) {
+        window.location.href = res.url;
+      } else if (onDeleted) {
         onDeleted();
-      } else {
-        router.push('/courses');
       }
     } catch (error) {
       console.error('Chyba při mazání kurzu:', error);

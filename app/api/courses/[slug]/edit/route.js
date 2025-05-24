@@ -2,6 +2,8 @@ import { updateCourse } from '@/lib/courseService';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic'; // ✅ ensure revalidation takes effect
+
 export async function POST(req, { params }) {
   try {
     const formData = await req.formData();

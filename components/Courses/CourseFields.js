@@ -22,12 +22,6 @@ export default function CourseFields({
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (state.success) {
-      router.push('/courses');
-    }
-  }, [state.success, router]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -46,13 +40,18 @@ export default function CourseFields({
     setState(prev => ({ ...prev, loading: true, errors: {}, message: null }));
 
     try {
-      await onSubmit(formData);
-      setState({
-        loading: false,
-        success: true,
-        message: { text: 'Kurz byl úspěšně uložen!', success: true },
-        errors: {}
-      });
+      const response = await onSubmit(formData);
+
+      if (response?.redirected) {
+        window.location.href = response.url;
+      } else {
+        setState({
+          loading: false,
+          success: true,
+          message: { text: 'Kurz byl úspěšně uložen!', success: true },
+          errors: {}
+        });
+      }
     } catch (err) {
       console.error('Submit error:', err);
       setState({
