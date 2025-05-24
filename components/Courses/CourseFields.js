@@ -33,23 +33,13 @@ export default function CourseFields({
     const formData = new FormData(e.target);
     const image = e.target.elements.image?.files?.[0];
 
-    if (requireImage && !image) {
+    if (requireImage && (!image || image.size === 0)) {
       setState(prev => ({
         ...prev,
         loading: false,
         errors: { image: 'Nahrajte prosím obrázek.' },
         message: null
       }));
-      return;
-    }
-
-    const newErrors = {};
-    if (requireImage && (!image || image.size === 0)) {
-      newErrors.image = 'Prosím vyberte obrázek.';
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setState(prev => ({ ...prev, errors: newErrors, message: null, loading: false }));
       return;
     }
 
@@ -162,7 +152,6 @@ export default function CourseFields({
         <CourseActionButton
           actionType={actionType}
           loading={state.loading}
-          message={state.message}
         />
       </div>
     </form>

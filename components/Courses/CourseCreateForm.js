@@ -1,10 +1,20 @@
+'use client';
+
 import React from 'react';
-import { saveCourse } from '@/lib/courseService';
 import CourseFields from './CourseFields';
 import classes from './page.module.css';
 
 export default function CourseCreateForm() {
-  const handleCreate = (formData) => saveCourse(formData);
+  const handleCreate = async (formData) => {
+    if (!formData.get('image')?.name) {
+      formData.delete('image');
+    }
+
+    await fetch('/api/courses/create', {
+      method: 'POST',
+      body: formData,
+    });
+  };
 
   return (
     <>

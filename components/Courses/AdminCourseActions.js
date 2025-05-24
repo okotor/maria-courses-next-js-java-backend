@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
-import { deleteCourse } from '@/lib/courseService';
 import classes from './AdminCourseActions.module.css';
 
 export default function AdminCourseActions({ slug, title, onDeleted }) {
@@ -21,12 +20,11 @@ export default function AdminCourseActions({ slug, title, onDeleted }) {
     if (confirmationInput !== 'Smazat') return;
     setDeleting(true);
     try {
-      await deleteCourse(slug);
+      await fetch(`/api/courses/${slug}/delete`, { method: 'DELETE' });
       if (onDeleted) {
         onDeleted();
       } else {
         router.push('/courses');
-        router.refresh();
       }
     } catch (error) {
       console.error('Chyba při mazání kurzu:', error);

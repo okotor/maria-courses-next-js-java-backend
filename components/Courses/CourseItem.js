@@ -1,18 +1,12 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext'; 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import AdminCourseActions from '@/components/Courses/AdminCourseActions';
 import classes from './CourseItem.module.css';
 
 export default function CourseItem({ date, title, slug, image, summary, lecturer, onDeleted }) {
   const auth = useAuth();
   const { isAdmin } = auth || {};
-
-  const [isModalOpen, setModalOpen] = useState(false);
 
    const formatDate = (dateString) => {
     if (!dateString) return 'Datum není dostupné';

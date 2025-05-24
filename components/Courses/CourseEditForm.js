@@ -2,22 +2,20 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { updateCourse } from '@/lib/courseService';
 import CourseFields from './CourseFields';
 import classes from './page.module.css';
 
 export default function CourseEditForm({ course }) {
   const router = useRouter();
 
-  const handleCancel = () => {
-    router.back();
-  };
-
-  const handleUpdate = (formData) => {
+  const handleUpdate = async (formData) => {
     if (!formData.get('image')?.name) {
       formData.delete('image');
     }
-    return updateCourse(formData, course.slug);
+    await fetch(`/api/courses/${course.slug}/edit`, {
+      method: 'POST',
+      body: formData,
+    }); 
   };
 
   return (
