@@ -63,7 +63,6 @@ export default function CourseDetailsClient({ course }) {
               <div className={classes.modalContent}>
                 <video
                   controls
-                  autoPlay
                   style={{ width: '100%' }}
                   onError={() => setVideoError(true)}
                 >
@@ -78,7 +77,7 @@ export default function CourseDetailsClient({ course }) {
           )
         ) : (
           <p className={classes.loginReminder}>
-            Přihlaste se pro zobrazení videa kurzu.
+            Přihlas se pro zobrazení videozáznamu kurzu.
           </p>
         )}
 
