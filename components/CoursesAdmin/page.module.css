@@ -28,9 +28,20 @@
   color: white;
 }
 
+.mediaRow {
+  display: flex;
+  gap: 4rem; 
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
 /* Form Styles */
 .form {
   max-width: 50rem;
+}
+
+.form p {
+  margin-bottom: 0.9rem;
 }
 
 .form label {
@@ -122,4 +133,21 @@
 .cancelButton:hover {
   background-color: #eee;
   color: #222;
+}
+
+.videoControl {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.videoInput {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.videoFileInfo {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 0.25rem;
 }

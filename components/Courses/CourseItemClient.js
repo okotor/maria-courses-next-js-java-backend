@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import AdminCourseActions from '@/components/Courses/AdminCourseActions';
+import AdminCourseActions from '@/components/CoursesAdmin/AdminCourseActions';
 import classes from './CourseItem.module.css';
 
 export default function CourseItemClient({ date, title, slug, image, summary, lecturer, onDeleted }) {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import CourseFields from './CourseFields';
+import CourseFields from '../CoursesAdmin/CourseFields';
 import classes from './page.module.css';
 
 export default function CourseCreateForm() {

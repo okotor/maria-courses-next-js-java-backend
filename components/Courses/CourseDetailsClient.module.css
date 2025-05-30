@@ -149,6 +149,14 @@
   }
 }
 
+.loginReminder {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e53935; /* bright red */
+  margin: 2rem auto 3rem auto;
+}
+
 @keyframes flash {
   0% {
     opacity: 0;
@@ -159,4 +167,24 @@
   100% {
     opacity: 0;
   }
+}
+
+.modalOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  width: 100%;
+}
+
+.modalContent {
+  max-width: 960px;
+  width: 90%;
+}
+
+.modalContent video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }

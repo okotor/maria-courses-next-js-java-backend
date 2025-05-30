@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import CourseFields from './CourseFields';
+import CourseFields from '../CoursesAdmin/CourseFields';
 import classes from './page.module.css';
 
 export default function CourseEditForm({ course }) {

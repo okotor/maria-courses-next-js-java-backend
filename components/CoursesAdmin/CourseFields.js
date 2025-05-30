@@ -1,9 +1,10 @@
 'use client';
 
 //imports
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import ImagePicker from './ImagePicker';
+// import ImagePicker from './ImagePicker';
+import MediaPicker from './MediaPicker';
 import CourseActionButton from './CourseActionButton';
 import classes from './page.module.css';
 
@@ -20,20 +21,30 @@ export default function CourseFields({
     errors: {}
   });
 
+  const imageInputRef = useRef();
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const image = e.target.elements.image?.files?.[0];
+    console.log('Raw description input:', formData.get('courseDescription'));
+    const imageFile = imageInputRef.current?.files?.[0];
 
-    if (requireImage && (!image || image.size === 0)) {
+    if (requireImage && (!imageFile || imageFile.size === 0)) {
       setState(prev => ({
         ...prev,
         loading: false,
-        errors: { image: 'Nahrajte prosím obrázek.' },
+        errors: { ...prev.errors, image: 'Nahrajte prosím obrázek.' },
         message: null
       }));
+
+      // Scroll to the image picker and focus the button
+      const imageInput = imageInputRef.current;
+      if (imageInput && imageInput.closest) {
+        const button = imageInput.closest('div').querySelector('button');
+        if (button) button.focus();
+      }
+
       return;
     }
 
@@ -68,7 +79,7 @@ export default function CourseFields({
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleSubmit} noValidate>
       <div className={classes.row}>
         <p>
           <label htmlFor="name">Jméno přednášejícího</label>
@@ -125,18 +136,47 @@ export default function CourseFields({
         ></textarea>
       </p>
 
-      <ImagePicker
+      <div className={classes.mediaRow}>
+        <MediaPicker
+          label="Obrázek"
+          name="image"
+          type="image"
+          defaultValue={defaultValues.image}
+          required={requireImage}
+          error={state.errors.image}
+          inputRef={imageInputRef}
+        />
+        <MediaPicker
+          label="Video (Jen pro online kurzy, v mp4)"
+          name="video"
+          type="video"
+          error={state.errors.video}
+        />
+      </div>
+
+      {/* <ImagePicker
         label="Obrázek"
         name="image"
         defaultValue={defaultValues.image}
         error={state.errors.image}
-      />
+      />*/}
 
-      {state.message && (
-        <p style={{ color: state.message.success ? 'green' : 'red', marginTop: '1rem' }}>
-          {state.message.text}
-        </p>
-      )}
+      {/* Video Upload */}
+      {/* <div className={classes.videoControl}>
+        <label htmlFor="video">Video (volitelné, .mp4)</label>
+        <input
+          type="file"
+          id="video"
+          name="video"
+          accept="video/mp4"
+          className={classes.videoInput}
+        />
+        {defaultValues.video && typeof defaultValues.video === 'string' && (
+          <p className={classes.videoFileInfo}>
+            Aktuální video: <em>{defaultValues.video}</em>
+          </p>
+        )}
+      </div>  */}
 
       <div className={classes.actions} style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
         {actionType === 'edit' && (
@@ -151,6 +191,7 @@ export default function CourseFields({
         <CourseActionButton
           actionType={actionType}
           loading={state.loading}
+          message={state.message}
         />
       </div>
     </form>
