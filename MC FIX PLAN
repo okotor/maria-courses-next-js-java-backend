@@ -21,6 +21,7 @@ b. Make the old one work online so it is presentable and working
              ba. Text saving including spaces and paragraphs
              c.Let courses show on the side, 4 courses per row and round corners and more padding/margin
               d. Text "MARIAN COURSES" over the header + Delete the First heading from the HomePage
+                E. Prompt the user to open a course to watch its contents
 
         3. Cookies pop-up
 

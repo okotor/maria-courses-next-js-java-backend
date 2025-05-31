@@ -3,7 +3,15 @@
 import { useRef, useState, useEffect } from 'react';
 import classes from './MediaPicker.module.css';
 
-export default function MediaPicker({ label, name, type = 'image', defaultValue, required = false, error = null, inputRef }) {
+export default function MediaPicker({ 
+  label,
+  name,
+  type = 'image',
+  defaultValue,
+  required = false,
+  error = null,
+  inputRef
+}) {
   const internalRef = useRef();
   const resolvedRef = inputRef || internalRef;
   const [picked, setPicked] = useState(defaultValue || null);
@@ -11,10 +19,18 @@ export default function MediaPicker({ label, name, type = 'image', defaultValue,
   const [localError, setLocalError] = useState(null);
 
   useEffect(() => {
-    if (defaultValue && type === 'image') {
-      setPicked(defaultValue);
+    if (defaultValue) {
+    setPicked(defaultValue);
     }
-  }, [defaultValue, type]);
+  }, [defaultValue]);
+
+  useEffect(() => {
+    return () => {
+      if (picked && picked.startsWith('blob:')) {
+        URL.revokeObjectURL(picked);
+      }
+    };
+  }, [picked]);
 
   function validateFile(file) {
     const maxSizeMB = type === 'image' ? 5 : 100;
@@ -26,7 +42,7 @@ export default function MediaPicker({ label, name, type = 'image', defaultValue,
   }
 
   function handlePickClick() {
-    inputRef.current.click();
+    resolvedRef.current?.click();
   }
 
   function handleChange(event) {
@@ -35,7 +51,8 @@ export default function MediaPicker({ label, name, type = 'image', defaultValue,
       setPicked(null);
       return;
     }
-    setPicked(type === 'image' ? URL.createObjectURL(file) : file.name);
+    const fileURL = URL.createObjectURL(file);
+    setPicked(fileURL);
     setLocalError(null);
   }
 
@@ -47,7 +64,8 @@ export default function MediaPicker({ label, name, type = 'image', defaultValue,
       setPicked(null);
       return;
     }
-    setPicked(type === 'image' ? URL.createObjectURL(file) : file.name);
+    const fileURL = URL.createObjectURL(file);
+    setPicked(fileURL);
     setLocalError(null);
   }
 
@@ -63,6 +81,12 @@ export default function MediaPicker({ label, name, type = 'image', defaultValue,
   const preview =
     type === 'image' && picked ? (
       <img src={picked} alt="Preview" className={classes.previewImage} />
+    ) : type === 'video' && picked ? (
+      <video
+        src={picked}
+        controls
+        className={classes.previewVideo}
+      />
     ) : (
       <p>{picked ? picked : type === 'video' ? 'Video nevybráno.' : 'Obrázek nevybrán.'}</p>
     );

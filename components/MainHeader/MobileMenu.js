@@ -48,7 +48,6 @@ export default function MobileMenu() {
             </>
           ) : (
             <>
-              <ClientNavLink href="/my-courses">Moje kurzy</ClientNavLink>
               <ClientNavLink href="/account">Můj účet</ClientNavLink>
               <button onClick={handleLogout} className={styles.logoutButton}>Odhlásit se</button>
             </>

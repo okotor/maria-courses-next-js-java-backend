@@ -5,10 +5,16 @@ import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import AdminCourseActions from '@/components/CoursesAdmin/AdminCourseActions';
 import classes from './CourseItem.module.css';
+import { useEffect, useState } from 'react';
 
 export default function CourseItemClient({ date, title, slug, image, summary, lecturer, onDeleted }) {
   const auth = useAuth();
   const { isAdmin } = auth || {};
+  const [cacheBuster, setCacheBuster] = useState('');
+
+  useEffect(() => {
+    setCacheBuster(`?v=${Date.now()}`);
+  }, []);
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Datum není dostupné';
@@ -25,13 +31,17 @@ export default function CourseItemClient({ date, title, slug, image, summary, le
   const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';
   const safeSlug = typeof slug === 'string' ? slug : '';
 
+  const imageUrl = image
+    ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}${cacheBuster}`
+    : null;
+
   return (
     <article className={classes.course}>
       <header>
         <div className={classes.image}>
           {image ? (
             <Image
-              src={`https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}`}
+              src={imageUrl}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

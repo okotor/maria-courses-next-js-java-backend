@@ -7,7 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function GoogleLoginButton({ onSuccessRedirect = '/my-courses' }) {
+export default function GoogleLoginButton({ onSuccessRedirect = '/' }) {
   const { login } = useAuth();
   const router = useRouter();
   const [error, setError] = useState(null);

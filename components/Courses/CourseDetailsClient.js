@@ -2,19 +2,28 @@
 
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AdminCourseActions from '@/components/CoursesAdmin/AdminCourseActions';
 import classes from './CourseDetailsClient.module.css';
 
 export default function CourseDetailsClient({ course }) {
   const { authenticated, isAdmin } = useAuth();
   const [videoError, setVideoError] = useState(false);
+  const [cacheBuster, setCacheBuster] = useState('');
+
+  useEffect(() => {
+    setCacheBuster(`?v=${Date.now()}`);
+  }, []);
 
   const courseDescription = course.courseDescription
     ? course.courseDescription.replace(/\n/g, '<br />')
     : '';
 
-  console.log("Video URL:", `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/videos/${course.slug}-video.mp4`);
+  const imageUrl = course.image
+  ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${course.image}${cacheBuster}`
+  : '/default-image.jpg';
+
+  const videoUrl = `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/videos/${course.slug}-video.mp4${cacheBuster}`;
 
   return (
     <>
@@ -28,9 +37,7 @@ export default function CourseDetailsClient({ course }) {
         </div>
         <div style={{ width: '100%', maxWidth: '40rem', overflow: 'hidden' }}>
           <Image
-            src={course.image
-              ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${course.image}`
-              : '/default-image.jpg'}
+            src={imageUrl}
             alt={course.title}
             layout="responsive"
             width={640}
@@ -41,11 +48,11 @@ export default function CourseDetailsClient({ course }) {
 
         <p className={classes.summary} style={{ marginBottom: '0.25rem' }}>{course.summary}</p>
 
-        {authenticated && course.videoKey && (
+        {/* {authenticated && course.videoKey && (
           <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
             <button className="button" onClick={() => setShowVideo(true)}>Zobrazit video</button>
           </div>
-        )}
+        )} */}
 
         {isAdmin && (
           <AdminCourseActions slug={course.slug} title={course.title} />
@@ -67,7 +74,7 @@ export default function CourseDetailsClient({ course }) {
                   onError={() => setVideoError(true)}
                 >
                   <source
-                    src={`https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/videos/${course.slug}-video.mp4`}
+                    src={videoUrl}
                     type="video/mp4"
                   />
                   Váš prohlížeč nepodporuje video tag.

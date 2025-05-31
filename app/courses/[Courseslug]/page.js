@@ -13,7 +13,8 @@ export async function generateStaticParams() {
 }
 
 export default async function CourseDetailsPage({ params }) {
-  const course = await getCourse(params.Courseslug);
+  const { Courseslug } = await params;
+  const course = await getCourse(Courseslug);
 
   if (!course) {
     notFound();

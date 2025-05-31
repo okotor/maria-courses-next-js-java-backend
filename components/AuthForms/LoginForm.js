@@ -17,7 +17,7 @@ export default function LoginForm() {
     if (data.success) {
       login(data.user);
       setFormState({ error: null, message: "Úspěšné přihlášení!", loading: false });
-      router.push(data.user.is_admin ? "/admin-dashboard" : "/my-courses");
+      router.push(data.user.is_admin ? "/admin-dashboard" : "/courses");
     } else {
       setFormState({ error: "Nesprávné přihlašovací údaje", message: null, loading: false });
     }
@@ -51,7 +51,7 @@ export default function LoginForm() {
       includePassword={true}
       currentPage="login"
     >
-      <GoogleLoginButton onSuccessRedirect="/my-courses" />
+      <GoogleLoginButton onSuccessRedirect="/courses" />
     </AuthFormWrapper>
   );
 }

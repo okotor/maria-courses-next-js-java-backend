@@ -10,6 +10,7 @@ export async function POST(req, { params }) {
     const updatedCourse = await updateCourse(formData, params.slug); // includes .date
     revalidatePath('/');
     revalidatePath('/courses');
+    revalidatePath(`/courses/${updatedCourse.slug}`); // very important
     revalidatePath('/archive');
 
     const date = new Date(updatedCourse.date);
@@ -20,7 +21,7 @@ export async function POST(req, { params }) {
       revalidatePath(`/archive/${year}/${month}`);
     }
 
-    return NextResponse.redirect(new URL('/courses', req.url));
+    return NextResponse.redirect(new URL(`/courses/${updatedCourse.slug}`, req.url));
   } catch (err) {
     console.error('❌ API ERROR in /api/courses/[slug]/edit:', err);
     return new NextResponse('Internal Server Error', { status: 500 });

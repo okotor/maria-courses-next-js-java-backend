@@ -39,7 +39,6 @@ export default function MainHeader() {
                 </>
               ) : (
                 <>
-                  <ClientNavLink href="/my-courses">Moje kurzy</ClientNavLink>
                   <ClientNavLink href="/account">Můj účet</ClientNavLink>
                   <button onClick={handleLogout} className={classes.logoutBtn}>Odhlásit se</button>
                 </>

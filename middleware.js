@@ -8,7 +8,7 @@ export function middleware(request) {
     isAuthenticated &&
     (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/register')
   ) {
-    return NextResponse.redirect(new URL('/my-courses', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();

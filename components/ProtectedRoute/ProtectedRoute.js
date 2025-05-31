@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children, requireAdmin = false }) {
     if (!authenticated) {
       router.replace("/login"); // Redirect if not logged in
     } else if (requireAdmin && !isAdmin) {
-      router.replace("/my-courses"); // Redirect non-admins away from admin-only pages
+      router.replace("/"); // Redirect non-admins away from admin-only pages
     }
   }, [authenticated, isAdmin, router, requireAdmin]);
 

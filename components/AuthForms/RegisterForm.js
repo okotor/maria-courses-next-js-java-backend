@@ -53,7 +53,7 @@ export default function RegisterForm() {
       includePassword={true}
       currentPage="register"
     >
-      <GoogleLoginButton onSuccessRedirect="/my-courses" />
+      <GoogleLoginButton onSuccessRedirect="/" />
     </AuthFormWrapper>
   );
 }

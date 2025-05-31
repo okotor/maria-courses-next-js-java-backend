@@ -3,7 +3,7 @@
 import { useFormStatus } from 'react-dom';
 import classes from './page.module.css';
 
-export default function CourseActionButton({ actionType = 'create', loading = false, message }) {
+export default function CourseActionButton({ actionType = 'create', loading = false, message, disabled = false }) {
   const label =
     actionType === 'edit'
       ? (loading ? 'Ukládám změny...' : 'Uložit změny')
@@ -11,7 +11,7 @@ export default function CourseActionButton({ actionType = 'create', loading = fa
 
   return (
     <div>
-      <button disabled={loading} className={classes.actionButton}>
+      <button disabled={loading || disabled} className={classes.actionButton}>
         {label}
       </button>
       {message && (

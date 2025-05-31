@@ -11,7 +11,7 @@ export default function Register() {
 
   useEffect(() => {
     if (authenticated) {
-      router.replace("/my-courses");
+      router.replace("/");
     }
   }, [authenticated, router]);
 

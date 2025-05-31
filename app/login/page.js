@@ -12,7 +12,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authenticated) {
-      router.replace("/my-courses");
+      router.replace("/");
     }
   }, [authenticated, router]);
 

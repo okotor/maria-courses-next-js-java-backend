@@ -2,7 +2,7 @@
 // import { useRouter } from 'next/navigation';
 // import { useAuth } from '@/context/AuthContext';
 
-// const useAuthRedirect = (redirectTo = "/my-courses") => {
+// const useAuthRedirect = (redirectTo = "/") => {
 //   const { authenticated, loading } = useAuth();
 //   const router = useRouter();
 
