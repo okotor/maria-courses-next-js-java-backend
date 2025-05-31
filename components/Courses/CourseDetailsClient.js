@@ -9,7 +9,7 @@ import classes from './CourseDetailsClient.module.css';
 export default function CourseDetailsClient({ course }) {
   const { authenticated, isAdmin } = useAuth();
   const [videoError, setVideoError] = useState(false);
-  const [cacheBuster, setCacheBuster] = useState(null);
+  const [cacheBuster, setCacheBuster] = useState('');
 
   useEffect(() => {
     setCacheBuster(`?v=${Date.now()}`);
@@ -23,9 +23,7 @@ export default function CourseDetailsClient({ course }) {
     ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${course.image}${cacheBuster}`
     : '/default-image.jpg';
 
-  const videoUrl = cacheBuster
-    ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/videos/${course.slug}-video.mp4${cacheBuster}`
-    : '';
+  const videoUrl = `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/videos/${course.slug}-video.mp4${cacheBuster}`;
 
   return (
     <>
