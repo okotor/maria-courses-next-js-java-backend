@@ -31,15 +31,14 @@ export default function CourseItemClient({ date, title, slug, image, summary, le
   const safeSummary = typeof summary === 'string' ? summary : 'Neznámý';
   const safeSlug = typeof slug === 'string' ? slug : '';
 
-  const imageUrl = image
+  const imageUrl = image && cacheBuster
     ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}${cacheBuster}`
     : null;
-
   return (
     <article className={classes.course}>
       <header>
         <div className={classes.image}>
-          {image ? (
+          {imageUrl ? (
             <Image
               src={imageUrl}
               alt={title}
