@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import ClientNavLink from './ClientNavLink';
 import { Menu, X } from 'lucide-react';
-import styles from './MobileMenu.module.css';
+import styles from './MobileHeader.module.css';
 
 export default function MobileMenu() {
   const { isAdmin, authenticated, logout } = useAuth();

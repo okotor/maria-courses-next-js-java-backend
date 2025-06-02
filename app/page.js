@@ -8,9 +8,6 @@ const Latest = dynamic(() => import('./archive/@latest/default'), { ssr: true })
 export default function HomePage() {
     return (
         <>
-            <header className={classes.header}>
-                <h1>Vítejte na portálu kurzů Marie!</h1>
-            </header>
             <section id="archive-latest">
                 <Latest />
             </section>

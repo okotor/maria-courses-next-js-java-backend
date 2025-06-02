@@ -62,27 +62,27 @@
 
 .headerText h1 {
   margin: 0;
-  font-size: 3.5rem;
+  font-size: 3clamp(1.5rem, 4vw, 3.5rem);
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif;
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-.creator {
-  font-size: 1.5rem;
+.lecturer {
+  font-size: clamp(0.75rem, 3vw, 2rem);
   color: #cab369;
   font-style: italic;
 }
 
-.creator a {
+.lecturer a {
   background: linear-gradient(90deg, #f9572a, #ff8a05);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.creator a:hover,
-.creator a:active {
+.lecturer a:hover,
+.lecturer a:active {
   background: linear-gradient(90deg, #f9572a, #ff8a05);
   background-clip: text;
   -webkit-background-clip: text;

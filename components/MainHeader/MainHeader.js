@@ -4,9 +4,8 @@ import { useAuth } from "@/context/AuthContext";
 import classes from "./MainHeader.module.css";
 import Image from 'next/image';
 import MariaPicture from '@/assets/Maria.png';
-import MainHeaderBackground from "./MainHeaderBackground";
 import ClientNavLink from "./ClientNavLink";
-import MobileMenu from "./MobileMenu";
+import MobileHeader from "./MobileHeader";
 
 export default function MainHeader() {
   const { isAdmin, authenticated, logout } = useAuth();
@@ -18,15 +17,15 @@ export default function MainHeader() {
 
   return (
     <>
-      <MainHeaderBackground />
       <header className="main-header">
-        <div>
+        <span className={classes.headerOverlayText}>Kurzy Marie</span>
+        <div className={classes.headerRow}>
           <Image src={MariaPicture} className={classes.logo} alt='Website logo'/>
-          <nav>
+          <nav className={classes.navWrapper}>
             <div className={`${classes.nav} ${classes['desktop-nav']}`}>
               <ClientNavLink href="/">Home</ClientNavLink>
               <ClientNavLink href="/about">O nás</ClientNavLink>
-              <ClientNavLink href="/courses">Najdi svůj kurz</ClientNavLink>
+              <ClientNavLink href="/courses">Vyber si kurz</ClientNavLink>
               {isAdmin && (
                 <>
                   <ClientNavLink href="/create-course">Vytvořit kurz</ClientNavLink>
@@ -46,10 +45,10 @@ export default function MainHeader() {
             </div>
 
             <div className={classes['mobile-nav']}>
-              <MobileMenu />
+              <MobileHeader />
             </div>
           </nav>
-        </div>
+        </div> 
       </header>
     </>
   );

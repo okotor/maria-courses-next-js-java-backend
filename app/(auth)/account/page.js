@@ -8,9 +8,9 @@ export default function AccountDetailsPage() {
   return (
     <ProtectedRoute>
       <>
-        <header className={classes.header}>
+        <header className={classes.header} style={{ textAlign: 'center'}}>
           <h1>
-            <span className={classes.highlight}>Nastavení účtu</span>
+            Nastavení<span className={classes.highlight}> účtu</span>
           </h1>
         </header>
         <main className={classes.main}>

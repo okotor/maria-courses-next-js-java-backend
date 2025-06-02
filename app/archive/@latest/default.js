@@ -14,8 +14,8 @@ export default async function LatestCoursesPage() {
 
     return (
         <>
-            <div className={`${classes.highlight} ${classes.subheader}`}>
-            <h1>Nejnovější kurzy</h1>
+            <div className={classes.subheader} style={{ textAlign: 'center' }}>
+            <h1>Nejnovější <span className={classes.highlight} >kurzy</span></h1>
             </div>
             <CoursesGrid courses={courses} />
         </>

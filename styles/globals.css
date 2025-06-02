@@ -1,4 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+
+.highlight {
+  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.highlight.subheader {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column; /* Stack header and list */
+  align-items: center; /* Center align */
+  gap: 1rem; /* Space between header and year list */
+  text-align: center;
+  margin-top: 7rem;
+}
 
 /* === Color Variables (Primary UI Colors) === */
 :root {
@@ -53,6 +72,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 a {
   color: inherit;
   text-decoration: none;
@@ -61,16 +81,17 @@ a {
 /* === Main Header with Wavy Background === */
 .main-header {
   position: relative;
-  padding: 4rem 2rem 6rem;
+  padding: 5rem 0rem 0rem;
   text-align: center;
   /* Wave SVG overlay plus header gradient */
   background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,32 C300,112 900,0 1200,48 L1200,120 L0,120 Z' fill='%23ffffff'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'><path d='M0,32 C300,112 900,0 1200,48 L1200,160 L0,160 Z' fill='%23ffffff' transform='translate(0,40)'/></svg>"),
     var(--header-gradient);
   background-repeat: no-repeat, no-repeat;
   background-position: bottom center, top center;
   background-size: cover, cover;
   color: white;
+  margin-bottom: 2.75rem;
 }
 
 /* Ensure main header content above wave */
@@ -211,6 +232,8 @@ button:disabled,
 .google-login-button:focus {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+
 
 /* === Loading Spinner === */
 .loading {

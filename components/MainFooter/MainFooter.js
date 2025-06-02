@@ -5,7 +5,7 @@ export default function MainFooter() {
   return (
     <footer className={styles.footer}>
       <p>
-          Copyright © 2025 by Marian Courses
+          Kurzy Marie © 2025
       </p>
     </footer>
   );

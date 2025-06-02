@@ -8,20 +8,21 @@ b. Make the old one work online so it is presentable and working
 
         - Top 1: New App - React & TypeScript frontend & Node.js & Typescript backend, Tailwind CSS - import, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
 
-        - Top 2: Marian Courses App - Add React functionalities, WebSockets, Kafka/RabbitMQ - each course video streaming, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile Version - PWA
+        - Top 2: Marian Courses App - Add React functionalities, WebSockets, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile Version - PWA
 
         - Top 3: Jest, React Testing Library, Cypress, or Pytest
         
     II. PORTFOLIO FIX
 
-        1. REACT LEARN - the COURSE!
+        1. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN 
 
-        2. a. LOADING WHEEL FOR NON-BUTTON WAITING
-            b. BACKEND VIDEO UPLOAD LOGIC (AND REPLACE ALSO)
-             ba. Text saving including spaces and paragraphs
-             c.Let courses show on the side, 4 courses per row and round corners and more padding/margin
-              d. Text "MARIAN COURSES" over the header + Delete the First heading from the HomePage
+        2. a. LOADING WHEEL FOR NON-BUTTON WAITING & DISABLE CLICKS - the UDEMY COURSE & CHAT GPT!
+             b. Text saving including spaces and paragraphs
+              c.Let courses show on the side, 4 courses per row and round corners and more padding/margin @ different colour background of course & unify headers
+               d. Text "MARIAN COURSES" over the header + Delete the First heading from the HomePage
                 E. Prompt the user to open a course to watch its contents
+                    f. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
+                    g. FIX CSS replications and centralise logic & Mobilní click Archiv kurzů & Loading Spinner & Vyberte rok. & Picture preview
 
         3. Cookies pop-up
 
@@ -43,6 +44,7 @@ Effort: Low to Medium. Begin by writing tests for existing components.
 
 Benefit: High. Demonstrates professionalism and attention to detail.
 
+
 Deepening React State Management with Redux
 
 Why: While you've used Zustand and Context API, Redux remains prevalent in many codebases.
@@ -50,6 +52,8 @@ Why: While you've used Zustand and Context API, Redux remains prevalent in many 
 Effort: Medium. Start with simple applications to grasp the core concepts.
 
 Benefit: High. Enhances your versatility in handling complex state scenarios.
+
+
 
 Implementing Responsive Design with Tailwind CSS
 
@@ -59,6 +63,8 @@ Effort: Low. Tailwind's utility classes make adjustments straightforward.
 
 Benefit: High. Improves user experience across devices.
 
+
+
 Integrating Authentication in Node.js Applications
 
 Why: You've implemented authentication in Java Spring; replicating this in Node.js showcases adaptability.
@@ -67,6 +73,8 @@ Effort: Medium. Utilize libraries like Passport.js or JWT for implementation.
 
 Benefit: High. Broadens your backend proficiency.
 
+
+
 Exploring Python Backends with Flask or FastAPI
 
 Why: Python's simplicity and versatility make it a valuable backend language.
@@ -74,6 +82,9 @@ Why: Python's simplicity and versatility make it a valuable backend language.
 Effort: Medium. Start with basic APIs and gradually incorporate more features.
 
 Benefit: High. Diversifies your backend capabilities.
+
+
+
 
 Understanding WebSockets for Real-Time Communication
 
@@ -84,6 +95,9 @@ Effort: Medium. Begin with chat applications to grasp the fundamentals.
 Benefit: Medium to High. Adds a dynamic layer to your applications.
 tecla.io
 
+
+
+
 Familiarizing with Docker for Containerization
 
 Why: Containerization ensures consistency across development and production environments.
@@ -91,6 +105,9 @@ Why: Containerization ensures consistency across development and production envi
 Effort: Medium. Start by containerizing simple applications.
 
 Benefit: High. Essential for modern DevOps practices.
+
+
+
 
 Implementing CI/CD Pipelines with GitHub Actions
 
@@ -100,11 +117,9 @@ Effort: Medium. Set up pipelines for testing and deployment.
 
 Benefit: High. Demonstrates a commitment to efficient workflows.
 nobledesktop.com
-+6
-H1B Data
-+6
-Glassdoor
-+6
+
+
+
 
 Exploring Redis for Caching Mechanisms
 
@@ -114,6 +129,9 @@ Effort: Medium. Integrate Redis into existing projects to cache frequent queries
 
 Benefit: Medium. Enhances scalability and speed.
 
+
+
+
 Delving into Kafka or RabbitMQ for Message Queuing
 
 Why: Message brokers handle asynchronous tasks efficiently.
@@ -121,6 +139,9 @@ Why: Message brokers handle asynchronous tasks efficiently.
 Effort: High. Requires understanding of distributed systems.
 
 Benefit: Medium. Valuable for applications requiring high throughput.
+
+
+
 
 Enhancing Applications with AI Integrations
 
@@ -130,6 +151,9 @@ Effort: Medium. Utilize APIs like OpenAI for integration.
 
 Benefit: Medium. Positions you at the forefront of modern application development.
 
+
+
+
 Implementing Internationalization (i18n)
 
 Why: Catering to a diverse user base requires multilingual support.
@@ -138,6 +162,9 @@ Effort: Medium. Use libraries like react-i18next.
 
 Benefit: Medium. Expands your application's reach.
 
+
+
+
 Prioritizing Accessibility (a11y) in UI Design
 
 Why: Inclusive design ensures usability for all users.
@@ -145,22 +172,6 @@ Why: Inclusive design ensures usability for all users.
 Effort: Medium. Follow WCAG guidelines and use semantic HTML.
 
 Benefit: Medium. Demonstrates social responsibility and professionalism.
-
-Learning Infrastructure as Code with Terraform
-
-Why: Automating infrastructure setup enhances efficiency.
-
-Effort: High. Requires understanding of cloud resources.
-
-Benefit: Medium. Valuable for roles involving DevOps responsibilities.
-
-Engaging in Open Source Contributions
-
-Why: Contributing to open source projects showcases collaboration and initiative.
-
-Effort: High. Involves understanding existing codebases and contributing meaningfully.
-
-Benefit: Medium. Enhances your portfolio and professional network.
 
 
 
