@@ -20,7 +20,7 @@ b. Make the old one work online so it is presentable and working
              b. Text saving including spaces and paragraphs
               c.Let courses show on the side, 4 courses per row and round corners and more padding/margin @ different colour background of course & unify headers
                d. Text "MARIAN COURSES" over the header + Delete the First heading from the HomePage
-                E. Prompt the user to open a course to watch its contents
+                E. Prompt the user to open. a course to watch its contents
                     f. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
                     g. FIX CSS replications and centralise logic & Mobilní click Archiv kurzů & Loading Spinner & Vyberte rok. & Picture preview
 
