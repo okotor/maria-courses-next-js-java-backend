@@ -1,24 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-
-.highlight {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.highlight.subheader {
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: column; /* Stack header and list */
-  align-items: center; /* Center align */
-  gap: 1rem; /* Space between header and year list */
-  text-align: center;
-  margin-top: 7rem;
-}
-
 /* === Color Variables (Primary UI Colors) === */
 :root {
   /* Accent & Text */
