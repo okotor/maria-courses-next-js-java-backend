@@ -6,11 +6,13 @@ import api from '@/utils/api';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useLoading } from '@/context/LoadingContext';
 
 export default function GoogleLoginButton({ onSuccessRedirect = '/' }) {
   const { login } = useAuth();
   const router = useRouter();
   const [error, setError] = useState(null);
+  const { setIsLoading } = useLoading();
 
   const handleGoogleLoginSuccess = async ({ credential }) => {
     if (!credential) {
@@ -20,9 +22,10 @@ export default function GoogleLoginButton({ onSuccessRedirect = '/' }) {
     try {
       const response = await api.post(`${BACKEND_URL}/google-login`, { token: credential });
       login(response.data.user);
-      router.push(response.data.user.is_admin ? '/admin-dashboard' : onSuccessRedirect);
+      router.push(response.data.user.is_admin ? '/' : onSuccessRedirect);
     } catch (err) {
       setError('Přihlášení s Googlem selhalo.');
+      setIsLoading(false);
     }
   };
 

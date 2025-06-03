@@ -9,10 +9,16 @@ import styles from './MobileHeader.module.css';
 export default function MobileMenu() {
   const { isAdmin, authenticated, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    setOpen(false);
+    setIsLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      setIsLoggingOut(false);
+      setOpen(false);
+    }
   };
 
   const closeMenu = () => setOpen(false);
@@ -49,7 +55,13 @@ export default function MobileMenu() {
           ) : (
             <>
               <ClientNavLink href="/account">Můj účet</ClientNavLink>
-              <button onClick={handleLogout} className={styles.logoutButton}>Odhlásit se</button>
+              <button 
+                onClick={handleLogout}
+                className={styles.logoutButton}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? 'Odlašuji...' : 'Odhlásit se'}
+              </button>
             </>
           )}
         </nav>

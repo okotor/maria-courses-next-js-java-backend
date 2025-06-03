@@ -1,11 +1,10 @@
-// components/Loader/Spinner.js
-import './Spinner.css';
+import styles from './Spinner.module.css';
 
-export default function Spinner({ size = '2rem', color = '#6b4e1f' }) {
+export default function Spinner({ size = '2rem' }) {
   return (
     <div
-      className="spinner"
-      style={{ width: size, height: size, borderColor: `${color} transparent ${color} transparent` }}
+      className={styles.spinner}
+      style={{ width: size, height: size }}
     />
   );
 }

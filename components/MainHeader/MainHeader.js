@@ -1,18 +1,24 @@
 'use client';
 
+import { useState } from "react"
 import { useAuth } from "@/context/AuthContext";
-import classes from "./MainHeader.module.css";
-import Image from 'next/image';
-import MariaPicture from '@/assets/Maria.png';
 import ClientNavLink from "./ClientNavLink";
 import MobileHeader from "./MobileHeader";
+import Image from 'next/image';
+import MariaPicture from '@/assets/Maria.png';
+import classes from "./MainHeader.module.css";
 
 export default function MainHeader() {
   const { isAdmin, authenticated, logout } = useAuth();
-  console.log('Render MainHeader:', isAdmin, authenticated);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
+    setIsLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -39,7 +45,13 @@ export default function MainHeader() {
               ) : (
                 <>
                   <ClientNavLink href="/account">Můj účet</ClientNavLink>
-                  <button onClick={handleLogout} className={classes.logoutBtn}>Odhlásit se</button>
+                  <button 
+                    onClick={handleLogout}
+                    className={classes.logoutBtn}
+                    disabled={isLoggingOut}
+                  >
+                    {isLoggingOut ? "Odlašuji..." : "Odhlásit se"}
+                  </button>
                 </>
               )}
             </div>

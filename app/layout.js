@@ -2,10 +2,13 @@ import "@/styles/globals.css";
 import MainHeader from "@/components/MainHeader/MainHeader";
 import MainFooter from "@/components/MainFooter/MainFooter";
 import { AuthProvider } from "@/context/AuthContext";
+import { LoadingProvider } from "@/context/LoadingContext";
+import GlobalSpinner from '@/components/Loading/GlobalSpinner';
+import RouteChangeListener from "@/components/Loading/RouteChangeListener";
 
 export const metadata = {
-  title: 'Marian Courses Website',
-  description: 'Learn about the courses offered by Maria',
+  title: 'Kurzy Marie',
+  description: 'Přihlašte se a prozkoumejte kurzy Marie',
 };
 
 // export const user = {
@@ -20,16 +23,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Add any custom head elements here */}
+        {/* Nothing yet */}
       </head>
       <body>
-        <AuthProvider>
-          <MainHeader />
-            <main>
-              {children}
-            </main>
-          <MainFooter />
-        </AuthProvider>
+        <LoadingProvider>
+          <AuthProvider>
+            <RouteChangeListener />
+            <GlobalSpinner />
+              <MainHeader />
+                <main>
+                  {children}
+                </main>
+              <MainFooter />
+          </AuthProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

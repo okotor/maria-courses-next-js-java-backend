@@ -12,20 +12,17 @@
   text-align: center;
 }
 
-.link:hover,
-.link:active {
-  background: #ffe0b2;
+.link:hover {
+  background-color: #ffe0b2;
   color: #d35400;
-  font-weight: bold;
-  text-shadow: none;
 }
 
-/* Ensure active stays highlighted even on hover */
-.active,
-.active:hover,
-.active:active {
-  background: #ffe0b2;
+.active {
+  background-color: #ffe0b2;
   color: #d35400;
-  font-weight: bold;
-  text-shadow: none;
+}
+
+.active:hover {
+  background-color: #ffe0b2;
+  color: #d35400;
 }

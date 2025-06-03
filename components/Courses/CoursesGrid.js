@@ -8,7 +8,7 @@ export default function CoursesGrid({ courses, onDeleted }) {
       }
 
     return (
-        <ul className={classes.courses}>
+        <ul id="courses-grid" className={classes.courses}>
             {courses.map(course => (
                 <li key={course.cId || course.slug}>
                     <CourseItem {...course} onDeleted={onDeleted} />

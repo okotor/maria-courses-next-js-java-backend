@@ -1,38 +1,37 @@
-a. Wedding Webpage - Next.js (Reusable Components)
+I. PORTFOLIO FIX
 
-b. Make the old one work online so it is presentable and working
+        1. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN
 
-    I. Job Offers & ChatGPT 20 Key Skills Research: 
-
-        - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching, Jest, React Testing Library, Cypress, or Pytest, Add react-i18next with Czech + English
-
-        - Top 1: New App - React & TypeScript frontend & Node.js & Typescript backend, Tailwind CSS - import, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
-
-        - Top 2: Marian Courses App - Add React functionalities, WebSockets, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile Version - PWA
-
-        - Top 3: Jest, React Testing Library, Cypress, or Pytest
+        2. STYLES !
         
-    II. PORTFOLIO FIX
+        a. LOADING WHEEL FOR NON-BUTTON WAITING (unify click & message.success) & DISABLE CLICKS - the UDEMY COURSE & CHAT GPT!
+        b. Text saving including spaces and paragraphs
+        c. Unify headers & font 
+        d Different colour background of course
+        e. smaller courses per row and round corners and more padding/margin
+        f. Prompt the user to open. a course to watch its contents
+        g. Image border strill visible 
+        h. FIX CSS replications and centralise logic & Mobilní click Archiv kurzů & Loading Spinner & Vyberte rok. & Picture preview
+        i. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
+        j. Cookies pop-up
 
-        1. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN 
+        4. Python Two Apps Optimise (Dockerise?) and Upload
 
-        2. a. LOADING WHEEL FOR NON-BUTTON WAITING & DISABLE CLICKS - the UDEMY COURSE & CHAT GPT!
-             b. Text saving including spaces and paragraphs
-              c.Let courses show on the side, 4 courses per row and round corners and more padding/margin @ different colour background of course & unify headers
-               d. Text "MARIAN COURSES" over the header + Delete the First heading from the HomePage
-                E. Prompt the user to open. a course to watch its contents
-                    f. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
-                    g. FIX CSS replications and centralise logic & Mobilní click Archiv kurzů & Loading Spinner & Vyberte rok. & Picture preview
+        5. CV Fix & Agree with M'u about Negotiation Prep 
 
-        3. Cookies pop-up
+        6. (GIT HUB ACTIONS & RENDER)
 
-        5. (GIT HUB ACTIONS & RENDER)
+II. EXAMINE JOB OFFERS
 
-        6. Python Two Apps Optimise (Dockerise?) and Upload
+III. Job Offers & ChatGPT 20 Key Skills Research: 
 
-        7. CV Fix & Agree with M'u about Negotiation Prep 
+    - React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, Redux, Zustand, Docker, REST APIs, GraphQL APIs, SQL (PostgreSQL), NoSQL (MongoDB), Python (Flask/FastAPI/Django), AWS/Azure/GCP (Cloud Storage), JWT Authentication, OAuth2.0 (Google Login), WebSockets (Real-time Communication), Kafka&RabbitMQ, CI/CD Pipelines (GitHub Actions), Redis - Caching, Jest, React Testing Library, Cypress, or Pytest, Add react-i18next with Czech + English
 
-c. EXAMINE JOB OFFERS + Need a New React & Django/Flask/FastAPI Project (Marian Novelty/Štěpán/...? - Template / from Scratch, go along with the Course, also make some of your own stuff later)
+    - Top 1: New App - React & TypeScript frontend & Node.js & Typescript backend, Tailwind CSS - import, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth
+
+    - Top 2: Marian Courses App - Add/Rewrite TypeScript functionalities, WebSockets, CI/CD Pipelines (Github Actions), Redis - Caching, Add react-i18next with Czech + English, Mobile PWA
+
+    - Top 3: Jest, React Testing Library, Cypress, or Pytest
 
 
 🛤️ Strategic Skill Enhancements: Prioritized by Impact and Effort
@@ -98,17 +97,6 @@ tecla.io
 
 
 
-Familiarizing with Docker for Containerization
-
-Why: Containerization ensures consistency across development and production environments.
-
-Effort: Medium. Start by containerizing simple applications.
-
-Benefit: High. Essential for modern DevOps practices.
-
-
-
-
 Implementing CI/CD Pipelines with GitHub Actions
 
 Why: Automating deployments streamlines the development process.
@@ -132,7 +120,7 @@ Benefit: Medium. Enhances scalability and speed.
 
 
 
-Delving into Kafka or RabbitMQ for Message Queuing
+Delving into Microservices - Kafka or RabbitMQ for Message Queuing
 
 Why: Message brokers handle asynchronous tasks efficiently.
 
@@ -143,7 +131,7 @@ Benefit: Medium. Valuable for applications requiring high throughput.
 
 
 
-Enhancing Applications with AI Integrations
+Enhancing Applications with AI Integrations (Spring AI)
 
 Why: AI features, like chatbots or recommendations, enrich user experience.
 
