@@ -95,7 +95,7 @@
 
 @media (max-width: 767px) {
   .headerOverlayText {
-    top: 1.93rem;
+    top: 1.84rem;
     left: 50%;
     transform: translateX(-10%) translateY(-40%);
     font-size: clamp(1.5rem, 6vw, 2.5rem);
