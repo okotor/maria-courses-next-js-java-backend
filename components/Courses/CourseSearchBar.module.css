@@ -2,14 +2,14 @@
   display: flex;
   justify-content: center;
   margin: 2rem 0;
-  padding: 0 1rem; /* Optional: adds horizontal padding on small screens */
+  padding: 0 1rem;
 }
 
 .searchInput {
   width: 100%;
   max-width: 800px; /* Prevents it from becoming too wide on large screens */
   background-color: white;
-  padding: 0.5rem;   /* Optional: for better touch UX */
+  padding: 0.75rem;   /* Optional: for better touch UX */
   border: 1px solid #ccc; /* Optional: basic styling */
   border-radius: 4px;      /* Optional: basic styling */
   box-sizing: border-box;  /* Ensures padding doesn't overflow container */
