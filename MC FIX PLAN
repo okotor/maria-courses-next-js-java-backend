@@ -2,16 +2,19 @@ I. PORTFOLIO FIX
 
         1. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN
 
-        2. STYLES !
+        2. SMALL PRESENTATION BEHAVIOURS
         
-        a. LOADING WHEEL FOR NON-BUTTON WAITING (unify click & message.success) & DISABLE CLICKS - the UDEMY COURSE & CHAT GPT!
         b. Text saving including spaces and paragraphs
-        c. Unify headers & font 
+        f. Prompt the user to open. a course to watch its contents
+        & Mobilní click Archiv kurzů 
+
+        CSS
+
+        h. FIX CSS replications and centralise logic & Vyberte rok. & Picture preview
+        c. Unify headers & font
         d Different colour background of course
         e. smaller courses per row and round corners and more padding/margin
-        f. Prompt the user to open. a course to watch its contents
-        g. Image border strill visible 
-        h. FIX CSS replications and centralise logic & Mobilní click Archiv kurzů & Loading Spinner & Vyberte rok. & Picture preview
+        g. Image border still visible 
         i. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
         j. Cookies pop-up
 

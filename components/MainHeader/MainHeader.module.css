@@ -77,11 +77,11 @@
 
 .headerOverlayText {
   position: absolute;
-  top: 2rem;
-  left: 47%;
-  transform: translateX(-0%) translateY(-25%); /* ✅ Center horizontally */
+  top: 1.69rem;
+  left: 50%;
+  transform: translateX(0%) translateY(-25%);
   font-family: 'Permanent Marker', cursive;
-  font-size: clamp(2rem, 6.5vw, 6rem);
+  font-size: clamp(2rem, 5vw, 5.5rem);
   color: white;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   line-height: 1.1;
