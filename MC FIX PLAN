@@ -3,20 +3,23 @@ I. PORTFOLIO FIX
         1. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN
 
         2. SMALL PRESENTATION BEHAVIOURS
+
+        JSX
         
-        b. Text saving including spaces and paragraphs
-        f. Prompt the user to open. a course to watch its contents
-        & Mobilní click Archiv kurzů 
+        a. Text saving including spaces and paragraphs
+        b. Prompt the user to open. a course to watch its contents
+        c. Mobilní click Archiv kurzů - not disappear
 
         CSS
 
-        h. FIX CSS replications and centralise logic & Vyberte rok. & Picture preview
-        c. Unify headers & font
-        d Different colour background of course
-        e. smaller courses per row and round corners and more padding/margin
-        g. Image border still visible 
-        i. occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
-        j. Cookies pop-up
+        a. FIX CSS replications and centralise logic & 
+        b. Unify headers & font
+        c Different colour background of course
+        d. smaller courses per row and round corners and more padding/margin
+        e. DETAILS: Image border still visible & Vyberte rok. & Picture preview
+        f. TESTING THOROUGHLY Occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
+        e. Cookies pop-up 
+        f. TESTING THOROUGHLY, call it a day!
 
         4. Python Two Apps Optimise (Dockerise?) and Upload
 
