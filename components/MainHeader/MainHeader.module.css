@@ -79,7 +79,7 @@
   position: absolute;
   top: 1.69rem;
   left: 50%;
-  transform: translateX(0%) translateY(-25%);
+  transform: translateX(7%) translateY(-25%);
   font-family: 'Permanent Marker', cursive;
   font-size: clamp(2rem, 5vw, 5.5rem);
   color: white;
