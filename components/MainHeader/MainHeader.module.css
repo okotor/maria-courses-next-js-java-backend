@@ -85,21 +85,21 @@
   color: white;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   line-height: 1.1;
-  
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
   z-index: 5;                   /* ✅ Always above the logo */
-  pointer-events: none;         
+  pointer-events: none;   
+  max-width: calc(100vw - 8rem); /* limit movement into hamburger area */     
 }
 
 @media (max-width: 767px) {
   .headerOverlayText {
-    transform: translateX(7%) translateY(-25%);
+    transform: translateX(0%) translateY(-25%);
     font-size: clamp(1.5rem, 6vw, 2.5rem);
     -webkit-text-stroke: 0.5px #ff9b05;
     justify-content: center;
+    max-width: calc(100vw - 6rem); /* ensure space for hamburger */
   }
 }
 
