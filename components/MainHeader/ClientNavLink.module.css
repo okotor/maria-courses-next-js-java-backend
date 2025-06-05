@@ -6,23 +6,23 @@
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  color: #949290;
+  color: var(--link);
   transition: background 0.2s, color 0.2s;
   min-width: 120px;
   text-align: center;
 }
 
 .link:hover {
-  background-color: #ffe0b2;
-  color: #d35400;
+  background-color: var(--link-bg);
+  color: var(--link-hover);
 }
 
 .active {
-  background-color: #ffe0b2;
-  color: #d35400;
+  background-color: var(--link-bg);
+  color: var(--link-hover);
 }
 
 .active:hover {
-  background-color: #ffe0b2;
-  color: #d35400;
+  background-color: var(--link-bg);
+  color: var(--link-hover);
 }

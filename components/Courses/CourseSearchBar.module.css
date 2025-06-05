@@ -1,17 +1,19 @@
 .searchWrapper {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
-  padding: 0 1rem;
+  margin: var(--space-md) 0;
+  padding: 0 var(--space-sm);
 }
 
 .searchInput {
   width: 100%;
   max-width: 850px; /* Prevents it from becoming too wide on large screens */
-  min-width: 250px;
-  background-color: white;
+  min-width: 275px;
+  background-color: var(--input-bg);
   padding: 0.2rem;   /* Optional: for better touch UX */
-  border: 1px solid #ccc; /* Optional: basic styling */
-  border-radius: 2px;      /* Optional: basic styling */
+  border: 1px solid var(--input-border); /* Optional: basic styling */
+  border-radius: var(--radius-xs);      /* Optional: basic styling */
   box-sizing: border-box;  /* Ensures padding doesn't overflow container */
+  color: var(--foreground);
+  font-size: var(--font-size-sm);
 }

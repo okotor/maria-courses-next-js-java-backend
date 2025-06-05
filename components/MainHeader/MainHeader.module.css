@@ -110,11 +110,13 @@
 }
 
 .logoutBtn {
+  display: inline-block;
   font-size: 1.35rem;
   padding: 0.7rem 1.5rem;
   min-width: 120px;
   font-weight: bold;
   margin-left: 2rem;
+  border-radius: 6px;
 }
 
 .logoWrapper {

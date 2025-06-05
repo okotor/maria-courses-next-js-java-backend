@@ -1,19 +1,19 @@
 .header {
-  gap: 3rem;
-  margin: 0rem auto 3rem auto;
+  gap: var(--space-lg);
+  margin: 0 auto var(--space-lg) auto;
   width: 90%;
   max-width: 75rem;
-  color: #312e28;
-  font-size: 1rem;
+  color: var(--foreground);
+  font-size: var(--font-size-sm);
   text-align: center;
 }
 
 .header h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
 }
 
 .highlight {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -31,16 +31,16 @@
 .infoColumns {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: var(--space-md);
   justify-content: space-between;
 }
 
 .infoColumn {
   flex: 1 1 320px;
   /* background: #f9f9fb; */
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-lg);
   min-width: 280px;
 }
 
@@ -50,10 +50,10 @@
 }
 
 .infoColumn li {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-sm);
   line-height: 1.7;
-  color: #222;
+  color: var(--foreground);
 }
 
 .main {
@@ -64,10 +64,10 @@
 }
 
 .main h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  color: #000000;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-lg);
+  color: var(--foreground);
 }
 
 /* .perks {
@@ -102,9 +102,9 @@
 }
 
 .perks p {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
   font-weight: bold;
   margin: 0;
-  color: #000000;
+  color: var(--foreground);
 }

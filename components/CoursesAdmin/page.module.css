@@ -11,22 +11,16 @@
 
 /* Layout */
 .header {
-  gap: 3rem;
-  margin: 0.4rem auto 3.5rem auto;
-  width: 90%;
-  max-width: 1200rem;
-  color: #2e2c29;
-  font-size: 1.5rem;
   text-align: center;
 }
 
 .header h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
 }
 
 /* Highlighted Text */
 .highlight {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -36,15 +30,15 @@
 .main {
   width: 90%;
   max-width: 75rem;
-  margin: 3rem auto;
+  margin: var(--space-lg) auto;
   color: white;
 }
 
 .mediaRow {
   display: flex;
-  gap: 4rem; 
+  gap: var(--space-xl);
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-md);
 }
 
 /* Form Styles */
@@ -54,7 +48,7 @@
   display: flex;
   flex-direction: column; /* ✅ Stack children vertically */
   align-items: center;     /* ✅ Center children horizontally */
-  gap: 1rem;               /* Optional: spacing between elements */
+  gap: var(--space-sm);              /* Optional: spacing between elements */
 }
 
 .form p {
@@ -63,9 +57,9 @@
 
 .form label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-family: 'Montserrat', sans-serif;
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
   text-transform: uppercase;
   color: #44423d;
   font-weight: bold;
@@ -75,18 +69,18 @@
 .form textarea {
   display: block;
   width: 100%;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 1px solid #454952;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border);
   background: #1c2027;
   font-size: 1.25rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   color: #ffffff;
 }
 
 .form input:focus,
 .form textarea:focus {
-  outline-color: #f99f2a;
+  outline-color: var(--accent);
   background-color: #1f252d;
 }
 
@@ -109,9 +103,9 @@
 .actionButton {
   border: 0;
   padding: 0.75rem 2rem;
-  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  background: var(--accent-gradient);
   color: #ffffff;
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   font: inherit;
   font-size: 1.25rem;
@@ -121,7 +115,7 @@
 
 .actionButton:hover,
 .actionButton:focus {
-  background: linear-gradient(90deg, #fd4715, #f9b241);
+  background: var(--accent-gradient-hover);
 }
 
 .actionButton:disabled,
@@ -140,11 +134,11 @@
   font: inherit;
   font-size: 1.25rem;
   border: 2px solid #aaa;
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
   box-sizing: border-box;
-  margin-right: 0.5rem; /* add this */
+  margin-right: var(--space-xs);
 }
 
 .cancelButton:hover {
@@ -165,6 +159,6 @@
 
 .videoFileInfo {
   font-size: 0.95rem;
-  color: #666;
+  color: #797676;
   margin-top: 0.25rem;
 }

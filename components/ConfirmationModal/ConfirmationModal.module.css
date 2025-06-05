@@ -18,7 +18,7 @@
   max-width: 650px;
   width: 90%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  font-family: 'Quicksand', sans-serif;
+  font-family: var(--font-main);
   color: var(--foreground);
   text-align: center;
   font-size: 1.15rem;
@@ -49,7 +49,7 @@
   margin: 2rem auto;
   font-size: 1.4rem;
   font-weight: 700;
-  font-family: 'Quicksand', sans-serif;
+  font-family: var(--font-main);
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--input-border);
   border-radius: 6px;

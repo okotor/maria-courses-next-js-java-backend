@@ -14,11 +14,11 @@
 
 .iconButton {
   font-size: 1.5rem;
-  color: #8f8c87;
+  color: #999; 
   cursor: pointer;
   transition: color 0.2s;
 }
 
 .iconButton:hover {
-  color: #ff5722;
+  color: var(--accent-dark);
 }

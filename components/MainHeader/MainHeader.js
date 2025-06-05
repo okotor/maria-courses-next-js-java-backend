@@ -33,7 +33,7 @@ export default function MainHeader() {
             <div className={`${classes.nav} ${classes['desktop-nav']}`}>
               <ClientNavLink href="/">Home</ClientNavLink>
               <ClientNavLink href="/about">O nás</ClientNavLink>
-              <ClientNavLink href="/courses">Vyber si kurz</ClientNavLink>
+              <ClientNavLink href="/courses">Vyhledej kurz</ClientNavLink>
               {isAdmin && (
                 <>
                   <ClientNavLink href="/create-course">Vytvořit kurz</ClientNavLink>

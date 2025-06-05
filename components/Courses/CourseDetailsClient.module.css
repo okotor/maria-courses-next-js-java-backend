@@ -7,8 +7,7 @@
 
 .header {
   display: flex;
-  padding: 2rem 1rem;
-  gap: 3rem;
+  gap: var(--space-lg);
   margin: auto;
   max-width: 80rem;
 }
@@ -42,14 +41,23 @@
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden;
+  border: none !important;
+  background: transparent !important;
+}
+
+.image img {
+  border: none !important;
+  box-shadow: none;
 }
 
 .header img {
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-md);
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
   animation: fade-slide-in-from-left 1s ease-out forwards;
 }
 
@@ -64,18 +72,17 @@
   margin: 0;
   font-size: 3clamp(1.5rem, 4vw, 3.5rem);
   text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .lecturer {
   font-size: clamp(0.75rem, 3vw, 2rem);
   color: #cab369;
-  font-style: italic;
 }
 
 .lecturer a {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -83,7 +90,7 @@
 
 .lecturer a:hover,
 .lecturer a:active {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -99,12 +106,12 @@
   line-height: 1.5;
   background-color: transparent; /* matches --page-gradient tones */
   color: #2a2a2a;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   margin: 2rem auto;
   max-width: 60rem;
-  margin: 2rem auto;
+  margin: var(--space-lg) auto;
   animation: fade-slide-in-from-bottom 1s ease-out forwards;
 }
 
@@ -153,7 +160,7 @@
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #e53935; /* bright red */
+  color: var(--error); /* bright red */
   margin: 2rem auto 3rem auto;
 }
 
@@ -185,6 +192,6 @@
 .modalContent video {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }

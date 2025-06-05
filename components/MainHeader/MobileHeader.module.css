@@ -6,7 +6,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: #ff9b05; /* correct orange background */
+  background-color: var(--accent);
   border: none;
   border-radius: 8px;
   padding: 0.5rem;
@@ -44,7 +44,7 @@
   padding: 2rem;
   gap: 1.5rem;
   font-size: 1.2rem;
-  color: #949290;
+  color: var(--link);
   flex-grow: 1;
   align-items: center;
 }
@@ -59,32 +59,27 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   text-decoration: none;
-  color: #949290;
+  color: var(--link);
   transition: background-color 0.2s, color 0.2s;
   font-weight: bold;
   text-align: center;
 }
 
 .navLinks a:hover {
-  background-color: #ffe0b2;
-  color: #d35400;
+  background-color: var(--link-bg);;
+  color: var(--link-hover);
 }
 
 .logoutButton {
   width: 100%;
   padding: 1rem;
   border: none;
-  background-color: #e04e2c;
   color: white;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   text-align: center;
   border-radius: 0;
-}
-
-.logoutButton:hover {
-  background-color: #c73f22;
 }
 
 .backdrop {

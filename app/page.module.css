@@ -1,60 +1,60 @@
 .header {
-  display: flex;
-  gap: 3rem;
-  margin: 3rem auto;
+  gap: var(--space-lg);
+  margin: 0rem auto;
   width: 90%;
   max-width: 75rem;
+  text-align: center;
+  color: var(--foreground)
 }
 
 .highlight {
-  background: linear-gradient(90deg, #f9572a, #ff8a05);
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .highlight.subheader {
-  font-size: 1.2rem;
+  font-size: var(--font-size-md);
   display: flex;
   flex-direction: column; /* Stack header and list */
   align-items: center; /* Center align */
-  gap: 1rem; /* Space between header and year list */
+  gap: var(--space-sm); /* Space between header and year list */
   text-align: center;
   margin-top: 7rem;
 }
 
 .main {
-  display: flex;
+  margin-top: 2rem;
   flex-direction: column;
-  gap: 32px;
+  gap:  var(--space-md);
   grid-row-start: 2;
   
 }
 
 .main ol {
-  font-family: var(--font-geist-mono);
+  font-family: var(--font-main);
   padding-left: 0;
   margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
   list-style-position: inside;
 }
 
 .main li:not(:last-of-type) {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .main code {
   font-family: inherit;
   background: var(--gray-alpha-100);
   padding: 2px 4px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
 }
 
 .auth-form p {
-  margin: 1rem 0;
+  margin: var(--space-sm) 0;
 }
 
 .auth-form p:last-child {
@@ -63,25 +63,26 @@
 
 /* Specifically target error/success messages if needed */
 .auth-form .form-message {
-  margin: 1rem 0;
+  margin: var(--space-sm) 0;
 }
 
 .cta {
-  font-size: 2rem;
+  font-size: var(--font-size-lg);
   display: flex;
-  gap: 1rem;
+  gap: var(--space-sm);
   height: 5rem;
 }
 
 .cta a {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: var(--space-sm);
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   background: linear-gradient(90deg, #5f5957, #201f1e);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
+  transition: background var(--transition);
 }
 
 .cta a:hover,
@@ -92,25 +93,25 @@
 .cta a:first-child {
   background: transparent;
   font-weight: normal;
-  color: #94908b;
+  color: var(--link);
   padding-left: 0;
 }
 
 .cta a:first-child:hover,
 .cta a:first-child:active {
   background: transparent;
-  color: #4e4c48;
+  color: var(--link-hover)
 }
 
 .hero {
   color: #7a5a21;
-  font-size: 1.5rem;
+  font-size: var(--font-size-md);
 }
 
 .hero h1 {
-  font-size: 2rem;
+  font-size: var(--font-size-lg);
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-heading);
   letter-spacing: 0.15rem;
   text-transform: uppercase;
   background: linear-gradient(90deg, #272423, #4e4833);
@@ -121,7 +122,7 @@
 
 .form-footer {
   font-size: 0.95rem;
-  margin-top: 1.5rem;
+  margin-top: var(--space-md);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -134,7 +135,7 @@
 
 .ctas {
   display: flex;
-  gap: 16px;
+  gap: var(--space-sm);
 }
 
 .ctas a {
@@ -148,14 +149,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: var(--font-size-sm);
   line-height: 20px;
   font-weight: 500;
+  transition: all var(--transition);
 }
 
 a.primary {
   background: var(--foreground);
-  color: var(--background);
+  color: var(--bg);
   gap: 8px;
 }
 
@@ -167,12 +169,12 @@ a.secondary {
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
-    background: var(--button-primary-hover);
+    background: var(--accent-gradient-hover);
     border-color: transparent;
   }
 
   a.secondary:hover {
-    background: var(--button-secondary-hover);
+    background: var(--input-bg);
     border-color: transparent;
   }
 
@@ -228,7 +230,7 @@ a.secondary {
   flex-direction: column;
   align-items: center;
   color: #353432;
-  font-size: 1.5rem;
+  font-size: var(--font-size-lg);
   max-width: 50rem;
   width: 90%;
   margin: 2.5rem auto 2rem auto;
@@ -243,7 +245,7 @@ a.secondary {
   margin: 2rem auto 0 auto;
   text-align: center;
   padding: 0.7rem 0;
-  font-size: 1.2rem;
+  font-size: var(--font-size-md);
   align-self: center;
 }
 
@@ -266,27 +268,27 @@ a.secondary {
 
 .yearslist li {
   margin-right: 10px;    /* Add some space between items */
-  color: black;
+  color: var(--foreground);
 }
 
 .yearslist li a {
   text-decoration: none;
-  color: #000;
+  color: var(--foreground);
   padding: 5px 10px;
-  border: 1px solid #000;
-  border-radius: 4px;
+  border: 1px solid var(--foreground);;
+  border-radius: var(--radius-sm);
   background-color: transparent;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--transition);
 }
 
 .yearslist li a:hover,
 .yearslist li a:focus {
   background-color: rgba(0, 0, 0, 0.05);  /* subtle transparent gray */
-  color: black !important;               /* FORCE visibility */
+  color: var(--foreground) !important;               /* FORCE visibility */
 }
 
 .yearslist li a:active {
   background-color: rgba(0, 0, 0, 0.1);
-  color: black !important;               /* FORCE visibility */
+  color: var(--foreground) !important;               /* FORCE visibility */
 }
 

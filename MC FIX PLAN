@@ -6,14 +6,11 @@ I. PORTFOLIO FIX
 
         CSS
 
-        a. FIX CSS replications and centralise logic & 
-        b. Unify headers & font
-        c Different colour background of course
-        d. smaller courses per row and round corners and more padding/margin
-        e. DETAILS: Image border still visible & Vyberte rok. & Picture preview
-        f. TESTING THOROUGHLY Occassionally CLICKING ON A COURSE DETAILS LATER THINKS THERE IS NO VIDEO, WHY?
-        e. Cookies pop-up 
-        f. TESTING THOROUGHLY, call it a day!
+        d. fix Vyhledej kurz - smaller gaps + bigger gaps between subtitle & title + size
+        e. DETAILS: Vyberte rok. & No courses available. & Picture preview
+        a. New Pictures - orange bg
+        f. Cookies pop-up 
+        g. TESTING THOROUGHLY, call it a day!
 
         4. Python Two Apps Optimise (Dockerise?) and Upload
 

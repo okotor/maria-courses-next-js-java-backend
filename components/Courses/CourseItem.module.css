@@ -3,12 +3,22 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  border-radius: 4px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   color: #ddd6cb;
   background: linear-gradient(90deg, #2c1e19, #25200f);
+}
+
+.course:hover {
+  transform: translateY(-4px);
+}
+
+
+.image {
+  position: relative;
+  height: 28rem;
 }
 
 .headerText {
@@ -17,28 +27,19 @@
 
 .headerText h2 {
   margin: 0;
-  font-size: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-heading);
 }
 
 .headerText p {
-  font-size: 0.75rem;
-  color: #cfa69b;
+  font-size: 1rem;
+  color: #d1ba9d;
   font-style: italic;
 }
 
-.course h2,
-.course p {
-  margin: 0;
-}
-
-.image {
-  position: relative;
-  height: 28rem;
-}
-
-.course img {
-  object-fit: cover;
+.summary {
+  padding: 1rem 1rem 0 1rem;
+  font-size: 1.1rem;
 }
 
 .content {
@@ -46,21 +47,10 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  /* text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
-
-.summary {
-  padding: 1rem 1rem 0 1rem;
-}
-
-
-/* .summary p {
-  background-color: white;
-} */
 
 .actions {
-  padding: 1rem;
+  padding: var(--space-sm);
   text-align: right;
 }
 
@@ -68,8 +58,8 @@
   display: inline-block;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  border-radius: var(--radius-md);
+  background: var(--accent-gradient);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
@@ -77,7 +67,7 @@
 
 .actions a:hover,
 .actions a:active {
-  background: linear-gradient(90deg, #fd4715, #f9b241);
+  background: var(--accent-gradient-hover);
   box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
 }
 
@@ -110,5 +100,5 @@
 }
 
 .iconButton:hover {
-  color: #ffb347;          /* lighter orange on hover */
+  color: var(--accent-light);          /* lighter orange on hover */
 }
