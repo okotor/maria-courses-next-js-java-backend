@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import ClientNavLink from "./ClientNavLink";
 import MobileHeader from "./MobileHeader";
 import Image from 'next/image';
-import MariaPicture from '@/assets/Maria.png';
+import MariaPicture from '@/public/Maria.png';
 import classes from "./MainHeader.module.css";
 
 export default function MainHeader() {
@@ -26,7 +26,9 @@ export default function MainHeader() {
       <header className="main-header">
         <span className={classes.headerOverlayText}>Kurzy Marie</span>
         <div className={classes.headerRow}>
+          <div className={classes.logoWrapper}>
           <Image src={MariaPicture} className={classes.logo} alt='Website logo'/>
+          </div>
           <nav className={classes.navWrapper}>
             <div className={`${classes.nav} ${classes['desktop-nav']}`}>
               <ClientNavLink href="/">Home</ClientNavLink>

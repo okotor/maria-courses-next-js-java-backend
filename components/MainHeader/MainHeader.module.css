@@ -33,11 +33,12 @@
 
 .headerRow {
   display: flex;
-  align-items: stretch;         /* allow child to use full height */
+  align-items: center;         /* allow child to use full height */
   justify-content: flex-start;
   width: 100%;
-  min-height: 10em;             /* ensure enough height */
+  min-height: 14em;             /* ensure enough height */
   gap: 2rem;
+  position: relative; /* Allow absolutely positioned children */
   margin-top: -3.75rem
 }
 
@@ -48,19 +49,22 @@
 }
 
 /* === Existing logo style === */
+.logoWrapper {
+  position: absolute;  /* Takes logo out of normal flow */
+  top: clamp(0rem, 0.5vw, 2rem);
+  left: clamp(0.5rem, 2vw, 2rem);          /* Adjust to shift it right */
+  transform-origin: top left;
+  pointer-events: none; /* Optional: allow clicks to pass through */
+  overflow: visible;
+  z-index: 10;
+}
+
 .logo {
-  height: 10em;
-  width: 10em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #ddd6cb;
-  font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  transition: filter 300ms;
+  position: relative;
+  height: clamp(15em, 19vw, 24em);
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .logo img {
@@ -78,8 +82,8 @@
 .headerOverlayText {
   position: absolute;
   top: 1.69rem;
-  left: 50%;
-  transform: translateX(7%) translateY(-25%);
+   left: calc(13vw + 5rem);  /* Gradually reduce left margin as screen narrows */
+  transform: translateX(0) translateY(-10%);
   font-family: 'Permanent Marker', cursive;
   font-size: clamp(2rem, 5vw, 5.5rem);
   color: white;
@@ -93,7 +97,7 @@
   max-width: calc(100vw - 10rem); /* limit movement into hamburger area */     
 }
 
-@media (max-width: 767px) {
+@media (max-width: 960px) {
   .headerOverlayText {
     top: 2rem;
     left: 50%;
@@ -126,6 +130,6 @@
   justify-content: center;  /* Align them to the right */
   align-self: flex-end;         /* ⬅️ position navWrapper to bottom of headerRow */
   flex-grow: 1;
-  margin-right: 4rem;
+  margin-right: -10rem;
 }
 
