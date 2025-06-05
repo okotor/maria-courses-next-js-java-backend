@@ -8,6 +8,7 @@
 .searchInput {
   width: 100%;
   max-width: 850px; /* Prevents it from becoming too wide on large screens */
+  min-width: 250px;
   background-color: white;
   padding: 0.2rem;   /* Optional: for better touch UX */
   border: 1px solid #ccc; /* Optional: basic styling */

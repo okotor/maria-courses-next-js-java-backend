@@ -128,7 +128,22 @@ export default function CourseFields({
         </p>
 
         <p>
-          <label htmlFor="courseDescription">Popis kurzu</label>
+          <label htmlFor="courseDescription" >Popis kurzu</label>
+          <label
+            htmlFor="courseDescription"
+            style={{ fontSize: '0.9rem', color: '#999', textAlign: 'center'}}
+          >
+          <strong>**tučně**</strong>,
+             <em> *kurzíva*</em>, <u>__podtržený__</u> a
+            <a
+              href="https://link-na-odkaz.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#0070f3', textDecoration: 'none' }}
+              title="[Odkaz](https://link-na-odkaz.com)"
+            > [Odkaz](https://link-na-odkaz.com)</a>
+          
+          </label>
           <textarea
             id="courseDescription"
             name="courseDescription"

@@ -1,9 +1,11 @@
 'use client';
 
+import xss from 'xss';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { useState, useEffect } from 'react';
 import AdminCourseActions from '@/components/CoursesAdmin/AdminCourseActions';
+
 import classes from './CourseDetailsClient.module.css';
 
 export default function CourseDetailsClient({ course }) {
@@ -16,8 +18,15 @@ export default function CourseDetailsClient({ course }) {
   }, []);
 
   const courseDescription = course.courseDescription
-    ? course.courseDescription.replace(/\n/g, '<br />')
-    : '';
+  ? xss(
+      course.courseDescription
+        .replace(/\n/g, '<br />')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')   // Bold
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')               // Italics
+        .replace(/__(.*?)__/g, '<u>$1</u>')                 // Underline
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>') // Links
+    )
+  : '';
 
   const imageUrl = course.image && cacheBuster
     ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${course.image}${cacheBuster}`

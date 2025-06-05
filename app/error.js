@@ -4,10 +4,10 @@ import React from 'react';
 
 const Error = ({ statusCode }) => {
     return (
-        <p>
+        <p style={{textAlign: 'center', }}>
             {statusCode
-                ? `An error ${statusCode} occurred on server`
-                : 'An error occurred on client'}
+                ? `Nastala chyba: ${statusCode} na naší straně. Zkuste znovu načíst tuto stránku.`
+                : 'Nastala chyba v prohlížeči, zkuste znovu načíst tuto stránku.'}
         </p>
     );
 };

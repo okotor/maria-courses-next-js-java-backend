@@ -51,7 +51,7 @@
 /* === Existing logo style === */
 .logoWrapper {
   position: absolute;  /* Takes logo out of normal flow */
-  top: clamp(0rem, 0.3vw, 0.5rem);
+  top: clamp(0.1rem, 0.3vw, 0.5rem);
   left: clamp(1.75rem, 2vw, 2rem);          /* Adjust to shift it right */
   transform-origin: top left;
   pointer-events: none; /* Optional: allow clicks to pass through */
