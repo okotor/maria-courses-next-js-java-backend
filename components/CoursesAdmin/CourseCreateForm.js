@@ -24,7 +24,7 @@ export default function CourseCreateForm() {
 
   return (
     <>
-      <header className={classes.header}>
+      <header className={`page-header ${classes.header}`}>
         <h1>Vytvoření <span className={classes.highlight}>nového kurzu</span></h1>
         <p>Zkontroluj si správnost všech údajů a odešli formulář.</p>
       </header>

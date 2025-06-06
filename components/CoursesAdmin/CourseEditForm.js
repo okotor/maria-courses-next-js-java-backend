@@ -24,7 +24,7 @@ export default function CourseEditForm({ course }) {
 
   return (
     <>
-      <header className={classes.header}>
+      <header className={`page-header ${classes.header}`}>
         <h1>Úprava <span className={classes.highlight}>kurzu</span></h1>
         <p>Uprav libovolné pole a odešli formulář.</p>
       </header>

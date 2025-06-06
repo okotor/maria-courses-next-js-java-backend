@@ -3,14 +3,14 @@
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import AccountSettings from "@/components/AuthForms/AccountSettingsForm";
 import StopSpinnerOnRender from '@/components/Loading/StopSpinnerOnRender';
-import classes from '../../page.module.css';
+import classes from '@/app/page.module.css';
 
 export default function AccountDetailsPage() {
   return (
     <ProtectedRoute>
       <StopSpinnerOnRender>
         <>
-          <header className={classes.header} style={{ textAlign: 'center'}}>
+          <header className={`page-header ${classes.header}`}>
             <h1>
               Nastavení<span className={classes.highlight}> účtu</span>
             </h1>

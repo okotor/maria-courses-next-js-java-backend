@@ -1,6 +1,6 @@
 import { getCourses } from "@/lib/courseService";
 import CoursesOverview from "@/components/Courses/CoursesOverview";
-import classes from './page.module.css';
+import classes from '@/app/page.module.css';
 
 export default async function CoursesPage(){
   const courses = await getCourses(); 

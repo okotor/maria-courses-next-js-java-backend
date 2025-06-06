@@ -11,7 +11,7 @@ const AboutPage = () => {
   return (   
     <StopSpinnerOnRender>    
       <>
-        <header className={classes.header}>
+        <header className={`page-header ${classes.header}`}>
           <h1>
             Naší vášní je: <span className={classes.highlight}>Vnitřní proměna</span>
           </h1>

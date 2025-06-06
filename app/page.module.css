@@ -1,10 +1,7 @@
-.header {
-  gap: var(--space-lg);
-  margin: 0rem auto;
-  width: 90%;
-  max-width: 75rem;
+.subheader {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  color: var(--foreground)
 }
 
 .highlight {
@@ -14,9 +11,10 @@
   -webkit-text-fill-color: transparent;
 }
 
-.highlight.subheader {
-  font-size: var(--font-size-md);
+.subsubheader {
   display: flex;
+  justify-content: center;
+  font-size: var(--font-size-md);
   flex-direction: column; /* Stack header and list */
   align-items: center; /* Center align */
   gap: var(--space-sm); /* Space between header and year list */
@@ -122,11 +120,18 @@
 
 .form-footer {
   font-size: 0.95rem;
-  margin-top: var(--space-md);
+  margin-top: 1.5rem;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
   justify-content: center;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+.form-footer a {
+  white-space: nowrap;
+  padding: 0 0.25rem;
 }
 
 .separator {

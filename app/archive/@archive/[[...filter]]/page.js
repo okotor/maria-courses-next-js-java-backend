@@ -28,7 +28,7 @@ export default async function FilteredCoursesPage({params}) {
         {selectedYear ? (
             <CoursesGrid courses={courses} />
         ) : (
-            <p styles={{textAlign: 'center'}}>Vyberte rok.</p>
+            <p className={`noItemChosen`}>Vyberte rok.</p>
         )}
         </div>
     );

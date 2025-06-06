@@ -1,7 +1,7 @@
 // import CourseList from "@/components/Courses/CourseList";
 import { getLatestCourses } from "@/lib/courseService";
 import CoursesGrid from "@/components/Courses/CoursesGrid";
-import classes from '@/app/courses/page.module.css'
+import classes from '@/app/page.module.css'
 
 
 // async function LoadingLatestCourses() {
@@ -14,7 +14,7 @@ export default async function LatestCoursesPage() {
 
     return (
         <>
-            <div className={classes.subheader} style={{ textAlign: 'center' }}>
+            <div className={classes.subheader}>
             <h1>Nejnovější <span className={classes.highlight} >kurzy</span></h1>
             </div>
             <CoursesGrid courses={courses} />

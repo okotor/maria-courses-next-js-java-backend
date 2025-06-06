@@ -1,10 +1,9 @@
 import CourseItem from './CourseItem';
-console.log('>>> CourseItem type:', typeof CourseItem);
 import classes from './CoursesGrid.module.css';
 
 export default function CoursesGrid({ courses, onDeleted }) {
     if (!Array.isArray(courses) || courses.length === 0) {
-        return <p>No courses available.</p>;
+        return <p className={`noItemChosen`}>Žádný text v žádném našem kurzu neobsahuje tuto sekvenci písmen.</p>;
       }
 
     return (

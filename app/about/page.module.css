@@ -1,4 +1,4 @@
-.header {
+/* .header {
   gap: var(--space-lg);
   margin: 0 auto var(--space-lg) auto;
   width: 90%;
@@ -10,7 +10,7 @@
 
 .header h1 {
   font-family: var(--font-heading);
-}
+} */
 
 .highlight {
   background: var(--accent-gradient);

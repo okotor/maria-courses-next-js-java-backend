@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import AuthFormWrapper from '@/components/AuthForms/AuthFormWrapper';
 import { FormInput, FormMessage } from '@/components/AuthForms/AuthFormElements';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import { useAuth } from '@/context/AuthContext';

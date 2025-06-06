@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import classes from './MediaPicker.module.css';
+import { getImageUrl } from "@/utils/media";
 
 export default function MediaPicker({ 
   label,
@@ -47,6 +48,7 @@ export default function MediaPicker({
 
   function handleChange(event) {
     const file = event.target.files[0];
+    console.log('Image file:', file);
     if (!file || !validateFile(file)) {
       setPicked(null);
       return;
@@ -80,7 +82,15 @@ export default function MediaPicker({
 
   const preview =
     type === 'image' && picked ? (
-      <img src={picked} alt="Preview" className={classes.previewImage} />
+      <img 
+        src={picked.startsWith('blob:') ? picked : getImageUrl(picked)}
+        alt="Preview"
+        className={classes.previewImage} 
+        onError={(e) => {
+          console.error("Image failed to load:", picked);
+          setPicked(null);
+        }}
+      />
     ) : type === 'video' && picked ? (
       <video
         src={picked}

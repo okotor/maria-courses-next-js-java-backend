@@ -1,7 +1,7 @@
 'use client';
 
 import { FormFooterLinks, ConditionalPasswordInput, FormMessage, FormInput } from '@/components/AuthForms/AuthFormElements';
-import styles from '@/styles/form.module.css';
+import styles from '@/app/page.module.css';
 
 export default function AuthFormWrapper({
   onSubmit,

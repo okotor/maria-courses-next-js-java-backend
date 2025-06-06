@@ -1,6 +1,5 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
 import classes from './page.module.css';
 
 export default function CourseActionButton({ actionType = 'create', loading = false, message, disabled = false }) {

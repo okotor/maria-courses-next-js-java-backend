@@ -9,15 +9,6 @@
   pointer-events: none;
 }
 
-/* Layout */
-.header {
-  text-align: center;
-}
-
-.header h1 {
-  font-family: var(--font-heading);
-}
-
 /* Highlighted Text */
 .highlight {
   background: var(--accent-gradient);

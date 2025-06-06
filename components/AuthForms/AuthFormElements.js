@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from '@/styles/form.module.css';
+import styles from '@/app/page.module.css';
 
 export function FormInput({ type = 'text', name, label, disabled, placeholder }) {
   return (

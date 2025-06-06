@@ -33,7 +33,7 @@ export default function CoursesOverview({ courses }) {
 
   return (
     <>
-      <header className={classes.header}>
+      <header className={`page-header ${classes.header}`}>
         <h1>
           Kurzy vytvořené <span className={classes.highlight}>jen pro vás</span>
         </h1>
