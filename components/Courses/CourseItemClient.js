@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import AdminCourseActions from '@/components/CoursesAdmin/AdminCourseActions';
-import classes from './CourseItem.module.css';
+import { FaTrash, FaEdit } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import classes from './CourseItem.module.css'
 
-export default function CourseItemClient({ date, title, slug, image, summary, lecturer, onDeleted }) {
+export default function CourseItemClient({ date, title, slug, image, summary, lecturer, onRequestDelete }) {
   const auth = useAuth();
   const { isAdmin } = auth || {};
   const [cacheBuster, setCacheBuster] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     setCacheBuster(`?v=${Date.now()}`);
@@ -34,6 +36,30 @@ export default function CourseItemClient({ date, title, slug, image, summary, le
   const imageUrl = image && cacheBuster
     ? `https://marian-courses-bucket.s3.us-east-1.amazonaws.com/public/${image}${cacheBuster}`
     : null;
+
+  const handleEdit = () => {
+    router.push(`/edit-course/${safeSlug}`);
+  };
+
+  const handleDelete = async (confirmationInput, setLoading, setModalOpen, setConfirmationInput) => {
+    if (confirmationInput !== 'Smazat') return;
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/courses/${safeSlug}/delete`, { method: 'DELETE' });
+      if (res.redirected) {
+        window.location.href = res.url;
+      } else {
+        onRequestDelete?.();
+      }
+    } catch (error) {
+      console.error('Chyba při mazání kurzu:', error);
+    } finally {
+      setLoading(false);
+      setModalOpen(false);
+      setConfirmationInput('');
+    }
+  };
+
   return (
     <article className={classes.course}>
       <header>
@@ -61,11 +87,20 @@ export default function CourseItemClient({ date, title, slug, image, summary, le
           <div className={classes.actionsRow}>
             <Link href={`/courses/${safeSlug}`}>Více informací</Link>
             {isAdmin && (
-              <AdminCourseActions
-                slug={safeSlug}
-                title={safeTitle}
-                {...(onDeleted ? { onDeleted: () => onDeleted(safeSlug) } : {})}
-              />
+                <>
+                  <FaTrash
+                    onClick={() => onRequestDelete?.(handleDelete, { slug: safeSlug, title: safeTitle })}
+                    className={classes.iconButton}
+                    title="Smazat kurz"
+                    role="button"
+                  />
+                  <FaEdit
+                    onClick={handleEdit}
+                    className={classes.iconButton}
+                    title="Upravit kurz"
+                    role="button"
+                  />
+                </>
             )}
           </div>
         </div>
