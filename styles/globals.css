@@ -4,10 +4,10 @@
 /* === CSS Variables: Colors, Spacing, Typography === */
 :root {
   /* Accent & Text */
-  --accent: #ff9b05;        /* primary button/text orange */
+  --accent: #F29A30;        /* primary button/text orange */
   --accent-dark: #f9572a;
   --accent-light: #ffb347;
-  --accent-gradient: linear-gradient(90deg, #f9572a, #ff9b05);
+  --accent-gradient: linear-gradient(90deg, #f9572a, #F29A30);
   --accent-gradient-hover: linear-gradient(90deg, #fd4715, #f9b241);   
   --bg: #fff8f0;
   --bg-dark: #25200f;
@@ -61,8 +61,8 @@
   /* Header Gradient (same palette, but shifted) */
   --header-gradient: linear-gradient(
     135deg,
-    #ff9b05 0%,     /* vibrant orange */
-    #ff9b05 100%    /* mellow orange */
+    #F29A30 0%,     /* vibrant orange */
+    #F29A30 100%    /* mellow orange */
   );
 
   /* Page Background Gradient: maintain white over header area, then pale peach → lighter orange */
