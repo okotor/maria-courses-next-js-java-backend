@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* === CSS Variables: Colors, Spacing, Typography === */
 :root {
   /* Accent & Text */
-  --accent: #F29A30;        /* primary button/text orange */
+  --accent: #f29a30;        /* primary button/text orange */
   --accent-dark: #f9572a;
   --accent-light: #ffb347;
-  --accent-gradient: linear-gradient(90deg, #f9572a, #F29A30);
+  --accent-gradient: linear-gradient(90deg, #f9572a, #f29a30);
   --accent-gradient-hover: linear-gradient(90deg, #fd4715, #f9b241);   
   --bg: #fff8f0;
   --bg-dark: #25200f;
@@ -61,8 +65,8 @@
   /* Header Gradient (same palette, but shifted) */
   --header-gradient: linear-gradient(
     135deg,
-    #F29A30 0%,     /* vibrant orange */
-    #F29A30 100%    /* mellow orange */
+    #f29a30 0%,     /* vibrant orange */
+    #f29a30 100%    /* mellow orange */
   );
 
   /* Page Background Gradient: maintain white over header area, then pale peach → lighter orange */

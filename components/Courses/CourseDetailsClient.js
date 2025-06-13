@@ -48,7 +48,7 @@ export default function CourseDetailsClient({ course }) {
           <Image
             src={imageUrl}
             alt={course.title}
-            layout="responsive"
+            fill
             width={640}
             height={180}
             style={{ display: 'block' }}

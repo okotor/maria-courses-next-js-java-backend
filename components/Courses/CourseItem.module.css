@@ -18,6 +18,7 @@
 .image {
   position: relative;
   height: 27rem;
+  width: auto;
 }
 
 .image img {

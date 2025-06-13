@@ -1,3 +1,21 @@
+.cookieButton {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  color: #888;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cookieButton:hover {
+  background-color: #eee;
+  color: #333;
+  border-color: #888;
+}
+
 .footer {
     display: flex;
     align-items: center;

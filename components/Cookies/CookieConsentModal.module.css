@@ -1,0 +1,141 @@
+.modalBackdrop {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: auto;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 90%;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.buttonPrimary {
+  padding: 0.5rem 1rem;
+  background-color: #f97316;
+  color: white;
+  border-radius: 0.375rem;
+  border: none;
+}
+
+.buttonSecondary {
+  padding: 0.5rem 1rem;
+  background-color: #d1d5db;
+  color: black;
+  border-radius: 0.375rem;
+  border: none;
+}
+
+.buttonDefault {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+.buttonLink {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-decoration: underline;
+  background: none;
+  border: none;
+}
+
+.preferenceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preferenceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.preferenceTitle {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.preferenceInfo {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.switchOn {
+  background-color: #f9572a;
+  border-radius: 9999px;
+  width: 42px;
+  height: 24px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.switchOff {
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  width: 42px;
+  height: 24px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.switchThumb {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 9999px;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.switchOn .switchThumb {
+  transform: translate(20px, -50%);
+}
