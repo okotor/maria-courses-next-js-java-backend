@@ -24,6 +24,7 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
+  console.log("GA ID:", process.env.NEXT_PUBLIC_GA_ID);
   return (
     <html lang="en">
       <head>
