@@ -49,7 +49,7 @@
 .buttonGroup {
   display: flex;
   gap: 0.5rem;
-  justify-content: space-between;
+  justify-content: right;
   flex-wrap: nowrap;
 }
 
@@ -57,7 +57,8 @@
 .buttonDefault,
 .buttonSecondary {
   flex: 1 1 0; /* ⭐ buttons can shrink as needed */
-  min-width: 0; /* ⭐ allow extreme shrinking if necessary */
+  min-width: 80px; /* ⭐ allow extreme shrinking if necessary */
+  max-width: 200px; /* ⭐ don't stretch too much on big screens */
   padding: 0.5rem 0.25rem; /* tighter padding for small screens */
   word-break: break-word; /* ⭐ allow text to break inside button */
   white-space: normal; /* ⭐ allow text to wrap inside the button */
