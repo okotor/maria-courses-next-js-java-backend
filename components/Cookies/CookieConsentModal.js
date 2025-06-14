@@ -125,8 +125,8 @@ export default function CookieConsentModal() {
           <>
             <h2 className={styles.title}>Tato stránka používá cookies 🍪</h2>
             <p className={styles.description}>
-              Používáme cookies pro zajištění správného fungování stránky a také analytiku a marketing. Použváme také cookies, které si pamatují vaši
-              volbu, abychom vás nemuseli opětovně obírat o čas při každé návštěvě stránky. Změna povolení cookies je samozřejmě možná kdykoliv tlačítkem na konci stránky. Zde si můžete vybrat,
+              Používáme funkční, analytické, marketingové a pamatovací cookies. Po vašem prvním výběru si tedy pamatujeme vaši
+              volbu, abychom vás nemuseli opětovně obírat o čas při každé návštěvě stránky. Změna povolení cookies je samozřejmě možná kdykoliv kliknutím na tlačítko na konci stránky. Zde si můžete vybrat,
               které typy cookies chcete povolit.
             </p>
             <div className={styles.buttonGroup}>
@@ -182,14 +182,14 @@ export default function CookieConsentModal() {
               Vyberte, které typy cookies chcete povolit. Nezbytné cookies jsou vždy aktivní.
             </p>
             <div className={styles.preferenceList}>
-              {['analytics', 'marketing', 'functional'].map((type) => (
+              {['analytické', 'marketingové', 'funkční'].map((type) => (
                 <div key={type} className={styles.preferenceItem}>
                   <div>
                     <p className={styles.preferenceTitle}>{type}</p>
                     <p className={styles.preferenceInfo}>
-                      {type === 'analytics' && 'Pomáhají nám porozumět, jak se stránka používá.'}
-                      {type === 'marketing' && 'Slouží k zobrazování relevantních reklam.'}
-                      {type === 'functional' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení.'}
+                      {type === 'analytické' && 'Pomáhají nám porozumět, jak se tato stránka používá.'}
+                      {type === 'marketingové' && 'Slouží k analýze efektivnosti našich reklam.'}
+                      {type === 'funkční' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení a automatické přihlášení.'}
                     </p>
                   </div>
                   <Switch
