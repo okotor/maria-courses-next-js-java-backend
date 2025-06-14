@@ -24,9 +24,9 @@ export default function MainHeader() {
   return (
     <>
       <header className="main-header">
-        <span className={classes.headerOverlayText}>Kurzy Marie</span>
+        <span className="headerOverlayText">Kurzy Marie</span>
         <div className={classes.headerRow}>
-          <div className={classes.logoWrapper}>
+          <div className="logoWrapper">
           <Image src={MariaPicture} className={classes.logo} alt='Website logo'/>
           </div>
           <nav className={classes.navWrapper}>
