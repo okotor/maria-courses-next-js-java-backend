@@ -89,7 +89,7 @@ export default function CookieConsentModal() {
     }
     document.cookie = `cookieConsent=${encodeURIComponent(value)}; path=/; max-age=31536000`;
     // 🔧 IMMEDIATE effect: if functional cookies are being revoked while logged in, log out and clear auth cookies instantly
-    if (cookies.functional && !toCommit.functional && authenticated) { // only if previously allowed and now denied
+    if (!toCommit.functional && authenticated) { // only if previously allowed and now denied
       if (typeof logout === "function") logout(); // 🔧 call your logout, which should also clear backend cookies
       // 🔧 Extra client-side clearing for instant compliance
       document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
@@ -182,14 +182,14 @@ export default function CookieConsentModal() {
               Vyberte, které typy cookies chcete povolit. Nezbytné cookies jsou vždy aktivní.
             </p>
             <div className={styles.preferenceList}>
-              {['analytické', 'marketingové', 'funkční'].map((type) => (
+              {['analytics', 'marketing', 'functional'].map((type) => (
                 <div key={type} className={styles.preferenceItem}>
                   <div>
                     <p className={styles.preferenceTitle}>{type}</p>
                     <p className={styles.preferenceInfo}>
-                      {type === 'analytické' && 'Pomáhají nám porozumět, jak se tato stránka používá.'}
-                      {type === 'marketingové' && 'Slouží k analýze efektivnosti našich reklam.'}
-                      {type === 'funkční' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení.'}
+                      {type === 'analytics' && 'Pomáhají nám porozumět, jak se tato stránka používá.'}
+                      {type === 'marketing' && 'Slouží k analýze efektivnosti našich reklam.'}
+                      {type === 'functional' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení.'}
                     </p>
                   </div>
                   <Switch

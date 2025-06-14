@@ -16,10 +16,17 @@ export default function CourseCreateForm() {
       body: formData,
     });
 
-    // Ensure browser follows redirect if it exists
-    if (response.redirected) {
-      window.location.href = response.url;
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || 'Chyba při vytváření kurzu');
     }
+
+    if (data.redirectTo) {
+      window.location.href = data.redirectTo;
+    }
+
+    return response;
   };
 
   return (

@@ -46,13 +46,18 @@ export default function CourseItemClient({ date, title, slug, image, summary, le
     setLoading(true);
     try {
       const res = await fetch(`/api/courses/${safeSlug}/delete`, { method: 'DELETE' });
-      if (res.redirected) {
-        window.location.href = res.url;
+      const data = await res.json();
+
+      if (data.success && data.redirectTo) {
+        window.location.href = data.redirectTo;
+      } else if (!data.success) {
+        alert(data.message || 'Chyba při mazání kurzu');
       } else {
-        onRequestDelete?.();
+        onRequestDelete?.(); // let parent know
       }
     } catch (error) {
       console.error('Chyba při mazání kurzu:', error);
+      alert('Nastala chyba při mazání kurzu.');
     } finally {
       setLoading(false);
       setModalOpen(false);

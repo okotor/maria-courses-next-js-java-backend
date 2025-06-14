@@ -9,8 +9,7 @@ import CoursesGrid from "@/components/Courses/CoursesGrid";
 // }
 
 export default async function FilteredCoursesPage({params}) {
-    
-    const filter = params.filter;
+    const { filter } = await params;
     const selectedYear = filter?.[0];
     // const selectedMonth = filter?.[1];
     let courses = [];

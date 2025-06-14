@@ -21,8 +21,11 @@ export default function AdminCourseActions({ slug, title, onDeleted }) {
     setDeleting(true);
     try {
       const res = await fetch(`/api/courses/${slug}/delete`, { method: 'DELETE' });
-      if (res.redirected) {
-        window.location.href = res.url;
+      const data = await res.json();
+      if (data.success && data.redirectTo) {
+        window.location.href = data.redirectTo;
+      } else if (!data.success) {
+        alert(data.message || 'Chyba při mazání kurzu');
       } else if (onDeleted) {
         onDeleted();
       }

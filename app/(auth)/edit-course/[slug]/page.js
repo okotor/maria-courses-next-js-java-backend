@@ -4,7 +4,8 @@ import CourseEditClientWrapper from '@/components/CoursesAdmin/CourseEditClientW
 import StopSpinnerOnRender from '@/components/Loading/StopSpinnerOnRender';
 
 export default async function CourseEditPage({ params }) {
-    const course = await getCourse(params.slug);
+    const { slug } = await params;
+  const course = await getCourse(slug);
 
     return (
         <StopSpinnerOnRender>

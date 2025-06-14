@@ -17,9 +17,17 @@ export default function CourseEditForm({ course }) {
       body: formData,
     });
 
-    if (response.redirected) {
-      window.location.href = response.url; // ✅ browser will load fresh, revalidated content
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || 'Chyba při ukládání kurzu');
     }
+
+    if (data.redirectTo) {
+      window.location.href = data.redirectTo;
+    }
+
+    return data;
   };
 
   return (

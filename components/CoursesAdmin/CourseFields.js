@@ -52,17 +52,19 @@ export default function CourseFields({
     setState(prev => ({ ...prev, loading: true, errors: {}, message: null }));
 
     try {
-      const response = await onSubmit(formData);
+      const data = await onSubmit(formData);
 
-      if (response?.redirected) {
-        window.location.href = response.url;
-      } else {
+      if (data.success && data.redirectTo) {
+        window.location.href = data.redirectTo;
+      } else if (data.success) {
         setState({
           loading: false,
           success: true,
           message: { text: 'Kurz byl úspěšně uložen!', success: true },
           errors: {}
         });
+      } else {
+        throw new Error(errorText || 'Chyba při ukládání kurzu.');
       }
     } catch (err) {
       console.error('Submit error:', err);

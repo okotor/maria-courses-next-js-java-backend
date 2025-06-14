@@ -20,9 +20,21 @@ export async function POST(req) {
         revalidatePath(`/archive/${year}/${month}`);
       }
 
-    return NextResponse.redirect(new URL('/courses', req.url)); // ✅ server handles redirect
+    return NextResponse.json({
+      success: true,
+      redirectTo: '/courses'
+    }, { status: 201 });
   } catch (err) {
     console.error('❌ Error creating course:', err);
-    return new NextResponse('Chyba při vytváření kurzu', { status: 500 });
+    return NextResponse.json({
+      success: false,
+      message: 'Chyba při vytváření kurzu'
+    }, { status: 500 });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
