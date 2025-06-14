@@ -189,7 +189,7 @@ export default function CookieConsentModal() {
                     <p className={styles.preferenceInfo}>
                       {type === 'analytické' && 'Pomáhají nám porozumět, jak se tato stránka používá.'}
                       {type === 'marketingové' && 'Slouží k analýze efektivnosti našich reklam.'}
-                      {type === 'funkční' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení a automatické přihlášení.'}
+                      {type === 'funkční' && 'Umožňují vylepšené funkce, jako je zapamatování přihlášení.'}
                     </p>
                   </div>
                   <Switch
