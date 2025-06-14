@@ -1,8 +1,11 @@
 export default {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./components/Cookies/**/*.{js,ts,jsx,tsx}", // Add this line
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./layouts/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+    "./context/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
