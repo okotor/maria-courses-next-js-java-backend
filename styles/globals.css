@@ -203,7 +203,7 @@ input:focus, textarea:focus, select:focus {
   position: absolute;
   top: 1.69rem;
   left: calc(13vw + 5rem);  /* Gradually reduce left margin as screen narrows */
-  transform: translateX(7%) translateY(-13%);
+  transform: translateX(7%) translateY(-18%);
   font-family: var(--font-marker);
   font-size: clamp(2rem, 5vw, 5.5rem);
   color: white;
