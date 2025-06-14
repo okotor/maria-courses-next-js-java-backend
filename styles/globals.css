@@ -103,8 +103,8 @@ html, body {
 /* === Typography === */
 h1, h2, h3 {
   font-family: var(--font-heading);
-  margin: 0.5rem;
-  padding: 0.5rem;
+  margin: 0.25rem;
+  padding: 0.25rem;
 }
 h1 {
   font-size: var(--font-size-xxl);
@@ -168,11 +168,11 @@ input:focus, textarea:focus, select:focus {
 /* === Main Header with Wavy Background === */
 .main-header {
   position: relative;
-  padding: 5rem 0rem 0rem;
+  padding: 4rem 0rem 0rem;
   text-align: center;
   /* Wave SVG overlay plus header gradient */
   background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'><path d='M0,32 C300,112 900,0 1200,48 L1200,160 L0,160 Z' fill='%23ffffff' transform='translate(0,40)'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'><path d='M0,32 C300,112 9999,0 1200,48 L1200,160 L0,160 Z' fill='%23ffffff' transform='translate(0,40)'/></svg>"),
     var(--header-gradient);
   background-repeat: no-repeat, no-repeat;
   background-position: bottom center, top center;
