@@ -49,16 +49,6 @@
 }
 
 /* === Existing logo style === */
-/* .logoWrapper {
-  position: absolute;  
-  top: clamp(0.1rem, 0.3vw, 0.5rem);
-  left: clamp(1.75rem, 2vw, 2rem);         
-  transform-origin: top left;
-  pointer-events: none; 
-  overflow: visible;
-  z-index: 10;
-} */
-
 .logo {
   position: relative;
   height: clamp(15em, 19vw, 24em);
@@ -78,24 +68,6 @@
 .logo:hover {
   filter: drop-shadow(0 0 2em #fff9edaa);
 }
-
-/* .headerOverlayText {
-  position: absolute;
-  top: 1.69rem;
-   left: calc(13vw + 5rem); 
-  transform: translateX(0) translateY(-10%);
-  font-family: 'Permanent Marker', cursive;
-  font-size: clamp(2rem, 5vw, 5.5rem);
-  color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  z-index: 5;                
-  pointer-events: none;   
-  max-width: calc(100vw - 10rem); /     
-} */
 
 @media (max-width: 960px) {
   .headerOverlayText {
