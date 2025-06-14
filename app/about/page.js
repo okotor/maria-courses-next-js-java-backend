@@ -21,11 +21,11 @@ const AboutPage = () => {
           <ul className={classes.perks}>
             <li>
               <p>Přijeďte na seminář probíhající naživo</p>
-              <Image src={seminarIcon} alt="A seminar icon." />
+              <Image src={seminarIcon} alt="A seminar icon." layout="intrinsic"/>
             </li>
             <li>
               <p>Zakuste proměnu z pohodlí domova</p>
-              <Image src={webinarIcon} alt="A webinar icon." />
+              <Image src={webinarIcon} alt="A webinar icon." layout="intrinsic"/>
               
             </li>
             <li>

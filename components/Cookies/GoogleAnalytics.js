@@ -103,7 +103,7 @@ export default function GoogleAnalytics({ gaId }) {
 
   useEffect(() => {
     if (consent?.analytics) {
-      console.log('[GA] Consent granted — injecting GA script with ID:', gaId);
+      console.log('[GA] Consent granted — injecting GA script');
     }
   }, [consent?.analytics]);
 

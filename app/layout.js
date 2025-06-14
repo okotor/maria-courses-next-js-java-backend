@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Nothing yet */}
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
       </head>
       <body>
         <LoadingProvider>

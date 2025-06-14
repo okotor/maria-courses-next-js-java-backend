@@ -149,6 +149,30 @@ export default function CookieConsentModal() {
                   ? 'Povolit vše'
                   : 'Povolit vybrané'}
               </button>
+
+              {
+                // Add Povolit vše button ONLY if the dynamic button won't say Povolit vše
+                !(
+                  (draftCookies || tempCookies).analytics &&
+                  (draftCookies || tempCookies).marketing &&
+                  (draftCookies || tempCookies).functional
+                ) && (
+                  <button
+                    onClick={() => {
+                      setTempCookies({
+                        necessary: true,
+                        analytics: true,
+                        marketing: true,
+                        functional: true,
+                      });
+                      commitPreferences();
+                    }}
+                    className={styles.buttonPrimary}
+                  >
+                    Povolit vše
+                  </button>
+                )
+              }
             </div>
           </>
         ) : (
