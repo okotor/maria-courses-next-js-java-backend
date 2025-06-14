@@ -6,6 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useLoading } from '@/context/LoadingContext';
 import axios from "@/utils/api";
 import { BACKEND_URL } from "@/utils/constants";
+import { getAllowPersistent } from "@/utils/cookieConsentUtil";
 import AuthFormWrapper from "@/components/AuthForms/AuthFormWrapper";
 import GoogleLoginButton from "@/components/AuthForms/GoogleLoginButton";
 
@@ -43,7 +44,8 @@ export default function LoginForm() {
     setIsLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
-    await handleLoginRequest(`${BACKEND_URL}/login`, { email, password });
+    const allowPersistent = getAllowPersistent();
+    await handleLoginRequest(`${BACKEND_URL}/login`, { email, password, allowPersistent });
   };
 
   return (

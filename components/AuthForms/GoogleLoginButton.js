@@ -3,6 +3,7 @@
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID, BACKEND_URL } from '@/utils/constants';
 import api from '@/utils/api';
+import { getAllowPersistent } from "@/utils/cookieConsentUtil";
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -19,8 +20,12 @@ export default function GoogleLoginButton({ onSuccessRedirect = '/' }) {
       setError('Přihlášení s Googlem selhalo.');
       return;
     }
+
+    const allowPersistent = getAllowPersistent();
+    console.log("[Frontend] allowPersistent:", allowPersistent);
+
     try {
-      const response = await api.post(`${BACKEND_URL}/google-login`, { token: credential });
+      const response = await api.post(`${BACKEND_URL}/google-login`, { token: credential, allowPersistent });
       login(response.data.user);
       router.push(response.data.user.is_admin ? '/' : onSuccessRedirect);
     } catch (err) {

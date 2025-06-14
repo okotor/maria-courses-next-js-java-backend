@@ -7,6 +7,7 @@ import CookieConsentModal, { openCookieModal } from "@/components/Cookies/Cookie
 import GlobalSpinner from '@/components/Loading/GlobalSpinner';
 import RouteChangeListener from "@/components/Loading/RouteChangeListener";
 import GoogleAnalyticsWrapper from '@/components/Cookies/GoogleAnalyticsWrapper';
+import FunctionalConsent from '@/components/Cookies/FunctionalConsent';
 
 export const metadata = {
   title: 'Kurzy Marie',
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
               <MainFooter />
               <GoogleAnalyticsWrapper gaId={process.env.NEXT_PUBLIC_GA_ID} />
               <CookieConsentModal />
+              <FunctionalConsent />
           </AuthProvider>
         </LoadingProvider>
       </body>

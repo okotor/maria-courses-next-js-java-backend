@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAllowPersistent } from '@/utils/cookieConsentUtil';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL, // now uses env variable
@@ -53,13 +54,19 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        await api.post("/auth/refresh");
+        const allowPersistent = getAllowPersistent();
+        await api.post("/auth/refresh", { allowPersistent });
         processQueue(null);
         return api(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
         if (logoutFn && !isLoggingOut && getIsAuthenticated()) {
           isLoggingOut = true;
+
+          // 🔧 Ensure client-side tokens cleared
+          document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
+          document.cookie = "refreshToken=; Path=/; Max-Age=0; SameSite=None; Secure"
+          
           await logoutFn(); // Prevent double logout
         }
         return Promise.reject(refreshError);

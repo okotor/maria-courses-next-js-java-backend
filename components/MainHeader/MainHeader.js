@@ -52,7 +52,7 @@ export default function MainHeader() {
                     className={classes.logoutBtn}
                     disabled={isLoggingOut}
                   >
-                    {isLoggingOut ? "Odlašuji..." : "Odhlásit se"}
+                    {isLoggingOut ? "Odhlašuji..." : "Odhlásit se"}
                   </button>
                 </>
               )}

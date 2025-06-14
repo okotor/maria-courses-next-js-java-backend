@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Switch } from '@headlessui/react';
+import { useAuth } from '@/context/AuthContext';
 import styles from './CookieConsentModal.module.css';
 
 let globalSetOpen = () => {};
@@ -16,15 +17,17 @@ export default function CookieConsentModal() {
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [cookies, setCookies] = useState({
     necessary: true,
-    analytics: true,
-    marketing: true,
-    functional: true,
+    analytics: false,
+    marketing: false,
+    functional: false,
   });
 
   const [tempCookies, setTempCookies] = useState({ ...cookies });
   const [draftCookies, setDraftCookies] = useState(null);
 
   const modalRef = useRef();
+
+  const { logout, authenticated } = useAuth();
 
   useEffect(() => {
     globalSetOpen = (val) => {
@@ -85,12 +88,19 @@ export default function CookieConsentModal() {
       console.warn('LocalStorage error:', e);
     }
     document.cookie = `cookieConsent=${encodeURIComponent(value)}; path=/; max-age=31536000`;
+    // 🔧 IMMEDIATE effect: if functional cookies are being revoked while logged in, log out and clear auth cookies instantly
+    if (cookies.functional && !toCommit.functional && authenticated) { // only if previously allowed and now denied
+      if (typeof logout === "function") logout(); // 🔧 call your logout, which should also clear backend cookies
+      // 🔧 Extra client-side clearing for instant compliance
+      document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
+      document.cookie = "refreshToken=; Path=/; Max-Age=0; SameSite=None; Secure";
+    }
     setOpen(false);
     setPreferencesOpen(false);
     setDraftCookies(null);
     if (typeof window !== 'undefined') {
       const consentChangeChannel = new BroadcastChannel('cookie-consent');
-      consentChangeChannel.postMessage({ type: 'consent-updated' });
+      consentChangeChannel.postMessage({ type: 'consent-updated', consent: toCommit });
       consentChangeChannel.close();
     }
   };
@@ -115,7 +125,8 @@ export default function CookieConsentModal() {
           <>
             <h2 className={styles.title}>Tato stránka používá cookies 🍪</h2>
             <p className={styles.description}>
-              Používáme cookies pro zajištění správného fungování stránky, analytiku a marketing. Můžete si vybrat,
+              Používáme cookies pro zajištění správného fungování stránky a také analytiku a marketing. Použváme také cookies, které si pamatují vaši
+              volbu, abychom vás nemuseli opětovně obírat o čas při každé návštěvě stránky. Změna povolení cookies je samozřejmě možná kdykoliv tlačítkem na konci stránky. Zde si můžete vybrat,
               které typy cookies chcete povolit.
             </p>
             <div className={styles.buttonGroup}>
@@ -160,7 +171,7 @@ export default function CookieConsentModal() {
                   <Switch
                     checked={tempCookies[type]}
                     onChange={(val) => 
-                      setTempCookies((prev) => ({ ...prev, [type]: val }))
+                      setTempCookies((prev) => ({ ...prev, [type]: Boolean(val) }))
                     }
                     className={`${tempCookies[type] ? styles.switchOn : styles.switchOff}`}
                   >

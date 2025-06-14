@@ -6,6 +6,8 @@ import { createContext, useContext,
 import { useRouter } from "next/navigation";
 import api, { setLogoutFunction, setIsAuthenticatedGetter }  from "@/utils/api";
 import { SESSION_REFRESH_INTERVAL } from "@/utils/constants";
+import { getAllowPersistent } from "@/utils/cookieConsentUtil";
+import { jwtDecode } from "jwt-decode";
 // import { useAuthCheck } from "@/hooks/useAuthCheck";
 //INACTIVITY LOGOUT
 // import { INACTIVITY_TIMEOUT } from "@/utils/constants";
@@ -15,11 +17,29 @@ const AuthContext = createContext();
 // Create a BroadcastChannel
 const authChannel = typeof window !== "undefined" ? new BroadcastChannel("auth") : null;
 
+// 🔑 Helper: Parse exp from JWT
+const parseJwtExp = (token) => {
+  try {
+    const decoded = jwtDecode(token);
+    if (decoded && decoded.exp) {
+      return decoded.exp * 1000; // Convert to ms
+    }
+    console.warn("JWT decoded but no exp found");
+    return null;
+  } catch (err) {
+    console.warn("Failed to decode JWT", err);
+    return null;
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(null); // null until checked
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true); // NEW
   const router = useRouter();
+  const refreshTimerRef = useRef(null);
+  
+
   //INACTIVITY LOGOUT
   // const lastActivityRef = useRef(Date.now());
 
@@ -59,82 +79,90 @@ export const AuthProvider = ({ children }) => {
     authStateRef.current = authenticated;
   }, [authenticated]);
 
-  //Recheck auth status every 5 minutes
   useEffect(() => {
-    console.log("AuthProvider mounted, setting up auth check.");
-    setLogoutFunction(logout); // let interceptor access logout
+    setLogoutFunction(logout);
     setIsAuthenticatedGetter(() => authStateRef.current);
-
-    const doCheck = async () => {
-      await checkAuth();
-      setLoading(false); // ✅ now we’re ready to render
-    };
-  
-    doCheck(); // run on mount
+    initAuthFlow();
     const interval = setInterval(checkAuth, SESSION_REFRESH_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
-  // Sync auth state across tabs using BroadcastChannel
   useEffect(() => {
     if (!authChannel) return;
-
     const handler = async (event) => {
       const { type, user } = event.data;
-      console.log("BroadcastChannel message:", event.data);
-
-      if (type === "logout") {
-        console.log("Detected logout from another tab");
-        await performLogout(false); // no rebroadcast
-      }
-
-      if (type === "login" && user) {
-        console.log("Detected login from another tab");
-          try {
-            await checkAuth(); // re-validate on this tab
-          } catch (err) {
-            console.error("Post-login checkAuth failed", err);
-          }
-      }
+      if (type === "logout") await performLogout(false);
+      if (type === "login" && user) await attemptAuthCheckOrRefresh();
     };
-
     authChannel.addEventListener("message", handler);
     return () => authChannel.removeEventListener("message", handler);
   }, []);
 
-  //Checking authentication status with the backend function
-  const checkAuth = async (retryCount = 0) => {
+  const initAuthFlow = async () => {
+    await attemptAuthCheckOrRefresh();
+    setLoading(false);
+  };
+
+  const attemptAuthCheckOrRefresh = async () => {
     try {
-      const response = await api.get("/auth/check");
-      const isAuth = response.data?.authenticated || false;
-      setAuthenticated(isAuth);
-      setIsAdmin(response.data?.user?.is_admin || false);
-      console.log("Auth check succeeded:", response.data);
+      await checkAuth();
     } catch (err) {
-      console.error("Auth check failed", err);
-      if (retryCount < 1) {
-        console.log("Retrying checkAuth in 4 seconds...");
-        setTimeout(() => checkAuth(retryCount + 1), 4000);
-      } else {
-        console.warn("Max retries reached.");
-        if (authenticated) {
-          console.log("Was previously authenticated, but check failed.");
-        } else {
-          console.log('User was never authenticated. Updating state.');
-        }
-        setAuthenticated(false);
-        setIsAdmin(false);
+      console.warn("Auth check failed, attempting refresh...");
+      const success = await attemptRefreshAndCheck();
+      if (!success) await logout();
+    }
+  };
+
+  const hasRefreshToken = () => {
+    return document.cookie.includes("refreshToken=");
+  };
+
+  const attemptRefreshAndCheck = async () => {
+    if (!hasRefreshToken()) {
+      console.warn("No refresh token found, cannot attempt refresh");
+      return false;
+    }
+    try {
+      await api.post("/auth/refresh", { allowPersistent: getAllowPersistent() });
+      console.log("🔍 Post-refresh cookies: ", document.cookie);
+      // 🚨 Check for invalid jwtToken
+
+      if (document.cookie.includes("jwtToken=null")) {
+        console.warn("🚨 Backend sent jwtToken=null — this should not happen!");
+        console.warn("🚨 Full cookie string:", document.cookie);
       }
+
+      await checkAuth();
+      return true;
+    } catch (err) {
+      console.error("Refresh failed", err);
+      return false;
+    }
+  };
+
+  //Checking authentication status with the backend function
+  const checkAuth = async () => {
+    const response = await api.get("/auth/check");
+    const isAuth = response.data?.authenticated || false;
+    setAuthenticated(isAuth);
+    setIsAdmin(response.data?.user?.is_admin || false);
+
+    if (isAuth) {
+      console.log("✅ checkAuth: user is authenticated, refreshing schedule");
+      scheduleProactiveRefresh();
+    } else {
+      console.log("❌ checkAuth: user not authenticated, clearing refresh");
+      clearProactiveRefresh();
     }
   };
 
   const login = (user) => {
-    console.log("Login successful:", user);
     setAuthenticated(true);
     setIsAdmin(user.is_admin);
-    if (authChannel) {
-      authChannel.postMessage({ type: "login", user });
-    }
+    if (authChannel) authChannel.postMessage({ type: "login", user });
+    clearProactiveRefresh(); // 🔧 Clear any leftover timers before starting new one
+    scheduleProactiveRefresh(); // 🔧 Schedule based on fresh token
+    console.log("✅ Login flow completed, proactive refresh scheduled");
   };
 
   const logout = async (broadcast = true) => {
@@ -153,10 +181,62 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.warn("[Logout] API call failed, continuing", err);
     }
+
     setAuthenticated(false);
     setIsAdmin(false);
+    clearProactiveRefresh(); // 🔧 Always stop timers
+    document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
+    document.cookie = "refreshToken=; Path=/; Max-Age=0; SameSite=None; Secure";
     router.replace("/login");
-};
+  };
+
+  // 🕑 Proactive refresh using actual exp
+  const scheduleProactiveRefresh = () => {
+    clearProactiveRefresh();
+
+    const match = document.cookie.match(/jwtToken=([^;]+)/);
+    if (!match) {
+      console.warn("No jwtToken cookie found for proactive refresh");
+      return;
+    }
+
+    const jwt = decodeURIComponent(match[1]);
+    const exp = parseJwtExp(jwt);
+    if (!exp) {
+      console.warn("Could not parse JWT expiry, skipping proactive refresh");
+      return;
+    }
+
+    const now = Date.now();
+    const delay = exp - now - 7000; // 🔧 Refresh 10 seconds before expiry
+
+    if (delay <= 0) {
+      console.warn("Token already expired or about to expire, refreshing immediately");
+      console.log(`⏳ Attempting refresh ${((exp - Date.now()) / 1000).toFixed(2)} seconds before expiry`);
+      attemptRefreshAndCheck();
+      return;
+    }
+
+    console.log(`🔄 Scheduling proactive refresh in ${(delay / 1000).toFixed(2)}s`);
+    refreshTimerRef.current = setTimeout(async () => {
+      const success = await attemptRefreshAndCheck();
+      if (success) {
+        scheduleProactiveRefresh();
+      } else {
+        await logout();
+      }
+    }, delay);
+  };
+
+  const clearProactiveRefresh = () => {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+      refreshTimerRef.current = null;
+      console.log("⏹️ Cleared proactive refresh timer");
+    }
+  };
+
+  useEffect(() => () => clearProactiveRefresh(), []);
 
   const contextValue = useMemo(() => ({
     isAdmin,

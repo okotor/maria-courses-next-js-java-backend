@@ -19,8 +19,9 @@ export default function GoogleAnalytics({ gaId }) {
             const changed = JSON.stringify(prev) !== JSON.stringify(parsed);
             if (changed) {
               console.log('[GA] Consent changed, updating...');
+              return parsed
             }
-            return parsed;
+            return prev;
           });
         } catch (err) {
           console.warn('[GA] Failed to parse cookieConsent during polling:', err);
@@ -33,7 +34,7 @@ export default function GoogleAnalytics({ gaId }) {
     pollingInterval = setInterval(checkConsent, 2000); // every 2s
     timeout = setTimeout(() => {
       clearInterval(pollingInterval);
-      console.log('[GA] Stopped polling after 10 seconds');
+      console.log('[GA] Stopped polling after 6 seconds');
       // ✅ CLEANUP GA IF ANALYTICS IS FALSE AFTER POLLING ENDS
       if (consent && !consent.analytics) {
         console.log('[GA] Auto-cleaning due to expired analytics consent');
@@ -42,7 +43,7 @@ export default function GoogleAnalytics({ gaId }) {
         });
         window.gtag = function () {};
       }
-    }, 10000); // stop after 10s
+    }, 6000); // stop after 6s
 
     return () => {
       clearInterval(pollingInterval);
@@ -100,12 +101,16 @@ export default function GoogleAnalytics({ gaId }) {
     return () => channel.close();
   }, []);
 
+  useEffect(() => {
+    if (consent?.analytics) {
+      console.log('[GA] Consent granted — injecting GA script with ID:', gaId);
+    }
+  }, [consent?.analytics]);
+
   if (!consent?.analytics) {
     console.log('[GA] Consent not granted for analytics — skipping GA script');
     return null;
   }
-
-  console.log('[GA] Consent granted — injecting GA script with ID:', gaId);
 
   return (
     <>

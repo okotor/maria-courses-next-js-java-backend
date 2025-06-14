@@ -60,7 +60,7 @@ export default function MobileMenu() {
                 className={styles.logoutButton}
                 disabled={isLoggingOut}
               >
-                {isLoggingOut ? 'Odlašuji...' : 'Odhlásit se'}
+                {isLoggingOut ? 'Odhlašuji...' : 'Odhlásit se'}
               </button>
             </>
           )}
