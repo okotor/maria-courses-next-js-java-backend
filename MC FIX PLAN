@@ -7,7 +7,7 @@ I. PORTFOLIO FIX
                 => FIX "POVOLIT VYBRANE" BUTTON LOGIC
         c. UNDERSTAND CODE IN COURSE CREATION & ANNOUNCING ITS STATUS - peacefully let CHAT explain it 
                 =>FIX THE ENTIRE COURSE CREATION AND EDIT FLOW (PC NOW ERROR BUT CREATES, MOBILE - kurz byl uspesne vytvoren, but does not create...)
-        d. LOGOUT UPON FIRST LOAD & REVALIDATE PATH EVERY ONCE IN A WHILE, 
+        d. LOGOUT UPON FIRST LOAD & REVALIDATE PATH EVERY ONCE IN A WHILE
         e. TESTING THOROUGHLY PC & PHONE, call it a day!
 
     2. Python Two Apps Optimise (Dockerise?) and Upload
@@ -18,16 +18,17 @@ I. PORTFOLIO FIX
 
     5. Prepare SCRIPT for IT video portfolio & logicS
 
-    6. REACT & TYPESCRIPT LEARN - UDEMY & ŠTĚPÁN WEBPAGE BEGIN
-
-        a. Cookies - Marketing - Facebook Pixel
+    6. ŠTĚPÁN WEBPAGE (React & TypeScript frontend & Node.js & Typescript backend
+         Tailwind CSS, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth, Cookies - Marketing - Facebook Pixel)
 
     7. CV Finalise, video Make & Agree with M'u about Negotiation Prep
 
     8. APP CODE REVISION (CSS fundamentals, JS6&JSX [Go over Course Basics], all code files)
 
-    9. (GIT HUB ACTIONS ... OTHER SKILLS)
-    
+    9. (GIT HUB ACTIONS ... WebSockets, Spring AI, Microservices, Kafka&RabbitMQ, Redis - Caching,
+                        Jest, React Testing Library, Cypress, or Pytest,
+                            Add react-i18next with Czech + English)
+
 
 II. EXAMINE JOB OFFERS
 
