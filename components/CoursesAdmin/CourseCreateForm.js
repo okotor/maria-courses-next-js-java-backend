@@ -17,16 +17,13 @@ export default function CourseCreateForm() {
     });
 
     const data = await response.json();
+    console.log('[FRONTEND RECEIVED]', data, response.ok, response.status);
 
     if (!response.ok || !data.success) {
       throw new Error(data.message || 'Chyba při vytváření kurzu');
     }
 
-    if (data.redirectTo) {
-      window.location.href = data.redirectTo;
-    }
-
-    return response;
+    return data;
   };
 
   return (

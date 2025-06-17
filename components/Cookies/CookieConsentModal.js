@@ -170,18 +170,20 @@ export default function CookieConsentModal() {
       <div className={styles.modalContent} ref={modalRef}>
         <div className={styles.modalHeader}>
           <div className={styles.headerRow}>
-            <button
-              onClick={() => {
-                setOpen(false);
-                setPreferencesOpen(false);
-                setDraftCookies(null);
-              }}
-              className={styles.closeButton}
-              aria-label="Zavřít"
-              type="button"
-            >
-              <FaTimes size={20} />
-            </button>
+            {!isFirstVisit && (
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  setPreferencesOpen(false);
+                  setDraftCookies(null);
+                }}
+                className={styles.closeButton}
+                aria-label="Zavřít"
+                type="button"
+              >
+                <FaTimes size={20} />
+              </button>
+            )}
               <h2 className={styles.title}>
                 {preferencesOpen ? 'Nastavení cookies' : 'Tato stránka používá cookies 🍪'}
               </h2>
