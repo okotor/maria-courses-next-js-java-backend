@@ -9,22 +9,22 @@ export default function CourseEditForm({ course }) {
   const router = useRouter();
 
   const handleUpdate = async (formData) => {
-    if (!formData.get('image')?.name) {
-      formData.delete('image');
-    }
+    // if (!formData.get('image')?.name) {
+    //   formData.delete('image');
+    // }
     const response = await fetch(`/api/courses/${course.slug}/edit`, {
       method: 'POST',
       body: formData,
     });
 
     const data = await response.json();
+    console.log('[EDIT RESPONSE]', data, response.ok, response.status);
 
-    if (!response.ok || !data.success) {
-      throw new Error(data.message || 'Chyba při ukládání kurzu');
-    }
-
-    if (data.redirectTo) {
-      window.location.href = data.redirectTo;
+   if (!response.ok || !data.success) {
+      // You can pass backend field errors up if CourseFields supports it
+      const error = new Error(data.message || 'Chyba při úpravě kurzu');
+      error.errors = data.errors || {};
+      throw error;
     }
 
     return data;
@@ -37,7 +37,12 @@ export default function CourseEditForm({ course }) {
         <p>Uprav libovolné pole a odešli formulář.</p>
       </header>
       <main className={classes.main}>
-        <CourseFields defaultValues={course} onSubmit={handleUpdate} requireImage={false} actionType="edit" />
+        <CourseFields
+          defaultValues={course}
+          onSubmit={handleUpdate}
+          requireImage={false}
+          actionType="edit"
+        />
       </main>
     </>
   );

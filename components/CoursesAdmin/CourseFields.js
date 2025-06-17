@@ -53,6 +53,7 @@ export default function CourseFields({
 
     try {
       const data = await onSubmit(formData);
+      console.log('[EDIT RESPONSE]', data);
 
       if (data.success && data.redirectTo) {
         window.location.href = data.redirectTo;
@@ -60,19 +61,33 @@ export default function CourseFields({
         setState({
           loading: false,
           success: true,
-          message: { text: 'Kurz byl úspěšně uložen!', success: true },
+           message: {
+          text: actionType === 'edit'
+            ? 'Kurz byl úspěšně upraven!'
+            : 'Kurz byl úspěšně uložen!',
+          success: true
+        },
           errors: {}
         });
       } else {
-        throw new Error(errorText || 'Chyba při ukládání kurzu.');
+        console.log(data)
+        throw new Error(
+          data.message ||
+          (actionType === 'edit'
+            ? 'Chyba při úpravě kurzu.'
+            : 'Chyba při ukládání kurzu.')
+        );
       }
     } catch (err) {
       console.error('Submit error:', err);
       setState({
         loading: false,
         success: false,
-        message: { text: 'Chyba při ukládání kurzu.', success: false },
-        errors: {}
+        message: {
+        text: err.message || 'Chyba při ukládání kurzu.',
+        success: false
+      },
+      errors: err.errors || err.response?.data?.errors || {}
       });
     }
   };

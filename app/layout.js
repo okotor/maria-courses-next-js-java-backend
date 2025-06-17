@@ -35,14 +35,16 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <RouteChangeListener />
             <GlobalSpinner />
+            <div className="layoutContainer">
               <MainHeader />
                 <main>
                   {children}
                 </main>
               <MainFooter />
-              <GoogleAnalyticsWrapper gaId={process.env.NEXT_PUBLIC_GA_ID} />
-              <CookieConsentModal />
-              <FunctionalConsent />
+            </div>
+            <GoogleAnalyticsWrapper gaId={process.env.NEXT_PUBLIC_GA_ID} />
+            <CookieConsentModal />
+            <FunctionalConsent />
           </AuthProvider>
         </LoadingProvider>
       </body>
