@@ -3,11 +3,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { Switch } from '@headlessui/react';
 import { useAuth } from '@/context/AuthContext';
+import { FaTimes } from 'react-icons/fa';
 import styles from './CookieConsentModal.module.css';
 
 let globalSetOpen = () => {};
 export function openCookieModal() {
-  console.log('Triggering openCookieModal...');
   globalSetOpen(true);
 }
 
@@ -15,43 +15,63 @@ export default function CookieConsentModal() {
   const [open, setOpen] = useState(false);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
+  // Holds last committed (persisted) cookies state for this session
   const [cookies, setCookies] = useState({
     necessary: true,
     analytics: false,
     marketing: false,
     functional: false,
   });
-
+  // Used only inside preferences panel (checkbox state)
   const [tempCookies, setTempCookies] = useState({ ...cookies });
+  // Used to draft preference changes per modal open
   const [draftCookies, setDraftCookies] = useState(null);
 
   const modalRef = useRef();
-
   const { logout, authenticated } = useAuth();
+
+  // Helper: are all cookies allowed (except necessary)?
+  const allEnabled = ['analytics', 'marketing', 'functional'].every(type => cookies[type]);
+
+  // On modal open, always load the latest from storage (best practice)
+  useEffect(() => {
+    if (open) {
+      // Try to get latest from storage
+      let committedPrefs = cookies; // fallback to in-memory state
+      try {
+        const stored = localStorage.getItem('cookiePrefs');
+        if (stored) {
+          committedPrefs = JSON.parse(stored);
+        }
+      } catch {}
+      setCookies(committedPrefs);
+      setTempCookies(committedPrefs);
+      setDraftCookies(null);
+    }
+  }, [open]);
 
   useEffect(() => {
     globalSetOpen = (val) => {
-      console.log('Global setOpen called with:', val);
       setIsFirstVisit(false);
       setPreferencesOpen(false);
       setOpen(val);
-      setTempCookies(draftCookies || cookies); 
+      // tempCookies and draftCookies will be set by above effect
     };
 
+    // On mount: check if consent was given before
     try {
       const stored = localStorage.getItem('cookiePrefs');
       const cookieSet = document.cookie.includes("cookieConsent=");
-      console.log('Cookie prefs from localStorage:', stored);
       if (!stored && !cookieSet) {
         setOpen(true);
-        setIsFirstVisit(true)
+        setIsFirstVisit(true);
       } else if (stored) {
         const parsed = JSON.parse(stored);
         setCookies(parsed);
-        setTempCookies(parsed); // ✅ Store in savedCookies
+        setTempCookies(parsed);
+        setDraftCookies(null);
       }
     } catch (err) {
-      console.error('Error reading cookiePrefs:', err);
       setOpen(true);
       setIsFirstVisit(true);
     }
@@ -65,9 +85,7 @@ export default function CookieConsentModal() {
     function handleClickOutside(event) {
       if (!isFirstVisit && modalRef.current && !modalRef.current.contains(event.target)) {
         setOpen(false);
-        setPreferencesOpen(false); // ✅ Reset screen
-        setTempCookies(cookies); // ✅ Reset to last saved
-        setDraftCookies(null);
+        setPreferencesOpen(false);
       }
     }
     if (open) {
@@ -76,44 +94,73 @@ export default function CookieConsentModal() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [open, isFirstVisit, cookies]);
+  }, [open, isFirstVisit]);
 
-  const commitPreferences = () => {
-    const toCommit = draftCookies || tempCookies;
-    setCookies(toCommit); // ✅ Save edits to primary state
-    const value = JSON.stringify(toCommit);
+  // Best practice: Commit only on "Povolit vše" or "Povolit vybrané", then always close modal!
+  const commitPreferences = (prefs) => {
+    setCookies(prefs);
+    setTempCookies(prefs);
+    setDraftCookies(null);
+    const value = JSON.stringify(prefs);
     try {
       localStorage.setItem('cookiePrefs', value);
-    } catch (e) {
-      console.warn('LocalStorage error:', e);
-    }
+    } catch (e) {}
     document.cookie = `cookieConsent=${encodeURIComponent(value)}; path=/; max-age=31536000`;
-    // 🔧 IMMEDIATE effect: if functional cookies are being revoked while logged in, log out and clear auth cookies instantly
-    if (!toCommit.functional && authenticated) { // only if previously allowed and now denied
-      if (typeof logout === "function") logout(); // 🔧 call your logout, which should also clear backend cookies
-      // 🔧 Extra client-side clearing for instant compliance
+    if (!prefs.functional && authenticated) {
+      if (typeof logout === "function") logout();
       document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
       document.cookie = "refreshToken=; Path=/; Max-Age=0; SameSite=None; Secure";
+      console.log("consent revoked.");
+    } else {
+      // Put your allowed consent logging here:
+      console.log("consent allowed:", prefs);
     }
-    setOpen(false);
+    setOpen(false); // Always close modal after commit to avoid race
     setPreferencesOpen(false);
-    setDraftCookies(null);
     if (typeof window !== 'undefined') {
       const consentChangeChannel = new BroadcastChannel('cookie-consent');
-      consentChangeChannel.postMessage({ type: 'consent-updated', consent: toCommit });
+      consentChangeChannel.postMessage({ type: 'consent-updated', consent: prefs });
       consentChangeChannel.close();
     }
   };
 
+  // Save draft only (does NOT commit!)
   const handleSavePreferences = () => {
-    setDraftCookies({ ...tempCookies });
+    setDraftCookies({ ...tempCookies }); // Save as draft
     setPreferencesOpen(false);
-    // 🟡 tempCookies remain unchanged, so reopening preferences will show unsaved edits
   };
 
+  // "Zpět" resets tempCookies to last draft, or cookies if no draft for this modal open
   const handleCancelPreferences = () => {
-    setTempCookies(draftCookies || cookies); // 🔄 Revert unsaved
+    // setTempCookies(draftCookies || cookies);
     setPreferencesOpen(false);
+  };
+
+  // "Povolit vše": always available, always enables all
+  const handleAllowAll = () => {
+    const allPrefs = {
+      necessary: true,
+      analytics: true,
+      marketing: true,
+      functional: true,
+    };
+    commitPreferences(allPrefs);
+  };
+
+  // "Povolit vybrané": appears ONLY if user made a draft with not all true, or on first visit before consent
+  const handleAllowSelected = () => {
+    if (
+      draftCookies &&
+      ['analytics', 'marketing', 'functional'].some(type => !draftCookies[type])
+    ) {
+      // Only commit if draft is not all enabled
+      commitPreferences(draftCookies);
+    } else {
+      // If nothing to commit, just close
+      setOpen(false);
+      setPreferencesOpen(false);
+      setDraftCookies(null);
+    }
   };
 
   if (!open) return null;
@@ -121,63 +168,68 @@ export default function CookieConsentModal() {
   return (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalContent} ref={modalRef}>
+        <div className={styles.modalHeader}>
+          <div className={styles.headerRow}>
+            <button
+              onClick={() => {
+                setOpen(false);
+                setPreferencesOpen(false);
+                setDraftCookies(null);
+              }}
+              className={styles.closeButton}
+              aria-label="Zavřít"
+              type="button"
+            >
+              <FaTimes size={20} />
+            </button>
+              <h2 className={styles.title}>
+                {preferencesOpen ? 'Nastavení cookies' : 'Tato stránka používá cookies 🍪'}
+              </h2>
+            <div style={{ width: '2.25rem' }} />
+          </div>
+        </div>
         {!preferencesOpen ? (
           <>
-            <h2 className={styles.title}>Tato stránka používá cookies 🍪</h2>
             <p className={styles.description}>
               Používáme funkční, analytické, marketingové a pamatovací cookies. Po vašem prvním výběru si tedy pamatujeme vaši
               volbu, abychom vás nemuseli opětovně obírat o čas při každé návštěvě stránky. Změna povolení cookies je samozřejmě možná kdykoliv kliknutím na tlačítko na konci stránky. Zde si můžete vybrat,
               které typy cookies chcete povolit.
             </p>
             <div className={styles.buttonGroup}>
-              <button 
+              
+              {/* Always open preferences from latest draft if exists, else committed */}
+              <button
                 onClick={() => {
                   setPreferencesOpen(true);
-                  setTempCookies(draftCookies || cookies);
-                }} 
+                  setTempCookies(draftCookies || tempCookies);
+                }}
                 className={styles.buttonDefault}
               >
                 Upravit preference
               </button>
+              {/* Povolit vybrané: only if 1) first visit, or 2) user made a draft with not all enabled */}
+              {(isFirstVisit ||
+                (draftCookies &&
+                  ['analytics', 'marketing', 'functional'].some(type => !draftCookies[type]))) && (
+                <button
+                  onClick={handleAllowSelected}
+                  className={styles.buttonPrimary}
+                >
+                  Povolit vybrané
+                </button>
+              )}
+              {/* Povolit vše: always present */}
               <button
-                onClick={commitPreferences}
+                onClick={handleAllowAll}
                 className={styles.buttonPrimary}
               >
-                {(draftCookies || tempCookies).analytics &&
-                (draftCookies || tempCookies).marketing &&
-                (draftCookies || tempCookies).functional
-                  ? 'Povolit vše'
-                  : 'Povolit vybrané'}
+                Povolit vše
               </button>
-
-              {
-                // Add Povolit vše button ONLY if the dynamic button won't say Povolit vše
-                !(
-                  (draftCookies || tempCookies).analytics &&
-                  (draftCookies || tempCookies).marketing &&
-                  (draftCookies || tempCookies).functional
-                ) && (
-                  <button
-                    onClick={() => {
-                      setTempCookies({
-                        necessary: true,
-                        analytics: true,
-                        marketing: true,
-                        functional: true,
-                      });
-                      commitPreferences();
-                    }}
-                    className={styles.buttonPrimary}
-                  >
-                    Povolit vše
-                  </button>
-                )
-              }
+              
             </div>
           </>
         ) : (
           <>
-            <h2 className={styles.title}>Nastavení cookies</h2>
             <p className={styles.description}>
               Vyberte, které typy cookies chcete povolit. Nezbytné cookies jsou vždy aktivní.
             </p>
@@ -194,7 +246,7 @@ export default function CookieConsentModal() {
                   </div>
                   <Switch
                     checked={tempCookies[type]}
-                    onChange={(val) => 
+                    onChange={(val) =>
                       setTempCookies((prev) => ({ ...prev, [type]: Boolean(val) }))
                     }
                     className={`${tempCookies[type] ? styles.switchOn : styles.switchOff}`}
@@ -205,13 +257,13 @@ export default function CookieConsentModal() {
               ))}
             </div>
             <div className={styles.buttonGroup}>
-              <button 
+              <button
                 onClick={handleCancelPreferences}
                 className={styles.buttonLink}
               >
                 Zpět
               </button>
-              <button 
+              <button
                 onClick={handleSavePreferences}
                 className={styles.buttonPrimary}
               >
