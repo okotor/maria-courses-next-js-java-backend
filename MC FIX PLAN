@@ -1,10 +1,9 @@
 I. PORTFOLIO FIX
 
     1. LAST STROKES
-
-        c. UNDERSTAND CODE IN COURSE CREATION & ANNOUNCING ITS STATUS - peacefully let CHAT explain it 
-                =>FIX THE ENTIRE COURSE CREATION AND EDIT FLOW (PC NOW ERROR BUT CREATES, MOBILE - kurz byl uspesne vytvoren, but does not create...)
-        d. LOGOUT UPON FIRST LOAD & REVALIDATE PATH EVERY ONCE IN A WHILE
+    
+        a. GLOBAL NOT FOUND & deployed - occasionally we do not see the course created immediately, why? sometimes yes sometimes no. & DELETE revise path and code
+        d. Server-Sent Events (SSE)? & LOGOUT UPON FIRST LOAD
         e. TESTING THOROUGHLY PC & PHONE, call it a day!
 
     2. Python Two Apps Optimise (Dockerise?) and Upload
