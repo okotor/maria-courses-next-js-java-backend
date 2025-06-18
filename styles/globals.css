@@ -343,7 +343,7 @@ main {
 }
 
 /* === Error/Not Found Page === */
-.not-found {
+.not-found, .error{
     display: flex;
     flex-direction: column;
     align-items: center;

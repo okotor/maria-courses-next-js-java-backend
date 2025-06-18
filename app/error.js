@@ -11,7 +11,6 @@ export default function GlobalError({ error, reset }) {
         <main className="error">
             <h1>Něco se pokazilo.</h1>
             <p>Zkuste to prosím znovu nebo se vraťte na domovskou stránku.</p>
-            <button onClick={() => reset()}>Zkusit znovu</button>
         </main>
     );
 }

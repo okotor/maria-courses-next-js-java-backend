@@ -50,9 +50,9 @@ export default function CoursesClientWrapper(){
     }
   }, [searchParams, router]);
 
-  if (loading) return <p className={classes.main}>Načítání kurzů…</p>;
-  if (error) return <p className={classes.main}>Chyba při načítání kurzů.</p>;
-  if (!courses) return <p className={classes.main}>Žádné kurzy.</p>;
+  if (loading) return <p className={classes.courseError}>Načítání kurzů…</p>;
+  if (error) return <p className={classes.courseError}>Chyba při načítání kurzů.</p>;
+  if (!courses) return <p className={classes.courseError}>Žádné kurzy.</p>;
 
   return <CoursesOverview courses={courses} />;
 }

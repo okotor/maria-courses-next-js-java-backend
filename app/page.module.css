@@ -64,6 +64,14 @@
   margin: var(--space-sm) 0;
 }
 
+.courseError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
 .cta {
   font-size: var(--font-size-lg);
   display: flex;
@@ -195,16 +203,6 @@ a.secondary {
     padding-bottom: 80px;
   }
 
-  .main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
 
   .ctas {
     flex-direction: column;
