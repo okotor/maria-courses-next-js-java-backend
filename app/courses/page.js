@@ -29,7 +29,7 @@ export default function CoursesPage(){
     fetchData();
   }, []);
 
-  // ---- On redirect with ?refresh=1, fetch again using your logic ----
+  // ---- On redirect do with ?refresh=1, fetch again using your logic ----
   useEffect(() => {
     if (searchParams.get('refresh') === '1') {
       async function refreshData() {
