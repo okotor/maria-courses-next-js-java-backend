@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from '@/components/CoursesAdmin/ConfirmationModal';
 import classes from './AdminCourseActions.module.css';
 
 export default function AdminCourseActions({ slug, title, onDeleted }) {

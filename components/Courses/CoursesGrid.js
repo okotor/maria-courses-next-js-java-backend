@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import CourseItem from './CourseItem';
-import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from '@/components/CoursesAdmin/ConfirmationModal';
 import classes from './CoursesGrid.module.css';
 
 export default function CoursesGrid({ courses, onDeleted }) {

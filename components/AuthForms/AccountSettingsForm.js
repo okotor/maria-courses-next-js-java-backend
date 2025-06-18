@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { FormInput, FormMessage } from '@/components/AuthForms/AuthFormElements';
-import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from '@/components/CoursesAdmin/ConfirmationModal';
 import { useAuth } from '@/context/AuthContext';
 import api from '@/utils/api';
 
