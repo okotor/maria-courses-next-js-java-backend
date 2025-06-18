@@ -1,10 +1,17 @@
 'use client';
 
-export default function Error () {
+import { useEffect } from 'react';
+
+export default function GlobalError({ error, reset }) {
+    useEffect(() => {
+        console.error(error);
+    }, [error]);
+
     return (
-        <main className='error' style={{ textAlign: 'center', padding: '2rem' }}>
-            <h1>Na stránce došlo k chybě.</h1>
-            <p>Nepovedlo se načíst obsah stránky. Zkuste to znovu.</p>
+        <main className="error">
+            <h1>Něco se pokazilo.</h1>
+            <p>Zkuste to prosím znovu nebo se vraťte na domovskou stránku.</p>
+            <button onClick={() => reset()}>Zkusit znovu</button>
         </main>
     );
 }
