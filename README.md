@@ -1,44 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kurzy Marie
 
-## Getting Started
+**Moderní aplikace pro správu, prezentaci a správu online kurzů.**  
+Tento projekt je fullstack aplikace: **frontend v Next.js, backend v Java Spring Boot**.
 
-First, run the development server:
+---
+
+## 🚀 Hlavní funkce
+
+- Moderní responzivní uživatelské rozhraní (React/Next.js)
+- Přihlášení & registrace (vlastní, Google OAuth)
+- JWT autentizace, refresh tokeny, multi-tab synchronizace
+- Správa kurzů (vytváření, editace, mazání – pouze admin)
+- Veřejný archiv kurzů, vyhledávání, řazení, ročníky
+- Nahrávání obrázků na AWS S3
+- Možnost filtrovat a zobrazit nejnovější kurzy
+- Notifikace úspěchů/chyb (v češtině)
+- Správa cookies & GDPR banner
+- CI/CD: **Vercel (frontend)** & **Render (backend)**
+
+---
+
+## 📦 Repozitáře
+
+- **Frontend (Next.js):**  
+  [https://github.com/okotor/maria-courses-next-js-java-backend](https://github.com/okotor/maria-courses-next-js-java-backend)
+- **Backend (Java Spring Boot):**  
+  [https://github.com/okotor/marian-courses-backend-java](https://github.com/okotor/marian-courses-backend-java)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js, React 19, Tailwind CSS, MUI, Emotion, Axios, NextAuth, Lucide, Headless UI
+- **Backend:** Spring Boot, Spring Security, JWT, JPA, PostgreSQL, AWS S3, Google OAuth2
+- **Databáze:** PostgreSQL
+- **Deployment:** Vercel (frontend), Render (backend)
+- **Styly:** CSS variables, Tailwind, moderní vzhled
+- **CI/CD:** Automatické nasazení na každé změně
+
+---
+
+## 🏗️ Struktura projektu
+
+/frontend (Next.js app)
+/backend (Java Spring Boot)
+
+- **frontend/**
+  - `/app` – stránky, layouty, moduly Next.js (App Router)
+  - `/components` – UI komponenty (hlavička, kurz, gridy, formuláře)
+  - `/context` – Auth, loading, cookies, globální stav
+  - `/utils` – api.js, constants.js, služby pro kurzy
+  - `/styles` – Tailwind, globální CSS, proměnné
+- **backend/**
+  - `/src/main/java` – controllery, entity, služby, bezpečnost
+  - `/src/main/resources` – `application.properties`
+  - `/pom.xml` – Maven konfigurace
+
+---
+
+## 💻 Jak projekt spustit lokálně
+
+### 1. Klonuj oba repozitáře:
 
 ```bash
+git clone https://github.com/okotor/maria-courses-next-js-java-backend.git
+git clone https://github.com/okotor/marian-courses-backend-java.git
+2. Nastav si prostředí
+Frontend (.env.local)
+env
+Copier
+Modifier
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=...
+NEXT_PUBLIC_GA_ID=...
+Backend (.env nebo v Render nastavení)
+env
+Copier
+Modifier
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/NAZEV_DB
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=...
+FRONTEND_BASE_URL=http://localhost:3000
+MAIL_HOST=smtp.example.com
+MAIL_PORT=587
+MAIL_USERNAME=...
+MAIL_PASSWORD=...
+JWT_SECRET=nějaký-tajný-klíč
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+3. Backend – spuštění
+bash
+Copier
+Modifier
+cd marian-courses-backend-java
+./mvnw spring-boot:run
+4. Frontend – spuštění
+bash
+Copier
+Modifier
+cd maria-courses-next-js-java-backend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🌍 Produkce & CI/CD
+Frontend je nasazován automaticky na Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Backend běží na Render
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🧑‍💻 Přispívání
+Vytvoř branch: git checkout -b feature/něco
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Commmitni změny a pushni na svůj fork
 
-## Learn More
+Vytvoř Pull Request do hlavního repozitáře
 
-To learn more about Next.js, take a look at the following resources:
+⚡ Rychlý přehled funkcí pro vývojáře
+Autentizace: JWT tokeny v httpOnly cookies, refresh s každou expirací, synchronizace mezi taby přes BroadcastChannel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+API servis: /utils/api.js a /lib/courseService.js na frontend.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Chyby a úspěchy: Vše v češtině, notifikace i pro Google OAuth.
 
-## Deploy on Vercel
+Správa uživatelů a kurzů: Ověření rolí (admin, běžný uživatel), restrikce přístupu.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Moderní styling: CSS proměnné, Google Fonts, wavy header.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Learn More
+📄 Licence
+MIT
+© 2025 okotor
 
 
-## Authentication Frontend Endpoints
+## API calls ve frontendu
 
 COURSE (NEXT.JS BACKEND) => lib/...
 
