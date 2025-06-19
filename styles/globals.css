@@ -370,6 +370,7 @@ main {
 .noItemChosen {
   padding: 1rem 1rem auto;
   margin-top: 3rem;
+  margin-bottom: 3rem;
   display: flex;
   justify-content: center;
   font-size: 2rem;

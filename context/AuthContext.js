@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     if (!authChannel) return;
     const handler = async (event) => {
       const { type, user } = event.data;
-      if (type === "logout") await performLogout(false);
+      if (type === "logout") await performLogout(false, /* doRedirect= */ false);
       if (type === "login" && user) await attemptAuthCheckOrRefresh();
     };
     authChannel.addEventListener("message", handler);
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.warn("Auth check failed, attempting refresh...");
       const success = await attemptRefreshAndCheck();
-      if (!success) await logout();
+      if (!success) await performLogout(true, /* doRedirect= */ false);
     }
   };
 
@@ -165,11 +165,12 @@ export const AuthProvider = ({ children }) => {
     console.log("✅ Login flow completed, proactive refresh scheduled");
   };
 
-  const logout = async (broadcast = true) => {
+  // logout will NOT redirect unless called explicitly with doRedirect=true!
+  const logout = async (broadcast = true, doRedirect = false) => {
     await performLogout(broadcast);
   };
 
-  const performLogout = async (broadcast) => {
+  const performLogout = async (broadcast, doRedirect = false) => {
     if (broadcast && authChannel) {
       console.log("[Logout] Broadcasting logout");
       authChannel.postMessage({ type: "logout" });
@@ -187,7 +188,9 @@ export const AuthProvider = ({ children }) => {
     clearProactiveRefresh(); // 🔧 Always stop timers
     document.cookie = "jwtToken=; Path=/; Max-Age=0; SameSite=None; Secure";
     document.cookie = "refreshToken=; Path=/; Max-Age=0; SameSite=None; Secure";
-    router.replace("/login");
+    if (doRedirect) {
+      router.replace("/login");
+    }
   };
 
   // 🕑 Proactive refresh using actual exp
@@ -208,7 +211,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const now = Date.now();
-    const delay = exp - now - 7000; // 🔧 Refresh 10 seconds before expiry
+    const delay = exp - now - 7000; // 🔧 Refresh 7 seconds before expiry
 
     if (delay <= 0) {
       console.warn("Token already expired or about to expire, refreshing immediately");
@@ -223,7 +226,7 @@ export const AuthProvider = ({ children }) => {
       if (success) {
         scheduleProactiveRefresh();
       } else {
-        await logout();
+        await logout(true, false);
       }
     }, delay);
   };

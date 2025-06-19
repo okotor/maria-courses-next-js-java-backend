@@ -1,10 +1,9 @@
 I. PORTFOLIO FIX
 
     1. LAST STROKES
-    
-        a. deployed - occasionally we do not see the course created immediately, why? sometimes yes sometimes no. & DELETE revise path and code
-        d. Server-Sent Events (SSE)? & LOGOUT UPON FIRST LOAD
-        e. TESTING THOROUGHLY PC & PHONE, call it a day!
+ 
+        e. TESTING THOROUGHLY PC & PHONE
+        f. SET-UP Uptime Robot & call it a day!
 
     2. Python Two Apps Optimise (Dockerise?) and Upload
 
@@ -14,7 +13,7 @@ I. PORTFOLIO FIX
 
     5. Prepare SCRIPT for IT video portfolio & logicS
 
-    6. ŠTĚPÁN WEBPAGE (React & TypeScript frontend & Node.js & Typescript backend
+    6. CHUCK WEBPAGE (React & TypeScript frontend & Node.js & Typescript backend
          Tailwind CSS, Redux State Management, GraphQL APIs, MongoDB, Google Cloud/Firebase Storage, JWT OAuth, Cookies - Marketing - Facebook Pixel)
 
     7. CV Finalise, video Make & Agree with M'u about Negotiation Prep
