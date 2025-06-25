@@ -6,7 +6,7 @@ export default function MainFooter() {
   return (
     <footer className={styles.footer}>
       <p>
-          2025 © tehacko, kontakt: +420 774 243 723, tehacko777@gmail.com
+          2025 © tehacko, +420 774 243 723, tehacko777@gmail.com
       </p>
       <button onClick={openCookieModal} className={styles.cookieButton}>
         Nastavení cookies
