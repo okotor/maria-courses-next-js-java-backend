@@ -128,7 +128,7 @@ Moderní styling: CSS proměnné, Google Fonts, wavy header.
 
 📄 Licence
 MIT
-© 2025 okotor
+© 2025 tehacko
 
 
 ## API calls ve frontendu
