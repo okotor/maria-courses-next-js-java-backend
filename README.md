@@ -1,4 +1,4 @@
-# Kurzy Marie
+# Webová aplikace Kurzy Marie (v tomto repozitáři je pouze frontend v Next.js)
 
 **Moderní aplikace pro správu, prezentaci a správu online kurzů.**  
 Tento projekt je fullstack aplikace: **frontend v Next.js, backend v Java Spring Boot**.
